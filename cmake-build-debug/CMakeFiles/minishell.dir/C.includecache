@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/cveeta/CLionProjects/minishell/libft-main/libft.h
+string.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+
+/Users/cveeta/CLionProjects/minishell/main.c
+main.h
+/Users/cveeta/CLionProjects/minishell/main.h
+
+/Users/cveeta/CLionProjects/minishell/main.h
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+libft-main/libft.h
+/Users/cveeta/CLionProjects/minishell/libft-main/libft.h
+fcntl.h
+-
+termcap.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+
