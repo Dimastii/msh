@@ -33,6 +33,8 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *s);
 size_t				ft_collen(char **s);
+size_t ft_count_c(char *token, char c);
+char *ft_isolating(char *token, char c);
 void				ft_freecol(char **col);
 void				ft_freestr(char *col);
 void				ft_printcol(char **s);

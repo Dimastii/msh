@@ -13,8 +13,16 @@ CMakeFiles/minishell.dir/ft_init.c.o: ../ft_init.c
 CMakeFiles/minishell.dir/ft_init.c.o: ../libft-main/libft.h
 CMakeFiles/minishell.dir/ft_init.c.o: ../main.h
 
+CMakeFiles/minishell.dir/libft-main/ft_bzero.c.o: ../libft-main/ft_bzero.c
+
+CMakeFiles/minishell.dir/libft-main/ft_calloc.c.o: ../libft-main/ft_calloc.c
+CMakeFiles/minishell.dir/libft-main/ft_calloc.c.o: ../libft-main/libft.h
+
 CMakeFiles/minishell.dir/libft-main/ft_free.c.o: ../libft-main/ft_free.c
 CMakeFiles/minishell.dir/libft-main/ft_free.c.o: ../libft-main/libft.h
+
+CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o: ../libft-main/ft_isolating.c
+CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o: ../libft-main/libft.h
 
 CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o: ../libft-main/ft_strdup.c
 CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o: ../libft-main/libft.h

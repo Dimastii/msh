@@ -13,22 +13,42 @@ int		ft_isspace(int c)
     return (0);
 }
 
+
+
+void			check_tocken(char **token)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	if ((*token)[0] == '"' && (*token)[ft_strlen(*token) - 1] == '"')
+	{
+		count = ft_count_c(*token, '"');
+		printf("%d\n\n\n", count);
+		if (count % 2 == 0) {
+			*token = ft_isolating(*token, '"');///тут лик
+//			free(*token);
+		}
+	}
+}
+
 void  detect_token(char **str, t_cmd *cmd)
 {
 	char *token;
-	char **temp_cmd;
 
 	while (ft_isspace(**str) && **str != ';')
 		(*str)++;
-	temp_cmd = cmd->tokens;
 	token = ft_strdup("");
-	while (**str != ';' && !(ft_isspace(**str)) && **str)
+	while (**str != ';' && !(ft_isspace(**str)) && **str)//добавить проверку и на другие спецсимволы
 	{
 		token = ft_strjoins(token,**str);
 		(*str)++;
 	}
 	if (*token)
 	{
+		check_tocken(&token);
+//		exit(0);
 		cmd->tokens = ft_coljoins(cmd->tokens, token);
 	}
 }
@@ -51,7 +71,7 @@ void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 	}
 }
 
-void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd)
+void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 {
 //	while (!(ft_isspace(**str)) && **str)
 //		(*str)++;
@@ -65,6 +85,20 @@ void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd)
 	{
 		(*str)++;
 		allocate_cmd(cmds, *cmd);
+
+		int pid = fork();
+
+		if (pid == 0) {
+			execve("/bin/ls", cmd->tokens, *envp);
+		}
+		else if (pid < 0)
+		{
+			//принт еррор
+		}
+		else
+		{
+			wait(NULL);
+		}
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
@@ -78,7 +112,7 @@ void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd)
 
 }
 
-void		add_cmd(t_cmd *cmds, int mode, void (*cmd) (char *, char **, char **))
+void		add_cmd(t_cmd *cmds, int mode, void (*cmd) (char *, char **, char ***))
 {
 	cmds->create = 1;
 	cmds->cmd = cmd;
@@ -99,7 +133,8 @@ int			detect_cmd(char **str, t_cmd *cmd)
     if (ft_strncmp("ls\0", str_enter, 3) == 0 || ft_strncmp("ls;", str_enter, 3) == 0 || ft_strncmp("ls|", str_enter, 3) == 0 || ft_strncmp("ls>", str_enter, 3) == 0)
     {
 		///add t_cmd
-		printf("!__ ls found\n");
+//		printf("!__ ls found\n");
+		cmd->tokens = ft_coljoins(cmd->tokens,"ls");
 		while (**str != ';' && **str != '\0')
 			detect_token(str, cmd);
 		add_cmd(cmd, 1, &exec_ls);
@@ -110,7 +145,7 @@ int			detect_cmd(char **str, t_cmd *cmd)
 }
 
 
-void lets_pars(char *str_original, t_cmd **cmds)
+void lets_pars(char *str_original, t_cmd **cmds, char ***envp)
 {
     char *str;
 
@@ -125,8 +160,8 @@ void lets_pars(char *str_original, t_cmd **cmds)
 		if (detect_cmd(&str, &cmd))
 		{
 			printf("cmd find with columns:\n");
-			ft_printcol(cmd.tokens);
-			detect_spec(&str, cmds, &cmd);
+
+			detect_spec(&str, cmds, &cmd, envp);
 		}
 	}
 }

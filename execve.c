@@ -4,9 +4,9 @@
 
 #include "main.h"
 
-void exec_ls(char *file, char **argv, char **envp)
+void exec_ls(char *file, char **argv, char ***envp)
 {
-	execve(file, argv, envp);
+	execve(file, argv, *envp);
 }
 
 

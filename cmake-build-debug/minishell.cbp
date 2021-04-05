@@ -89,7 +89,16 @@
 		<Unit filename="/Users/cveeta/CLionProjects/minishell/ft_init.c">
 			<Option target="minishell"/>
 		</Unit>
+		<Unit filename="/Users/cveeta/CLionProjects/minishell/libft-main/ft_bzero.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/cveeta/CLionProjects/minishell/libft-main/ft_calloc.c">
+			<Option target="minishell"/>
+		</Unit>
 		<Unit filename="/Users/cveeta/CLionProjects/minishell/libft-main/ft_free.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/cveeta/CLionProjects/minishell/libft-main/ft_isolating.c">
 			<Option target="minishell"/>
 		</Unit>
 		<Unit filename="/Users/cveeta/CLionProjects/minishell/libft-main/ft_strdup.c">

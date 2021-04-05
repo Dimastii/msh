@@ -3,20 +3,27 @@
 #include "main.h"
 
 
-int main(int ac,char **argv, char **envp)
+int main(int ac, char **argv, char **envp)
 {
     t_cmd *cmds;
 
-    cmds = malloc(sizeof(t_cmd) * 3);
-	init_cmds(&cmds);
+    cmds = ft_calloc(3, sizeof(t_cmd));
+//	init_cmds(&cmds);
 
-    printf("Welcome to the fShell!\n");
+//    printf("Welcome to the fShell!\n %s", argv[2]);
 
-    char *line = strdup("   ls -la -ll   ;  ls -lll ffff;   ls;        ");
-    lets_pars(line, &cmds);
+
+	char **str = malloc(sizeof(char **) * 3);
+	str[0] = strdup("ls");
+	str[1] = strdup("-la");
+	str[2] = NULL;
+
+//	ft_printcol(str);
+
+	char *line = strdup("   ls \"-la\";  ls   -a  ;");
+	lets_pars(line, &cmds, &envp);
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "123");
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "1234");
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "12345");
-	ft_printcol(cmds[0].tokens);
 	return 0;
 }

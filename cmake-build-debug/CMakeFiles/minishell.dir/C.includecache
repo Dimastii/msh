@@ -16,10 +16,6 @@ stdlib.h
 unistd.h
 -
 
-/Users/cveeta/CLionProjects/minishell/main.c
-main.h
-/Users/cveeta/CLionProjects/minishell/main.h
-
 /Users/cveeta/CLionProjects/minishell/main.h
 stdio.h
 -
@@ -37,4 +33,8 @@ sys/types.h
 -
 sys/stat.h
 -
+
+/Users/cveeta/CLionProjects/minishell/perser.c
+main.h
+/Users/cveeta/CLionProjects/minishell/main.h
 

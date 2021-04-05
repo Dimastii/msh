@@ -13,8 +13,16 @@ CMakeFiles/minishell.dir/ft_init.c.o
  /Users/cveeta/CLionProjects/minishell/ft_init.c
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
  /Users/cveeta/CLionProjects/minishell/main.h
+CMakeFiles/minishell.dir/libft-main/ft_bzero.c.o
+ /Users/cveeta/CLionProjects/minishell/libft-main/ft_bzero.c
+CMakeFiles/minishell.dir/libft-main/ft_calloc.c.o
+ /Users/cveeta/CLionProjects/minishell/libft-main/ft_calloc.c
+ /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
 CMakeFiles/minishell.dir/libft-main/ft_free.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/ft_free.c
+ /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
+CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o
+ /Users/cveeta/CLionProjects/minishell/libft-main/ft_isolating.c
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
 CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/ft_strdup.c
