@@ -25,7 +25,6 @@ void			check_tocken(char **token)
 	if ((*token)[0] == '"' && (*token)[ft_strlen(*token) - 1] == '"')
 	{
 		count = ft_count_c(*token, '"');
-		printf("%d\n\n\n", count);
 		if (count % 2 == 0) {
 			*token = ft_isolating(*token, '"');///тут лик
 //			free(*token);
@@ -34,6 +33,27 @@ void			check_tocken(char **token)
 }
 
 void  detect_token(char **str, t_cmd *cmd)
+{
+	char *tocken;
+
+	tocken = ft_strdup("");
+	while (ft_isspace(**str))
+		(*str)++;
+	while (**str != ' ')
+	{
+		if (**str == '"' || **str == '\'')
+		{
+			ft_strchr(*str, **str);
+			///token concat;
+		}
+		else///иначе это токен без кавычек
+		{
+			///пока str не ковычка или не пробел мы tok concat;
+		}
+	}
+}
+
+void  detect_token1(char **str, t_cmd *cmd)
 {
 	char *token;
 
@@ -85,20 +105,20 @@ void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 	{
 		(*str)++;
 		allocate_cmd(cmds, *cmd);
-
-		int pid = fork();
-
-		if (pid == 0) {
-			execve("/bin/ls", cmd->tokens, *envp);
-		}
-		else if (pid < 0)
-		{
-			//принт еррор
-		}
-		else
-		{
-			wait(NULL);
-		}
+		ft_printcol(cmd->tokens);
+//		int pid = fork();
+//
+//		if (pid == 0) {
+//			execve("/bin/ls", cmd->tokens, *envp);
+//		}
+//		else if (pid < 0)
+//		{
+//			//принт еррор
+//		}
+//		else
+//		{
+//			wait(NULL);
+//		}
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
@@ -125,21 +145,14 @@ int			detect_cmd(char **str, t_cmd *cmd)
 	char *cmd_;
     str_enter = *str;
 
-    while (!(ft_isspace(**str)) && **str)
-        (*str)++;
-	if (**str != ';')
-    	**str = '\0';
-	(*str)++;
-    if (ft_strncmp("ls\0", str_enter, 3) == 0 || ft_strncmp("ls;", str_enter, 3) == 0 || ft_strncmp("ls|", str_enter, 3) == 0 || ft_strncmp("ls>", str_enter, 3) == 0)
-    {
-		///add t_cmd
-//		printf("!__ ls found\n");
-		cmd->tokens = ft_coljoins(cmd->tokens,"ls");
+
+//    if (ft_strncmp("ls\0", str_enter, 3) == 0 || ft_strncmp("ls;", str_enter, 3) == 0 || ft_strncmp("ls|", str_enter, 3) == 0 || ft_strncmp("ls>", str_enter, 3) == 0)
+//    {
 		while (**str != ';' && **str != '\0')
 			detect_token(str, cmd);
 		add_cmd(cmd, 1, &exec_ls);
         return 1;
-    }
+//    }
     else
         return 0;
 }
