@@ -24,6 +24,12 @@ CMakeFiles/minishell.dir/libft-main/ft_free.c.o: ../libft-main/libft.h
 CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o: ../libft-main/ft_isolating.c
 CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o: ../libft-main/libft.h
 
+CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.o: ../libft-main/ft_lastcoldel.c
+CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.o: ../libft-main/libft.h
+
+CMakeFiles/minishell.dir/libft-main/ft_strchr.c.o: ../libft-main/ft_strchr.c
+CMakeFiles/minishell.dir/libft-main/ft_strchr.c.o: ../libft-main/libft.h
+
 CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o: ../libft-main/ft_strdup.c
 CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o: ../libft-main/libft.h
 
@@ -36,6 +42,9 @@ CMakeFiles/minishell.dir/libft-main/ft_strlen.c.o: ../main.h
 
 CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o: ../libft-main/ft_strncmp.c
 CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o: ../libft-main/libft.h
+
+CMakeFiles/minishell.dir/libft-main/ft_substr.c.o: ../libft-main/ft_substr.c
+CMakeFiles/minishell.dir/libft-main/ft_substr.c.o: ../libft-main/libft.h
 
 CMakeFiles/minishell.dir/main.c.o: ../libft-main/libft.h
 CMakeFiles/minishell.dir/main.c.o: ../main.c
@@ -52,4 +61,8 @@ CMakeFiles/minishell.dir/perser.c.o: ../perser.c
 CMakeFiles/minishell.dir/realized_f.c.o: ../libft-main/libft.h
 CMakeFiles/minishell.dir/realized_f.c.o: ../main.h
 CMakeFiles/minishell.dir/realized_f.c.o: ../realized_f.c
+
+CMakeFiles/minishell.dir/utils.c.o: ../libft-main/libft.h
+CMakeFiles/minishell.dir/utils.c.o: ../main.h
+CMakeFiles/minishell.dir/utils.c.o: ../utils.c
 

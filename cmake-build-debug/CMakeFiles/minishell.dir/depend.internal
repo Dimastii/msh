@@ -24,6 +24,12 @@ CMakeFiles/minishell.dir/libft-main/ft_free.c.o
 CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/ft_isolating.c
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
+CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.o
+ /Users/cveeta/CLionProjects/minishell/libft-main/ft_lastcoldel.c
+ /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
+CMakeFiles/minishell.dir/libft-main/ft_strchr.c.o
+ /Users/cveeta/CLionProjects/minishell/libft-main/ft_strchr.c
+ /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
 CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/ft_strdup.c
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
@@ -36,6 +42,9 @@ CMakeFiles/minishell.dir/libft-main/ft_strlen.c.o
  /Users/cveeta/CLionProjects/minishell/main.h
 CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/ft_strncmp.c
+ /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
+CMakeFiles/minishell.dir/libft-main/ft_substr.c.o
+ /Users/cveeta/CLionProjects/minishell/libft-main/ft_substr.c
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
 CMakeFiles/minishell.dir/main.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
@@ -53,3 +62,7 @@ CMakeFiles/minishell.dir/realized_f.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
  /Users/cveeta/CLionProjects/minishell/main.h
  /Users/cveeta/CLionProjects/minishell/realized_f.c
+CMakeFiles/minishell.dir/utils.c.o
+ /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
+ /Users/cveeta/CLionProjects/minishell/main.h
+ /Users/cveeta/CLionProjects/minishell/utils.c

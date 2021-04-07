@@ -11,14 +11,18 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_calloc.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_calloc.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_free.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_free.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_isolating.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o"
+  "/Users/cveeta/CLionProjects/minishell/libft-main/ft_lastcoldel.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.o"
+  "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strchr.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strchr.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strdup.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strjoin.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strjoin.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strlen.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strlen.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strncmp.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o"
+  "/Users/cveeta/CLionProjects/minishell/libft-main/ft_substr.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_substr.c.o"
   "/Users/cveeta/CLionProjects/minishell/main.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/main.c.o"
   "/Users/cveeta/CLionProjects/minishell/pepe.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/pepe.c.o"
   "/Users/cveeta/CLionProjects/minishell/perser.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/perser.c.o"
   "/Users/cveeta/CLionProjects/minishell/realized_f.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/realized_f.c.o"
+  "/Users/cveeta/CLionProjects/minishell/utils.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/utils.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

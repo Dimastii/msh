@@ -332,6 +332,60 @@ libft-main/ft_isolating.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_isolating.c.s
 .PHONY : libft-main/ft_isolating.c.s
 
+libft-main/ft_lastcoldel.o: libft-main/ft_lastcoldel.c.o
+
+.PHONY : libft-main/ft_lastcoldel.o
+
+# target to build an object file
+libft-main/ft_lastcoldel.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.o
+.PHONY : libft-main/ft_lastcoldel.c.o
+
+libft-main/ft_lastcoldel.i: libft-main/ft_lastcoldel.c.i
+
+.PHONY : libft-main/ft_lastcoldel.i
+
+# target to preprocess a source file
+libft-main/ft_lastcoldel.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.i
+.PHONY : libft-main/ft_lastcoldel.c.i
+
+libft-main/ft_lastcoldel.s: libft-main/ft_lastcoldel.c.s
+
+.PHONY : libft-main/ft_lastcoldel.s
+
+# target to generate assembly for a file
+libft-main/ft_lastcoldel.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.s
+.PHONY : libft-main/ft_lastcoldel.c.s
+
+libft-main/ft_strchr.o: libft-main/ft_strchr.c.o
+
+.PHONY : libft-main/ft_strchr.o
+
+# target to build an object file
+libft-main/ft_strchr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strchr.c.o
+.PHONY : libft-main/ft_strchr.c.o
+
+libft-main/ft_strchr.i: libft-main/ft_strchr.c.i
+
+.PHONY : libft-main/ft_strchr.i
+
+# target to preprocess a source file
+libft-main/ft_strchr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strchr.c.i
+.PHONY : libft-main/ft_strchr.c.i
+
+libft-main/ft_strchr.s: libft-main/ft_strchr.c.s
+
+.PHONY : libft-main/ft_strchr.s
+
+# target to generate assembly for a file
+libft-main/ft_strchr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strchr.c.s
+.PHONY : libft-main/ft_strchr.c.s
+
 libft-main/ft_strdup.o: libft-main/ft_strdup.c.o
 
 .PHONY : libft-main/ft_strdup.o
@@ -439,6 +493,33 @@ libft-main/ft_strncmp.s: libft-main/ft_strncmp.c.s
 libft-main/ft_strncmp.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.s
 .PHONY : libft-main/ft_strncmp.c.s
+
+libft-main/ft_substr.o: libft-main/ft_substr.c.o
+
+.PHONY : libft-main/ft_substr.o
+
+# target to build an object file
+libft-main/ft_substr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_substr.c.o
+.PHONY : libft-main/ft_substr.c.o
+
+libft-main/ft_substr.i: libft-main/ft_substr.c.i
+
+.PHONY : libft-main/ft_substr.i
+
+# target to preprocess a source file
+libft-main/ft_substr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_substr.c.i
+.PHONY : libft-main/ft_substr.c.i
+
+libft-main/ft_substr.s: libft-main/ft_substr.c.s
+
+.PHONY : libft-main/ft_substr.s
+
+# target to generate assembly for a file
+libft-main/ft_substr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_substr.c.s
+.PHONY : libft-main/ft_substr.c.s
 
 main.o: main.c.o
 
@@ -548,6 +629,33 @@ realized_f.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/realized_f.c.s
 .PHONY : realized_f.c.s
 
+utils.o: utils.c.o
+
+.PHONY : utils.o
+
+# target to build an object file
+utils.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/utils.c.o
+.PHONY : utils.c.o
+
+utils.i: utils.c.i
+
+.PHONY : utils.i
+
+# target to preprocess a source file
+utils.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/utils.c.i
+.PHONY : utils.c.i
+
+utils.s: utils.c.s
+
+.PHONY : utils.s
+
+# target to generate assembly for a file
+utils.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/utils.c.s
+.PHONY : utils.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -578,6 +686,12 @@ help:
 	@echo "... libft-main/ft_isolating.o"
 	@echo "... libft-main/ft_isolating.i"
 	@echo "... libft-main/ft_isolating.s"
+	@echo "... libft-main/ft_lastcoldel.o"
+	@echo "... libft-main/ft_lastcoldel.i"
+	@echo "... libft-main/ft_lastcoldel.s"
+	@echo "... libft-main/ft_strchr.o"
+	@echo "... libft-main/ft_strchr.i"
+	@echo "... libft-main/ft_strchr.s"
 	@echo "... libft-main/ft_strdup.o"
 	@echo "... libft-main/ft_strdup.i"
 	@echo "... libft-main/ft_strdup.s"
@@ -590,6 +704,9 @@ help:
 	@echo "... libft-main/ft_strncmp.o"
 	@echo "... libft-main/ft_strncmp.i"
 	@echo "... libft-main/ft_strncmp.s"
+	@echo "... libft-main/ft_substr.o"
+	@echo "... libft-main/ft_substr.i"
+	@echo "... libft-main/ft_substr.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -602,6 +719,9 @@ help:
 	@echo "... realized_f.o"
 	@echo "... realized_f.i"
 	@echo "... realized_f.s"
+	@echo "... utils.o"
+	@echo "... utils.i"
+	@echo "... utils.s"
 .PHONY : help
 
 
