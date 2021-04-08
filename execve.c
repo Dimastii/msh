@@ -9,6 +9,22 @@ void exec_ls(char *file, char **argv, char ***envp)
 	execve(file, argv, *envp);
 }
 
+void		stdexec(t_cmd *cmd, char ***envp)
+{
+	int pid = fork();
+
+	if (pid == 0) {
+		execve("/bin/ls", cmd->tokens, *envp);
+	}
+	else if (pid < 0)
+	{
+		//принт еррор
+	}
+	else
+	{
+		wait(NULL);
+	}
+}
 
 void lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode){
     int	status;

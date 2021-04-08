@@ -2,6 +2,12 @@
 
 #include "main.h"
 
+//void read_line()
+//{
+//	char str;
+//	read(1,)
+//	while ()
+//}
 
 int main(int ac, char **argv, char **envp)
 {
@@ -20,10 +26,12 @@ int main(int ac, char **argv, char **envp)
 
 //	ft_printcol(str);
 
-	char *line = strdup("   ls \"-la \" \" \";  ls   \"-a\"  ;");
+	char *line = strdup("q ; $USER ");
 	lets_pars(line, &cmds, &envp);
+
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "123");
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "1234");
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "12345");
+
 	return 0;
 }

@@ -8,12 +8,18 @@ int		ft_isspace(int c)
 {
     c = (unsigned char)c;
     if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-        || c == ' ' || c == ';')
+        || c == ' ')
         return (1);
     return (0);
 }
 
-
+int 	isspec(int c)
+{
+	c = (unsigned char)c;
+	if (c == ';' || c == '|' || c == '>' || c == '<' || c == '\0')
+		return (1);
+	return (0);
+}
 
 void			check_tocken(char **token)
 {
@@ -35,22 +41,85 @@ void			check_tocken(char **token)
 void  detect_token(char **str, t_cmd *cmd)
 {
 	char *tocken;
-
+	char *tmp;
+	char *fre;
 	tocken = ft_strdup("");
 	while (ft_isspace(**str))
 		(*str)++;
-	while (**str != ' ')
+	while (**str != ' ' && !(isspec(**str)) && **str)
 	{
 		if (**str == '"' || **str == '\'')
 		{
-			ft_strchr(*str, **str);
-			///token concat;
+
+			(*str)++;
+			if ((tmp = ft_strchrifnepred(*str, *(*str - 1))))
+			{
+				fre = tocken;
+				tocken = ft_strjoin(tocken, ft_substr(*str, 0, tmp - *str));
+				*str = tmp + 1;
+				free(fre);
+			}
+			else
+			{
+				if (*tocken)
+				{
+					fre = tocken;
+					tocken = ft_strdup("");
+					free(fre);
+				}
+				printf("ERROR\n");
+			}
 		}
-		else///иначе это токен без кавычек
+		else
 		{
+			if (**str == '\\')
+			{
+				fre = tocken;
+				tocken = ft_strjoins(tocken, *(*str + 1));
+				(*str) = (*str) + 2;
+				free(fre);
+			}
+			while (**str != '"' && **str != '\'' && **str != ' ' && **str && !isspec(**str))
+			{
+				if (**str != '$') {
+					fre = tocken;
+					tocken = ft_strjoins(tocken, **str);
+					free(fre);
+					(*str)++;
+				}
+				else
+				{
+					char *glob;
+					(*str)++;
+					glob = ft_strdup("");
+					while (**str != '"' && **str != '\'' && **str != ' ' && **str && !isspec(**str))
+					{
+						glob = ft_strjoins(glob, **str);//лик
+						(*str)++;
+					}
+//					printf("HEHE %d\n", ft_strncmp(glob, "USER", 4));
+					if (/*check_glob(glob)==1*/ft_strncmp(glob, "USER", 10) == 0)
+					{
+						tocken = ft_strjoin(tocken, "cveeta");//лик
+					}
+					/* функция которая принимает строку и проверяет все символы
+					 * от $ до (**str != '"' && **str != '\'' && **str != ' ' && **str && !isspec(**str))
+					 * и если находит такую переменную окружения то
+					 * джоинит значение переменной к токену и передвигает указатель на конец имени
+					 * найденной переменной
+					 * иначе (если не находит такую переменную окружения)
+					 * то
+					 * передвигает указатель не джоиня токен
+					 * */
+				}
+			}
 			///пока str не ковычка или не пробел мы tok concat;
 		}
 	}
+	if (tocken[0] != '\0')
+		cmd->tokens = ft_coljoins(cmd->tokens, tocken);///лик
+	else
+		free(tocken);
 }
 
 void  detect_token1(char **str, t_cmd *cmd)
@@ -93,9 +162,6 @@ void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 
 void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 {
-//	while (!(ft_isspace(**str)) && **str)
-//		(*str)++;
-//	**str = '\0';
     if (**str == '|')
     {
         ///add (s_cmd cmd) in (s_cmd loop[3])
@@ -104,21 +170,13 @@ void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 	if (**str == ';')
 	{
 		(*str)++;
+		printf(" is ;\n");
 		allocate_cmd(cmds, *cmd);
 		ft_printcol(cmd->tokens);
-//		int pid = fork();
-//
-//		if (pid == 0) {
-//			execve("/bin/ls", cmd->tokens, *envp);
-//		}
-//		else if (pid < 0)
-//		{
-//			//принт еррор
-//		}
-//		else
-//		{
-//			wait(NULL);
-//		}
+
+		if (cmd->tokens[0])
+			stdexec(cmd, envp);
+
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
@@ -126,8 +184,17 @@ void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 	}
 	if (**str == '\0')
 	{
+		printf(" is \\0\n");
+
 		allocate_cmd(cmds, *cmd);
-		//exec_cmds(cmds);
+		ft_printcol(cmd->tokens);
+
+		if (cmd->tokens[0])
+			stdexec(cmd, envp);
+		free(cmd->tokens);
+		cmd->tokens = NULL;
+		init_cnd(cmd);
+		return;
 	}
 
 }
@@ -141,20 +208,11 @@ void		add_cmd(t_cmd *cmds, int mode, void (*cmd) (char *, char **, char ***))
 
 int			detect_cmd(char **str, t_cmd *cmd)
 {
-    char *str_enter;
-	char *cmd_;
-    str_enter = *str;
-
-
-//    if (ft_strncmp("ls\0", str_enter, 3) == 0 || ft_strncmp("ls;", str_enter, 3) == 0 || ft_strncmp("ls|", str_enter, 3) == 0 || ft_strncmp("ls>", str_enter, 3) == 0)
-//    {
-		while (**str != ';' && **str != '\0')
-			detect_token(str, cmd);
-		add_cmd(cmd, 1, &exec_ls);
-        return 1;
-//    }
-    else
-        return 0;
+    while (!isspec(**str)) {
+    	detect_token(str, cmd);
+    }
+    add_cmd(cmd, 1, &exec_ls);
+    return 1;
 }
 
 
@@ -172,8 +230,6 @@ void lets_pars(char *str_original, t_cmd **cmds, char ***envp)
 			str++;
 		if (detect_cmd(&str, &cmd))
 		{
-			printf("cmd find with columns:\n");
-
 			detect_spec(&str, cmds, &cmd, envp);
 		}
 	}

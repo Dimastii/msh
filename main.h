@@ -26,6 +26,8 @@ typedef struct  s_cmd{
 
 char *pwd();
 void cd(char *path);
+void		stdexec(t_cmd *cmd, char ***envp);
+char	*ft_strchrifnepred(const char *string, int symbol);
 void lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode);
 void lets_pars(char *str_original, t_cmd **cmds, char ***envp);
 void pepe(char **argv, char **envp);
