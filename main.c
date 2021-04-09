@@ -26,7 +26,7 @@ int main(int ac, char **argv, char **envp)
 
 //	ft_printcol(str);
 
-	char *line = strdup("q ; $USER ");
+	char *line = strdup(" $PWD ");
 	lets_pars(line, &cmds, &envp);
 
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "123");

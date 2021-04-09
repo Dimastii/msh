@@ -119,6 +119,9 @@
 		<Unit filename="/Users/cveeta/CLionProjects/minishell/libft-main/ft_strncmp.c">
 			<Option target="minishell"/>
 		</Unit>
+		<Unit filename="/Users/cveeta/CLionProjects/minishell/libft-main/ft_strnstr.c">
+			<Option target="minishell"/>
+		</Unit>
 		<Unit filename="/Users/cveeta/CLionProjects/minishell/libft-main/ft_substr.c">
 			<Option target="minishell"/>
 		</Unit>

@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strjoin.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strjoin.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strlen.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strlen.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strncmp.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o"
+  "/Users/cveeta/CLionProjects/minishell/libft-main/ft_strnstr.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.o"
   "/Users/cveeta/CLionProjects/minishell/libft-main/ft_substr.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_substr.c.o"
   "/Users/cveeta/CLionProjects/minishell/main.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/main.c.o"
   "/Users/cveeta/CLionProjects/minishell/pepe.c" "/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir/pepe.c.o"

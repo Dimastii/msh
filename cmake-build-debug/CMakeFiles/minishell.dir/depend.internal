@@ -43,6 +43,9 @@ CMakeFiles/minishell.dir/libft-main/ft_strlen.c.o
 CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/ft_strncmp.c
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
+CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.o
+ /Users/cveeta/CLionProjects/minishell/libft-main/ft_strnstr.c
+ /Users/cveeta/CLionProjects/minishell/libft-main/libft.h
 CMakeFiles/minishell.dir/libft-main/ft_substr.c.o
  /Users/cveeta/CLionProjects/minishell/libft-main/ft_substr.c
  /Users/cveeta/CLionProjects/minishell/libft-main/libft.h

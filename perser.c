@@ -38,26 +38,92 @@ void			check_tocken(char **token)
 	}
 }
 
-void  detect_token(char **str, t_cmd *cmd)
+char	*check_glob(char *glob, char **envp) {
+	int i;
+	char *value;
+	i = 0;
+
+	value = NULL;
+	while (envp[i])
+	{
+		if (!value) {
+			value = ft_strnstr(envp[i], glob, ft_strlen(glob));
+		}
+		else
+			return (value + ft_strlen(glob) + 1);
+		i++;
+	}
+	return value;
+}
+
+void	search_glob(char **str, char **tocken, char const *tmp, char **envp)
+{
+	char *glob;
+	char *value;
+	char *fre;
+
+	value = NULL;
+	(*str)++;
+	glob = ft_strdup("");
+	while (*str != tmp && **str != ' ' && **str && !isspec(**str))
+	{//тут мы ищем переменную в строке
+		fre = glob;
+		glob = ft_strjoins(glob, **str);//лик
+		free(fre);
+		fre = NULL;
+		(*str)++;
+	}//в этом условии будет поиск по глобальным переменным
+	if ((value = check_glob(glob, envp))/*ft_strncmp(glob, "USER", 10) == 0*/)
+	{
+		fre = *tocken;
+		*tocken = ft_strjoin(*tocken, value);
+		free(fre);
+		fre = NULL;
+	}
+}
+
+void	detect_token(char **str, t_cmd *cmd, char **envp)
 {
 	char *tocken;
 	char *tmp;
 	char *fre;
+	int flag;
+
 	tocken = ft_strdup("");
 	while (ft_isspace(**str))
 		(*str)++;
 	while (**str != ' ' && !(isspec(**str)) && **str)
 	{
-		if (**str == '"' || **str == '\'')
+		if (**str == '"' || **str == '\'')//если кавычка
 		{
-
-			(*str)++;
-			if ((tmp = ft_strchrifnepred(*str, *(*str - 1))))
+			if (**str == '"')
+				flag = 1;
+			else
+				flag = 0;
+			(*str)++;//находим есть ли вообще такая же закрывающаа скобка
+			if ((tmp = ft_strchrifnepred(*str, *(*str - 1), flag)))
 			{
-				fre = tocken;
-				tocken = ft_strjoin(tocken, ft_substr(*str, 0, tmp - *str));
-				*str = tmp + 1;
-				free(fre);
+				while (*str != tmp)//если есть то пока мы до неё не дойжем то будем джоинить
+				{
+					if (**str == '\\' && flag)//если экран то мы просто джоиним скипая экран
+					{
+						fre = tocken;
+						tocken = ft_strjoins(tocken, *(*str + 1));
+						(*str) = (*str) + 2;
+						free(fre);
+					}
+					else if (**str != '$' || !flag) {// обычный случай
+						fre = tocken;
+						tocken = ft_strjoins(tocken, **str);
+						(*str)++;
+						free(fre);
+					}
+					else// необычный случай (если переменная)
+					{
+						search_glob(str, &tocken, tmp, envp);
+					}
+				}
+				(*str)++;
 			}
 			else
 			{
@@ -67,21 +133,21 @@ void  detect_token(char **str, t_cmd *cmd)
 					tocken = ft_strdup("");
 					free(fre);
 				}
-				printf("ERROR\n");
+				printf("ERROR \n");
 			}
 		}
-		else
+		else // если не кавычка
 		{
-			if (**str == '\\')
-			{
-				fre = tocken;
-				tocken = ft_strjoins(tocken, *(*str + 1));
-				(*str) = (*str) + 2;
-				free(fre);
-			}
 			while (**str != '"' && **str != '\'' && **str != ' ' && **str && !isspec(**str))
-			{
-				if (**str != '$') {
+			{//но только в том случае если не наткнёмся на переменную
+				if (**str == '\\')//если экран то мы просто джоиним
+				{
+					fre = tocken;
+					tocken = ft_strjoins(tocken, *(*str + 1));
+					(*str) = (*str) + 2;
+					free(fre);
+				}//теперь пока это слово мы будем посимвольно джоинить
+				else if (**str != '$') {
 					fre = tocken;
 					tocken = ft_strjoins(tocken, **str);
 					free(fre);
@@ -89,19 +155,7 @@ void  detect_token(char **str, t_cmd *cmd)
 				}
 				else
 				{
-					char *glob;
-					(*str)++;
-					glob = ft_strdup("");
-					while (**str != '"' && **str != '\'' && **str != ' ' && **str && !isspec(**str))
-					{
-						glob = ft_strjoins(glob, **str);//лик
-						(*str)++;
-					}
-//					printf("HEHE %d\n", ft_strncmp(glob, "USER", 4));
-					if (/*check_glob(glob)==1*/ft_strncmp(glob, "USER", 10) == 0)
-					{
-						tocken = ft_strjoin(tocken, "cveeta");//лик
-					}
+					search_glob(str, &tocken, tmp, envp);
 					/* функция которая принимает строку и проверяет все символы
 					 * от $ до (**str != '"' && **str != '\'' && **str != ' ' && **str && !isspec(**str))
 					 * и если находит такую переменную окружения то
@@ -116,7 +170,7 @@ void  detect_token(char **str, t_cmd *cmd)
 			///пока str не ковычка или не пробел мы tok concat;
 		}
 	}
-	if (tocken[0] != '\0')
+	if (1)
 		cmd->tokens = ft_coljoins(cmd->tokens, tocken);///лик
 	else
 		free(tocken);
@@ -206,10 +260,10 @@ void		add_cmd(t_cmd *cmds, int mode, void (*cmd) (char *, char **, char ***))
 	cmds->mode = mode;
 }
 
-int			detect_cmd(char **str, t_cmd *cmd)
+int			detect_cmd(char **str, t_cmd *cmd, char **envp)
 {
     while (!isspec(**str)) {
-    	detect_token(str, cmd);
+    	detect_token(str, cmd, envp);
     }
     add_cmd(cmd, 1, &exec_ls);
     return 1;
@@ -228,7 +282,7 @@ void lets_pars(char *str_original, t_cmd **cmds, char ***envp)
 	{
 		while (ft_isspace(*str))
 			str++;
-		if (detect_cmd(&str, &cmd))
+		if (detect_cmd(&str, &cmd, *envp))
 		{
 			detect_spec(&str, cmds, &cmd, envp);
 		}

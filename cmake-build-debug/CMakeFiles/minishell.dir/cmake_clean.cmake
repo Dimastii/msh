@@ -12,6 +12,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/minishell.dir/libft-main/ft_strjoin.c.o"
   "CMakeFiles/minishell.dir/libft-main/ft_strlen.c.o"
   "CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o"
+  "CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.o"
   "CMakeFiles/minishell.dir/libft-main/ft_substr.c.o"
   "CMakeFiles/minishell.dir/main.c.o"
   "CMakeFiles/minishell.dir/pepe.c.o"

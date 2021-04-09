@@ -494,6 +494,33 @@ libft-main/ft_strncmp.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.s
 .PHONY : libft-main/ft_strncmp.c.s
 
+libft-main/ft_strnstr.o: libft-main/ft_strnstr.c.o
+
+.PHONY : libft-main/ft_strnstr.o
+
+# target to build an object file
+libft-main/ft_strnstr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.o
+.PHONY : libft-main/ft_strnstr.c.o
+
+libft-main/ft_strnstr.i: libft-main/ft_strnstr.c.i
+
+.PHONY : libft-main/ft_strnstr.i
+
+# target to preprocess a source file
+libft-main/ft_strnstr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.i
+.PHONY : libft-main/ft_strnstr.c.i
+
+libft-main/ft_strnstr.s: libft-main/ft_strnstr.c.s
+
+.PHONY : libft-main/ft_strnstr.s
+
+# target to generate assembly for a file
+libft-main/ft_strnstr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.s
+.PHONY : libft-main/ft_strnstr.c.s
+
 libft-main/ft_substr.o: libft-main/ft_substr.c.o
 
 .PHONY : libft-main/ft_substr.o
@@ -704,6 +731,9 @@ help:
 	@echo "... libft-main/ft_strncmp.o"
 	@echo "... libft-main/ft_strncmp.i"
 	@echo "... libft-main/ft_strncmp.s"
+	@echo "... libft-main/ft_strnstr.o"
+	@echo "... libft-main/ft_strnstr.i"
+	@echo "... libft-main/ft_strnstr.s"
 	@echo "... libft-main/ft_substr.o"
 	@echo "... libft-main/ft_substr.i"
 	@echo "... libft-main/ft_substr.s"

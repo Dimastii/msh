@@ -16,4 +16,5 @@ add_executable(minishell main.c
         libft-main/ft_bzero.c
         libft-main/ft_substr.c
         libft-main/ft_strchr.c
+        libft-main/ft_strnstr.c
         f.c main.h realized_f.c execve.c perser.c pepe.c libft-main/ft_free.c ft_init.c libft-main/ft_isolating.c libft-main/ft_lastcoldel.c utils.c)
