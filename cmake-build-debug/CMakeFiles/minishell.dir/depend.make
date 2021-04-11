@@ -49,6 +49,9 @@ CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.o: ../libft-main/libft.h
 CMakeFiles/minishell.dir/libft-main/ft_substr.c.o: ../libft-main/ft_substr.c
 CMakeFiles/minishell.dir/libft-main/ft_substr.c.o: ../libft-main/libft.h
 
+CMakeFiles/minishell.dir/libft-main/get_next_line.c.o: ../libft-main/get_next_line.c
+CMakeFiles/minishell.dir/libft-main/get_next_line.c.o: ../libft-main/libft.h
+
 CMakeFiles/minishell.dir/main.c.o: ../libft-main/libft.h
 CMakeFiles/minishell.dir/main.c.o: ../main.c
 CMakeFiles/minishell.dir/main.c.o: ../main.h
@@ -64,6 +67,10 @@ CMakeFiles/minishell.dir/perser.c.o: ../perser.c
 CMakeFiles/minishell.dir/realized_f.c.o: ../libft-main/libft.h
 CMakeFiles/minishell.dir/realized_f.c.o: ../main.h
 CMakeFiles/minishell.dir/realized_f.c.o: ../realized_f.c
+
+CMakeFiles/minishell.dir/termcaps.c.o: ../libft-main/libft.h
+CMakeFiles/minishell.dir/termcaps.c.o: ../main.h
+CMakeFiles/minishell.dir/termcaps.c.o: ../termcaps.c
 
 CMakeFiles/minishell.dir/utils.c.o: ../libft-main/libft.h
 CMakeFiles/minishell.dir/utils.c.o: ../main.h
