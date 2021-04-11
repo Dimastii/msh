@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/bdaedric/msh/libft-main/libft.h
+/Users/cveeta/CLionProjects/msh-main/libft-main/libft.h
 string.h
 -
 stdio.h
@@ -16,11 +16,7 @@ stdlib.h
 unistd.h
 -
 
-/Users/bdaedric/msh/main.c
-main.h
-/Users/bdaedric/msh/main.h
-
-/Users/bdaedric/msh/main.h
+/Users/cveeta/CLionProjects/msh-main/main.h
 stdio.h
 -
 stdlib.h
@@ -28,7 +24,7 @@ stdlib.h
 unistd.h
 -
 libft-main/libft.h
-/Users/bdaedric/msh/libft-main/libft.h
+/Users/cveeta/CLionProjects/msh-main/libft-main/libft.h
 fcntl.h
 -
 termcap.h
@@ -42,7 +38,7 @@ curses.h
 term.h
 -
 
-/Users/bdaedric/msh/termcaps.c
+/Users/cveeta/CLionProjects/msh-main/perser.c
 main.h
-/Users/bdaedric/msh/main.h
+/Users/cveeta/CLionProjects/msh-main/main.h
 

@@ -107,6 +107,10 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 				{
 					if (**str == '\\' && flag)//если экран то мы просто джоиним скипая экран
 					{
+						if (!(*(*str + 1))) {
+							(*str)++;
+							continue;
+						}
 						fre = tocken;
 						tocken = ft_strjoins(tocken, *(*str + 1));
 						(*str) = (*str) + 2;
@@ -138,10 +142,14 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 		}
 		else // если не кавычка
 		{
-			while (**str != '"' && **str != '\'' && **str != ' ' && **str && !isspec(**str))
+			while (**str && **str != '"' && **str != '\'' && **str != ' ' && !isspec(**str))
 			{//но только в том случае если не наткнёмся на переменную
 				if (**str == '\\')//если экран то мы просто джоиним
 				{
+					if (!(*(*str + 1))) {
+						(*str)++;
+						continue;
+					}
 					fre = tocken;
 					tocken = ft_strjoins(tocken, *(*str + 1));
 					(*str) = (*str) + 2;
@@ -170,32 +178,11 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 			///пока str не ковычка или не пробел мы tok concat;
 		}
 	}
-	if (1)
+	if (*tocken)
 		cmd->tokens = ft_coljoins(cmd->tokens, tocken);///лик
 	else
 		free(tocken);
 }
-
-void  detect_token1(char **str, t_cmd *cmd)
-{
-	char *token;
-
-	while (ft_isspace(**str) && **str != ';')
-		(*str)++;
-	token = ft_strdup("");
-	while (**str != ';' && !(ft_isspace(**str)) && **str)//добавить проверку и на другие спецсимволы
-	{
-		token = ft_strjoins(token,**str);
-		(*str)++;
-	}
-	if (*token)
-	{
-		check_tocken(&token);
-//		exit(0);
-		cmd->tokens = ft_coljoins(cmd->tokens, token);
-	}
-}
-
 
 void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 {
@@ -224,9 +211,8 @@ void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 	if (**str == ';')
 	{
 		(*str)++;
-		printf(" is ;\n");
-		allocate_cmd(cmds, *cmd);
-		ft_printcol(cmd->tokens);
+//		printf(" is ;\n");
+//		ft_printcol(cmd->tokens);
 
 		if (cmd->tokens[0])
 			stdexec(cmd, envp);
@@ -238,10 +224,8 @@ void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 	}
 	if (**str == '\0')
 	{
-		printf(" is \\0\n");
-
-		allocate_cmd(cmds, *cmd);
-		ft_printcol(cmd->tokens);
+//		printf(" is \\0\n");
+//		ft_printcol(cmd->tokens);
 
 		if (cmd->tokens[0])
 			stdexec(cmd, envp);

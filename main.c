@@ -8,25 +8,24 @@ int main(int ac, char **argv, char **envp)
 	int				fd;
 	t_dlist			*lst = NULL;
 
+	pars_str = ft_strdup("1");//потом очистить
+	cmds = ft_calloc(3, sizeof(t_cmd));///m h
+
 	fd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND , 0644);
 	lst = sort_history(fd, lst);
-	pars_str = termcap_processing(fd, lst);
-    cmds = ft_calloc(3, sizeof(t_cmd));
 
-	char **str = malloc(sizeof(char **) * 3);
-	str[0] = strdup("ls");
-	str[1] = strdup("-la");
-	str[2] = NULL;
+//	printf("pars_str: |%s|\n", pars_str);
 
-//	ft_printcol(str);
+	char *line = strdup("qwe | qwe");
+	while (1) {
+		write(1, "POLUPOKER:", 10);
+//		pars_str = termcap_processing(fd, lst);
+//		printf("pars_str: |%s|-|%d|\n", pars_str, ft_strncmp(pars_str, "exit", ft_strlen(pars_str)));
+//		if (*pars_str) {
+			lets_pars(line, &cmds, &envp);
+//		}///
+	}
 
-	char *line = strdup(" $PWD ");
-	printf("pars_str: %s\n", pars_str);
-	lets_pars(pars_str, &cmds, &envp);
-
-//	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "123");
-//	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "1234");
-//	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "12345");
 
 	return (0);
 }

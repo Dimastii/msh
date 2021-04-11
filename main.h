@@ -50,5 +50,6 @@ void		init_cmds(t_cmd **cmds);
 t_dlist		*sort_history(int fd, t_dlist *lst);
 t_dlist		*init_list(t_dlist *lst, char *str);
 char		*termcap_processing(int fd, t_dlist *lst);
+char	*check_glob(char *glob, char **envp);
 
 #endif //MINISHELL_MAIN_H
