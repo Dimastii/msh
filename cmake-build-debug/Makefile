@@ -68,10 +68,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cveeta/CLionProjects/minishell
+CMAKE_SOURCE_DIR = /Users/bdaedric/msh
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cveeta/CLionProjects/minishell/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/bdaedric/msh/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles /Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bdaedric/msh/cmake-build-debug/CMakeFiles /Users/bdaedric/msh/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bdaedric/msh/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -548,6 +548,33 @@ libft-main/ft_substr.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_substr.c.s
 .PHONY : libft-main/ft_substr.c.s
 
+libft-main/get_next_line.o: libft-main/get_next_line.c.o
+
+.PHONY : libft-main/get_next_line.o
+
+# target to build an object file
+libft-main/get_next_line.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/get_next_line.c.o
+.PHONY : libft-main/get_next_line.c.o
+
+libft-main/get_next_line.i: libft-main/get_next_line.c.i
+
+.PHONY : libft-main/get_next_line.i
+
+# target to preprocess a source file
+libft-main/get_next_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/get_next_line.c.i
+.PHONY : libft-main/get_next_line.c.i
+
+libft-main/get_next_line.s: libft-main/get_next_line.c.s
+
+.PHONY : libft-main/get_next_line.s
+
+# target to generate assembly for a file
+libft-main/get_next_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/get_next_line.c.s
+.PHONY : libft-main/get_next_line.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -656,6 +683,33 @@ realized_f.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/realized_f.c.s
 .PHONY : realized_f.c.s
 
+termcaps.o: termcaps.c.o
+
+.PHONY : termcaps.o
+
+# target to build an object file
+termcaps.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/termcaps.c.o
+.PHONY : termcaps.c.o
+
+termcaps.i: termcaps.c.i
+
+.PHONY : termcaps.i
+
+# target to preprocess a source file
+termcaps.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/termcaps.c.i
+.PHONY : termcaps.c.i
+
+termcaps.s: termcaps.c.s
+
+.PHONY : termcaps.s
+
+# target to generate assembly for a file
+termcaps.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/termcaps.c.s
+.PHONY : termcaps.c.s
+
 utils.o: utils.c.o
 
 .PHONY : utils.o
@@ -737,6 +791,9 @@ help:
 	@echo "... libft-main/ft_substr.o"
 	@echo "... libft-main/ft_substr.i"
 	@echo "... libft-main/ft_substr.s"
+	@echo "... libft-main/get_next_line.o"
+	@echo "... libft-main/get_next_line.i"
+	@echo "... libft-main/get_next_line.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -749,6 +806,9 @@ help:
 	@echo "... realized_f.o"
 	@echo "... realized_f.i"
 	@echo "... realized_f.s"
+	@echo "... termcaps.o"
+	@echo "... termcaps.i"
+	@echo "... termcaps.s"
 	@echo "... utils.o"
 	@echo "... utils.i"
 	@echo "... utils.s"

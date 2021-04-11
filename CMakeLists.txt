@@ -6,6 +6,7 @@ set(CMAKE_C_STANDARD 99)
 include_directories(libft-main)
 link_directories(./)
 
+set(CMAKE_C_FLAGS "-ltermcap")
 
 add_executable(minishell main.c
         libft-main/ft_strjoin.c
@@ -17,4 +18,6 @@ add_executable(minishell main.c
         libft-main/ft_substr.c
         libft-main/ft_strchr.c
         libft-main/ft_strnstr.c
+        termcaps.c
+        libft-main/get_next_line.c
         f.c main.h realized_f.c execve.c perser.c pepe.c libft-main/ft_free.c ft_init.c libft-main/ft_isolating.c libft-main/ft_lastcoldel.c utils.c)

@@ -1,23 +1,17 @@
-
-
 #include "main.h"
 
-//void read_line()
-//{
-//	char str;
-//	read(1,)
-//	while ()
-//}
 
 int main(int ac, char **argv, char **envp)
 {
-    t_cmd *cmds;
+    t_cmd			*cmds;
+	char			*pars_str;
+	int				fd;
+	t_dlist			*lst = NULL;
 
+	fd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND , 0644);
+	lst = sort_history(fd, lst);
+	pars_str = termcap_processing(fd, lst);
     cmds = ft_calloc(3, sizeof(t_cmd));
-//	init_cmds(&cmds);
-
-//    printf("Welcome to the fShell!\n %s", argv[2]);
-
 
 	char **str = malloc(sizeof(char **) * 3);
 	str[0] = strdup("ls");
@@ -27,11 +21,12 @@ int main(int ac, char **argv, char **envp)
 //	ft_printcol(str);
 
 	char *line = strdup(" $PWD ");
-	lets_pars(line, &cmds, &envp);
+	printf("pars_str: %s\n", pars_str);
+	lets_pars(pars_str, &cmds, &envp);
 
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "123");
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "1234");
 //	cmds[0].tokens = ft_coljoins(cmds[0].tokens, "12345");
 
-	return 0;
+	return (0);
 }

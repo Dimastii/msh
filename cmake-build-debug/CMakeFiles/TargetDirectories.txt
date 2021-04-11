@@ -1,3 +1,3 @@
-/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/cveeta/CLionProjects/minishell/cmake-build-debug/CMakeFiles/minishell.dir
+/Users/bdaedric/msh/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/bdaedric/msh/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/bdaedric/msh/cmake-build-debug/CMakeFiles/minishell.dir
