@@ -1,0 +1,42 @@
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  "C"
+  )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_C
+  "/Users/cveeta/CLionProjects/msh-main/execve.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/execve.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/f.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/f.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/ft_init.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/ft_init.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_bzero.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_bzero.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_calloc.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_calloc.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_free.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_free.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_isolating.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_lastcoldel.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_strchr.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strchr.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_strdup.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_strjoin.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strjoin.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_strlen.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strlen.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_strncmp.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_strnstr.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/ft_substr.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/ft_substr.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/libft-main/get_next_line.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/libft-main/get_next_line.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/main.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/main.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/pepe.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/pepe.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/perser.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/perser.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/realized_f.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/realized_f.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/termcaps.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/termcaps.c.o"
+  "/Users/cveeta/CLionProjects/msh-main/utils.c" "/Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/minishell.dir/utils.c.o"
+  )
+set(CMAKE_C_COMPILER_ID "AppleClang")
+
+# The include file search paths:
+set(CMAKE_C_TARGET_INCLUDE_PATH
+  "../libft-main"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

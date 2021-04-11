@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/cveeta/CLionProjects/msh-main/libft-main/libft.h
+string.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+
+/Users/cveeta/CLionProjects/msh-main/main.h
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+libft-main/libft.h
+/Users/cveeta/CLionProjects/msh-main/libft-main/libft.h
+fcntl.h
+-
+termcap.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+curses.h
+-
+term.h
+-
+
+/Users/cveeta/CLionProjects/msh-main/perser.c
+main.h
+/Users/cveeta/CLionProjects/msh-main/main.h
+
