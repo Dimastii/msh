@@ -184,11 +184,36 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 		free(tocken);
 }
 
+//void 		exec_pepe(t_cmd **cmds, int num_enter, t_cmd cmd)
+//{
+//	int pid;
+//
+//
+//	while (cmds[num_enter % 3]->create != 0 )
+//
+//
+//	pid = fork();
+//	if (pid != 0) {
+//
+//	}
+//	//запускаем 1 cmd
+//	while ()
+//	//cmds[(num_enter - 1) % 3] = cmd;//типа удалил пред и положил новую
+//	//waitpid cmds[(num_enter - 2) % 3]
+//	//exec cmds[(num_enter) % 3]
+//}
+
 void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 {
 	int i;
+	static int num_enter;
 
 	i = 0;
+	num_enter++;
+//	if (num_enter > 4)
+//	{
+//		exec_pepe(cmds, num_enter, cmd);
+//	}
 	while (i < 3)
 	{
 		if (cmds[i]->create == 0) {
@@ -197,9 +222,10 @@ void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 			cmds[i]->mode = cmd.mode;
 			return;
 		}
-			i++;
+		i++;
 	}
 }
+
 
 void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 {

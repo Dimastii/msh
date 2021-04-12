@@ -17,13 +17,14 @@ int main(int ac, char **argv, char **envp)
 //	printf("pars_str: |%s|\n", pars_str);
 
 	char *line = strdup("qwe | qwe");
+
 	while (1) {
 		write(1, "POLUPOKER:", 10);
-//		pars_str = termcap_processing(fd, lst);
-//		printf("pars_str: |%s|-|%d|\n", pars_str, ft_strncmp(pars_str, "exit", ft_strlen(pars_str)));
-//		if (*pars_str) {
-			lets_pars(line, &cmds, &envp);
-//		}///
+		pars_str = termcap_processing(fd, lst);
+		printf("pars_str: |%s|-|%d|\n", pars_str, ft_strncmp(pars_str, "exit", ft_strlen(pars_str)));
+		if (*pars_str) {
+			lets_pars(pars_str, &cmds, &envp);
+		}///
 	}
 
 
