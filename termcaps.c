@@ -34,6 +34,24 @@ int			ft_putchar(int c)
 	return (write(1, &c, 1));
 }
 
+char	*copy_string(char *line, size_t len)
+{
+	size_t			i;
+	char			*str;
+
+	i = 0;
+	if (!line)
+		return (NULL);
+	str = ft_strdup("");
+	while (i < len)
+	{
+		str[i] = line[i];
+		i++;
+	}
+	return (str);
+}
+
+
 t_dlist			*init_list(t_dlist *lst, char *str)
 {
 	t_dlist	*tmp = NULL;
@@ -93,6 +111,9 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	tcgetattr(0, &term);
 	term.c_lflag &= ~(ECHO);
 	term.c_lflag &= ~(ICANON);
+	// каждый раз при работе с форками нужно обратно подключать каконический ввод и печать символов
+	// term.c_lflag |= (ECHO);
+	// term.c_lflag |= (ICANON);
 	if (tcsetattr(0, TCSANOW, &term) < 0)
 		error("Couldn't get terminal database for some reason!");
 	if (tgetent(0, term_type) < 0)
@@ -101,14 +122,14 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	i = 0;
 	tmp = init_list(tmp, ft_strdup(""));
 	tmp = tmp->next;
-	//TODO надо что-то сделать со строкой чтобы ее можно было редактировать
+	//TODO не должно сегаться когда нечего удалять
 	while (1)
 	{
 		i += read(0, &str, 100);
 		str[i] = '\0';
 		if (!ft_strcmp(str, "\4"))
 		{
-			if (i == 1)
+			if (*line == '\0')
 			{
 				write(1, "exit", 4);
 				exit(0);
@@ -119,7 +140,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		{
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
-			write(1, tmp->str, ft_strlen(tmp->str));
+			line = tmp->str;
+			write(1, line, ft_strlen(line));
 			if (tmp->prev)
 				tmp = tmp->prev;
 		}
@@ -129,12 +151,20 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			tputs(tigetstr("ed"), 1, ft_putchar);
 			if (tmp->next)
 				tmp = tmp->next;
-			write(1, tmp->str, ft_strlen(tmp->str));
+			line = tmp->str;
+			write(1, line, ft_strlen(line));
 		}
 		else if (!ft_strcmp(str, "\177"))
 		{
-			tputs(cursor_left, 1, ft_putchar);
-			tputs(tgetstr("dc", 0), 1, ft_putchar);
+			if (i > 1)
+			{
+				tputs(cursor_left, 1, ft_putchar);
+				tputs(tgetstr("dc", 0), 1, ft_putchar);
+				line  = copy_string(line, ft_strlen(line) - 1);
+				i--;
+			}
+			else
+				continue ;
 		}
 		else if (!ft_strcmp(str, "\e[C") || !ft_strcmp(str, "\e[D"))
 			continue ;
@@ -146,7 +176,6 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		if (!ft_strcmp(str, "\n"))
 		{
 			write(fd, line, ft_strlen(line));
-			close (fd);
 			return (line);
 		}
 	}
