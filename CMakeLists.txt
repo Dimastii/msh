@@ -3,21 +3,22 @@ project(minishell C)
 
 set(CMAKE_C_STANDARD 99)
 
-include_directories(libft-main)
-link_directories(./)
+include_directories(libft)
+link_directories(msh)
 
 set(CMAKE_C_FLAGS "-ltermcap")
 
-add_executable(minishell main.c
-        libft-main/ft_strjoin.c
-        libft-main/ft_strlen.c
-        libft-main/ft_strncmp.c
-        libft-main/ft_strdup.c
-        libft-main/ft_calloc.c
-        libft-main/ft_bzero.c
-        libft-main/ft_substr.c
-        libft-main/ft_strchr.c
-        libft-main/ft_strnstr.c
+add_executable(minishell
+        main.c
+        libft/ft_strjoin.c
+        libft/ft_strlen.c
+        libft/ft_strncmp.c
+        libft/ft_strdup.c
+        libft/ft_calloc.c
+        libft/ft_bzero.c
+        libft/ft_substr.c
+        libft/ft_strchr.c
+        libft/ft_strnstr.c
         termcaps.c
-        libft-main/get_next_line.c
-        f.c main.h realized_f.c execve.c perser.c pepe.c libft-main/ft_free.c ft_init.c libft-main/ft_isolating.c libft-main/ft_lastcoldel.c utils.c)
+        libft/get_next_line.c
+        f.c minishell.h realized_f.c execve.c perser.c pepe.c libft/ft_free.c ft_init.c libft/ft_isolating.c libft/ft_lastcoldel.c utils.c)

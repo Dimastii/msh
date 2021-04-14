@@ -6,5 +6,5 @@ C_FLAGS = -ltermcap -g -isysroot /Applications/Xcode.app/Contents/Developer/Plat
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/cveeta/CLionProjects/msh-main/libft-main 
+C_INCLUDES = -I/Users/bdaedric/msh/libft 
 

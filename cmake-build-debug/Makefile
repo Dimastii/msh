@@ -68,10 +68,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/cveeta/CLionProjects/msh-main
+CMAKE_SOURCE_DIR = /Users/bdaedric/msh
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/cveeta/CLionProjects/msh-main/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/bdaedric/msh/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles /Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bdaedric/msh/cmake-build-debug/CMakeFiles /Users/bdaedric/msh/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/cveeta/CLionProjects/msh-main/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/bdaedric/msh/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -224,356 +224,356 @@ ft_init.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/ft_init.c.s
 .PHONY : ft_init.c.s
 
-libft-main/ft_bzero.o: libft-main/ft_bzero.c.o
+libft/ft_bzero.o: libft/ft_bzero.c.o
 
-.PHONY : libft-main/ft_bzero.o
-
-# target to build an object file
-libft-main/ft_bzero.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_bzero.c.o
-.PHONY : libft-main/ft_bzero.c.o
-
-libft-main/ft_bzero.i: libft-main/ft_bzero.c.i
-
-.PHONY : libft-main/ft_bzero.i
-
-# target to preprocess a source file
-libft-main/ft_bzero.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_bzero.c.i
-.PHONY : libft-main/ft_bzero.c.i
-
-libft-main/ft_bzero.s: libft-main/ft_bzero.c.s
-
-.PHONY : libft-main/ft_bzero.s
-
-# target to generate assembly for a file
-libft-main/ft_bzero.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_bzero.c.s
-.PHONY : libft-main/ft_bzero.c.s
-
-libft-main/ft_calloc.o: libft-main/ft_calloc.c.o
-
-.PHONY : libft-main/ft_calloc.o
+.PHONY : libft/ft_bzero.o
 
 # target to build an object file
-libft-main/ft_calloc.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_calloc.c.o
-.PHONY : libft-main/ft_calloc.c.o
+libft/ft_bzero.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_bzero.c.o
+.PHONY : libft/ft_bzero.c.o
 
-libft-main/ft_calloc.i: libft-main/ft_calloc.c.i
+libft/ft_bzero.i: libft/ft_bzero.c.i
 
-.PHONY : libft-main/ft_calloc.i
+.PHONY : libft/ft_bzero.i
 
 # target to preprocess a source file
-libft-main/ft_calloc.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_calloc.c.i
-.PHONY : libft-main/ft_calloc.c.i
+libft/ft_bzero.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_bzero.c.i
+.PHONY : libft/ft_bzero.c.i
 
-libft-main/ft_calloc.s: libft-main/ft_calloc.c.s
+libft/ft_bzero.s: libft/ft_bzero.c.s
 
-.PHONY : libft-main/ft_calloc.s
+.PHONY : libft/ft_bzero.s
 
 # target to generate assembly for a file
-libft-main/ft_calloc.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_calloc.c.s
-.PHONY : libft-main/ft_calloc.c.s
+libft/ft_bzero.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_bzero.c.s
+.PHONY : libft/ft_bzero.c.s
 
-libft-main/ft_free.o: libft-main/ft_free.c.o
+libft/ft_calloc.o: libft/ft_calloc.c.o
 
-.PHONY : libft-main/ft_free.o
+.PHONY : libft/ft_calloc.o
 
 # target to build an object file
-libft-main/ft_free.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_free.c.o
-.PHONY : libft-main/ft_free.c.o
+libft/ft_calloc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_calloc.c.o
+.PHONY : libft/ft_calloc.c.o
 
-libft-main/ft_free.i: libft-main/ft_free.c.i
+libft/ft_calloc.i: libft/ft_calloc.c.i
 
-.PHONY : libft-main/ft_free.i
+.PHONY : libft/ft_calloc.i
 
 # target to preprocess a source file
-libft-main/ft_free.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_free.c.i
-.PHONY : libft-main/ft_free.c.i
+libft/ft_calloc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_calloc.c.i
+.PHONY : libft/ft_calloc.c.i
 
-libft-main/ft_free.s: libft-main/ft_free.c.s
+libft/ft_calloc.s: libft/ft_calloc.c.s
 
-.PHONY : libft-main/ft_free.s
+.PHONY : libft/ft_calloc.s
 
 # target to generate assembly for a file
-libft-main/ft_free.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_free.c.s
-.PHONY : libft-main/ft_free.c.s
+libft/ft_calloc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_calloc.c.s
+.PHONY : libft/ft_calloc.c.s
 
-libft-main/ft_isolating.o: libft-main/ft_isolating.c.o
+libft/ft_free.o: libft/ft_free.c.o
 
-.PHONY : libft-main/ft_isolating.o
+.PHONY : libft/ft_free.o
 
 # target to build an object file
-libft-main/ft_isolating.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_isolating.c.o
-.PHONY : libft-main/ft_isolating.c.o
+libft/ft_free.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_free.c.o
+.PHONY : libft/ft_free.c.o
 
-libft-main/ft_isolating.i: libft-main/ft_isolating.c.i
+libft/ft_free.i: libft/ft_free.c.i
 
-.PHONY : libft-main/ft_isolating.i
+.PHONY : libft/ft_free.i
 
 # target to preprocess a source file
-libft-main/ft_isolating.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_isolating.c.i
-.PHONY : libft-main/ft_isolating.c.i
+libft/ft_free.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_free.c.i
+.PHONY : libft/ft_free.c.i
 
-libft-main/ft_isolating.s: libft-main/ft_isolating.c.s
+libft/ft_free.s: libft/ft_free.c.s
 
-.PHONY : libft-main/ft_isolating.s
+.PHONY : libft/ft_free.s
 
 # target to generate assembly for a file
-libft-main/ft_isolating.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_isolating.c.s
-.PHONY : libft-main/ft_isolating.c.s
+libft/ft_free.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_free.c.s
+.PHONY : libft/ft_free.c.s
 
-libft-main/ft_lastcoldel.o: libft-main/ft_lastcoldel.c.o
+libft/ft_isolating.o: libft/ft_isolating.c.o
 
-.PHONY : libft-main/ft_lastcoldel.o
+.PHONY : libft/ft_isolating.o
 
 # target to build an object file
-libft-main/ft_lastcoldel.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.o
-.PHONY : libft-main/ft_lastcoldel.c.o
+libft/ft_isolating.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_isolating.c.o
+.PHONY : libft/ft_isolating.c.o
 
-libft-main/ft_lastcoldel.i: libft-main/ft_lastcoldel.c.i
+libft/ft_isolating.i: libft/ft_isolating.c.i
 
-.PHONY : libft-main/ft_lastcoldel.i
+.PHONY : libft/ft_isolating.i
 
 # target to preprocess a source file
-libft-main/ft_lastcoldel.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.i
-.PHONY : libft-main/ft_lastcoldel.c.i
+libft/ft_isolating.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_isolating.c.i
+.PHONY : libft/ft_isolating.c.i
 
-libft-main/ft_lastcoldel.s: libft-main/ft_lastcoldel.c.s
+libft/ft_isolating.s: libft/ft_isolating.c.s
 
-.PHONY : libft-main/ft_lastcoldel.s
+.PHONY : libft/ft_isolating.s
 
 # target to generate assembly for a file
-libft-main/ft_lastcoldel.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_lastcoldel.c.s
-.PHONY : libft-main/ft_lastcoldel.c.s
+libft/ft_isolating.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_isolating.c.s
+.PHONY : libft/ft_isolating.c.s
 
-libft-main/ft_strchr.o: libft-main/ft_strchr.c.o
+libft/ft_lastcoldel.o: libft/ft_lastcoldel.c.o
 
-.PHONY : libft-main/ft_strchr.o
+.PHONY : libft/ft_lastcoldel.o
 
 # target to build an object file
-libft-main/ft_strchr.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strchr.c.o
-.PHONY : libft-main/ft_strchr.c.o
+libft/ft_lastcoldel.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_lastcoldel.c.o
+.PHONY : libft/ft_lastcoldel.c.o
 
-libft-main/ft_strchr.i: libft-main/ft_strchr.c.i
+libft/ft_lastcoldel.i: libft/ft_lastcoldel.c.i
 
-.PHONY : libft-main/ft_strchr.i
+.PHONY : libft/ft_lastcoldel.i
 
 # target to preprocess a source file
-libft-main/ft_strchr.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strchr.c.i
-.PHONY : libft-main/ft_strchr.c.i
+libft/ft_lastcoldel.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_lastcoldel.c.i
+.PHONY : libft/ft_lastcoldel.c.i
 
-libft-main/ft_strchr.s: libft-main/ft_strchr.c.s
+libft/ft_lastcoldel.s: libft/ft_lastcoldel.c.s
 
-.PHONY : libft-main/ft_strchr.s
+.PHONY : libft/ft_lastcoldel.s
 
 # target to generate assembly for a file
-libft-main/ft_strchr.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strchr.c.s
-.PHONY : libft-main/ft_strchr.c.s
+libft/ft_lastcoldel.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_lastcoldel.c.s
+.PHONY : libft/ft_lastcoldel.c.s
 
-libft-main/ft_strdup.o: libft-main/ft_strdup.c.o
+libft/ft_strchr.o: libft/ft_strchr.c.o
 
-.PHONY : libft-main/ft_strdup.o
+.PHONY : libft/ft_strchr.o
 
 # target to build an object file
-libft-main/ft_strdup.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strdup.c.o
-.PHONY : libft-main/ft_strdup.c.o
+libft/ft_strchr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strchr.c.o
+.PHONY : libft/ft_strchr.c.o
 
-libft-main/ft_strdup.i: libft-main/ft_strdup.c.i
+libft/ft_strchr.i: libft/ft_strchr.c.i
 
-.PHONY : libft-main/ft_strdup.i
+.PHONY : libft/ft_strchr.i
 
 # target to preprocess a source file
-libft-main/ft_strdup.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strdup.c.i
-.PHONY : libft-main/ft_strdup.c.i
+libft/ft_strchr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strchr.c.i
+.PHONY : libft/ft_strchr.c.i
 
-libft-main/ft_strdup.s: libft-main/ft_strdup.c.s
+libft/ft_strchr.s: libft/ft_strchr.c.s
 
-.PHONY : libft-main/ft_strdup.s
+.PHONY : libft/ft_strchr.s
 
 # target to generate assembly for a file
-libft-main/ft_strdup.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strdup.c.s
-.PHONY : libft-main/ft_strdup.c.s
+libft/ft_strchr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strchr.c.s
+.PHONY : libft/ft_strchr.c.s
 
-libft-main/ft_strjoin.o: libft-main/ft_strjoin.c.o
+libft/ft_strdup.o: libft/ft_strdup.c.o
 
-.PHONY : libft-main/ft_strjoin.o
+.PHONY : libft/ft_strdup.o
 
 # target to build an object file
-libft-main/ft_strjoin.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strjoin.c.o
-.PHONY : libft-main/ft_strjoin.c.o
+libft/ft_strdup.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strdup.c.o
+.PHONY : libft/ft_strdup.c.o
 
-libft-main/ft_strjoin.i: libft-main/ft_strjoin.c.i
+libft/ft_strdup.i: libft/ft_strdup.c.i
 
-.PHONY : libft-main/ft_strjoin.i
+.PHONY : libft/ft_strdup.i
 
 # target to preprocess a source file
-libft-main/ft_strjoin.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strjoin.c.i
-.PHONY : libft-main/ft_strjoin.c.i
+libft/ft_strdup.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strdup.c.i
+.PHONY : libft/ft_strdup.c.i
 
-libft-main/ft_strjoin.s: libft-main/ft_strjoin.c.s
+libft/ft_strdup.s: libft/ft_strdup.c.s
 
-.PHONY : libft-main/ft_strjoin.s
+.PHONY : libft/ft_strdup.s
 
 # target to generate assembly for a file
-libft-main/ft_strjoin.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strjoin.c.s
-.PHONY : libft-main/ft_strjoin.c.s
+libft/ft_strdup.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strdup.c.s
+.PHONY : libft/ft_strdup.c.s
 
-libft-main/ft_strlen.o: libft-main/ft_strlen.c.o
+libft/ft_strjoin.o: libft/ft_strjoin.c.o
 
-.PHONY : libft-main/ft_strlen.o
+.PHONY : libft/ft_strjoin.o
 
 # target to build an object file
-libft-main/ft_strlen.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strlen.c.o
-.PHONY : libft-main/ft_strlen.c.o
+libft/ft_strjoin.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strjoin.c.o
+.PHONY : libft/ft_strjoin.c.o
 
-libft-main/ft_strlen.i: libft-main/ft_strlen.c.i
+libft/ft_strjoin.i: libft/ft_strjoin.c.i
 
-.PHONY : libft-main/ft_strlen.i
+.PHONY : libft/ft_strjoin.i
 
 # target to preprocess a source file
-libft-main/ft_strlen.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strlen.c.i
-.PHONY : libft-main/ft_strlen.c.i
+libft/ft_strjoin.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strjoin.c.i
+.PHONY : libft/ft_strjoin.c.i
 
-libft-main/ft_strlen.s: libft-main/ft_strlen.c.s
+libft/ft_strjoin.s: libft/ft_strjoin.c.s
 
-.PHONY : libft-main/ft_strlen.s
+.PHONY : libft/ft_strjoin.s
 
 # target to generate assembly for a file
-libft-main/ft_strlen.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strlen.c.s
-.PHONY : libft-main/ft_strlen.c.s
+libft/ft_strjoin.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strjoin.c.s
+.PHONY : libft/ft_strjoin.c.s
 
-libft-main/ft_strncmp.o: libft-main/ft_strncmp.c.o
+libft/ft_strlen.o: libft/ft_strlen.c.o
 
-.PHONY : libft-main/ft_strncmp.o
+.PHONY : libft/ft_strlen.o
 
 # target to build an object file
-libft-main/ft_strncmp.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.o
-.PHONY : libft-main/ft_strncmp.c.o
+libft/ft_strlen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strlen.c.o
+.PHONY : libft/ft_strlen.c.o
 
-libft-main/ft_strncmp.i: libft-main/ft_strncmp.c.i
+libft/ft_strlen.i: libft/ft_strlen.c.i
 
-.PHONY : libft-main/ft_strncmp.i
+.PHONY : libft/ft_strlen.i
 
 # target to preprocess a source file
-libft-main/ft_strncmp.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.i
-.PHONY : libft-main/ft_strncmp.c.i
+libft/ft_strlen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strlen.c.i
+.PHONY : libft/ft_strlen.c.i
 
-libft-main/ft_strncmp.s: libft-main/ft_strncmp.c.s
+libft/ft_strlen.s: libft/ft_strlen.c.s
 
-.PHONY : libft-main/ft_strncmp.s
+.PHONY : libft/ft_strlen.s
 
 # target to generate assembly for a file
-libft-main/ft_strncmp.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strncmp.c.s
-.PHONY : libft-main/ft_strncmp.c.s
+libft/ft_strlen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strlen.c.s
+.PHONY : libft/ft_strlen.c.s
 
-libft-main/ft_strnstr.o: libft-main/ft_strnstr.c.o
+libft/ft_strncmp.o: libft/ft_strncmp.c.o
 
-.PHONY : libft-main/ft_strnstr.o
+.PHONY : libft/ft_strncmp.o
 
 # target to build an object file
-libft-main/ft_strnstr.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.o
-.PHONY : libft-main/ft_strnstr.c.o
+libft/ft_strncmp.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strncmp.c.o
+.PHONY : libft/ft_strncmp.c.o
 
-libft-main/ft_strnstr.i: libft-main/ft_strnstr.c.i
+libft/ft_strncmp.i: libft/ft_strncmp.c.i
 
-.PHONY : libft-main/ft_strnstr.i
+.PHONY : libft/ft_strncmp.i
 
 # target to preprocess a source file
-libft-main/ft_strnstr.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.i
-.PHONY : libft-main/ft_strnstr.c.i
+libft/ft_strncmp.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strncmp.c.i
+.PHONY : libft/ft_strncmp.c.i
 
-libft-main/ft_strnstr.s: libft-main/ft_strnstr.c.s
+libft/ft_strncmp.s: libft/ft_strncmp.c.s
 
-.PHONY : libft-main/ft_strnstr.s
+.PHONY : libft/ft_strncmp.s
 
 # target to generate assembly for a file
-libft-main/ft_strnstr.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_strnstr.c.s
-.PHONY : libft-main/ft_strnstr.c.s
+libft/ft_strncmp.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strncmp.c.s
+.PHONY : libft/ft_strncmp.c.s
 
-libft-main/ft_substr.o: libft-main/ft_substr.c.o
+libft/ft_strnstr.o: libft/ft_strnstr.c.o
 
-.PHONY : libft-main/ft_substr.o
+.PHONY : libft/ft_strnstr.o
 
 # target to build an object file
-libft-main/ft_substr.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_substr.c.o
-.PHONY : libft-main/ft_substr.c.o
+libft/ft_strnstr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strnstr.c.o
+.PHONY : libft/ft_strnstr.c.o
 
-libft-main/ft_substr.i: libft-main/ft_substr.c.i
+libft/ft_strnstr.i: libft/ft_strnstr.c.i
 
-.PHONY : libft-main/ft_substr.i
+.PHONY : libft/ft_strnstr.i
 
 # target to preprocess a source file
-libft-main/ft_substr.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_substr.c.i
-.PHONY : libft-main/ft_substr.c.i
+libft/ft_strnstr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strnstr.c.i
+.PHONY : libft/ft_strnstr.c.i
 
-libft-main/ft_substr.s: libft-main/ft_substr.c.s
+libft/ft_strnstr.s: libft/ft_strnstr.c.s
 
-.PHONY : libft-main/ft_substr.s
+.PHONY : libft/ft_strnstr.s
 
 # target to generate assembly for a file
-libft-main/ft_substr.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/ft_substr.c.s
-.PHONY : libft-main/ft_substr.c.s
+libft/ft_strnstr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_strnstr.c.s
+.PHONY : libft/ft_strnstr.c.s
 
-libft-main/get_next_line.o: libft-main/get_next_line.c.o
+libft/ft_substr.o: libft/ft_substr.c.o
 
-.PHONY : libft-main/get_next_line.o
+.PHONY : libft/ft_substr.o
 
 # target to build an object file
-libft-main/get_next_line.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/get_next_line.c.o
-.PHONY : libft-main/get_next_line.c.o
+libft/ft_substr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_substr.c.o
+.PHONY : libft/ft_substr.c.o
 
-libft-main/get_next_line.i: libft-main/get_next_line.c.i
+libft/ft_substr.i: libft/ft_substr.c.i
 
-.PHONY : libft-main/get_next_line.i
+.PHONY : libft/ft_substr.i
 
 # target to preprocess a source file
-libft-main/get_next_line.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/get_next_line.c.i
-.PHONY : libft-main/get_next_line.c.i
+libft/ft_substr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_substr.c.i
+.PHONY : libft/ft_substr.c.i
 
-libft-main/get_next_line.s: libft-main/get_next_line.c.s
+libft/ft_substr.s: libft/ft_substr.c.s
 
-.PHONY : libft-main/get_next_line.s
+.PHONY : libft/ft_substr.s
 
 # target to generate assembly for a file
-libft-main/get_next_line.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft-main/get_next_line.c.s
-.PHONY : libft-main/get_next_line.c.s
+libft/ft_substr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/ft_substr.c.s
+.PHONY : libft/ft_substr.c.s
+
+libft/get_next_line.o: libft/get_next_line.c.o
+
+.PHONY : libft/get_next_line.o
+
+# target to build an object file
+libft/get_next_line.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/get_next_line.c.o
+.PHONY : libft/get_next_line.c.o
+
+libft/get_next_line.i: libft/get_next_line.c.i
+
+.PHONY : libft/get_next_line.i
+
+# target to preprocess a source file
+libft/get_next_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/get_next_line.c.i
+.PHONY : libft/get_next_line.c.i
+
+libft/get_next_line.s: libft/get_next_line.c.s
+
+.PHONY : libft/get_next_line.s
+
+# target to generate assembly for a file
+libft/get_next_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minishell.dir/build.make CMakeFiles/minishell.dir/libft/get_next_line.c.s
+.PHONY : libft/get_next_line.c.s
 
 main.o: main.c.o
 
@@ -755,45 +755,45 @@ help:
 	@echo "... ft_init.o"
 	@echo "... ft_init.i"
 	@echo "... ft_init.s"
-	@echo "... libft-main/ft_bzero.o"
-	@echo "... libft-main/ft_bzero.i"
-	@echo "... libft-main/ft_bzero.s"
-	@echo "... libft-main/ft_calloc.o"
-	@echo "... libft-main/ft_calloc.i"
-	@echo "... libft-main/ft_calloc.s"
-	@echo "... libft-main/ft_free.o"
-	@echo "... libft-main/ft_free.i"
-	@echo "... libft-main/ft_free.s"
-	@echo "... libft-main/ft_isolating.o"
-	@echo "... libft-main/ft_isolating.i"
-	@echo "... libft-main/ft_isolating.s"
-	@echo "... libft-main/ft_lastcoldel.o"
-	@echo "... libft-main/ft_lastcoldel.i"
-	@echo "... libft-main/ft_lastcoldel.s"
-	@echo "... libft-main/ft_strchr.o"
-	@echo "... libft-main/ft_strchr.i"
-	@echo "... libft-main/ft_strchr.s"
-	@echo "... libft-main/ft_strdup.o"
-	@echo "... libft-main/ft_strdup.i"
-	@echo "... libft-main/ft_strdup.s"
-	@echo "... libft-main/ft_strjoin.o"
-	@echo "... libft-main/ft_strjoin.i"
-	@echo "... libft-main/ft_strjoin.s"
-	@echo "... libft-main/ft_strlen.o"
-	@echo "... libft-main/ft_strlen.i"
-	@echo "... libft-main/ft_strlen.s"
-	@echo "... libft-main/ft_strncmp.o"
-	@echo "... libft-main/ft_strncmp.i"
-	@echo "... libft-main/ft_strncmp.s"
-	@echo "... libft-main/ft_strnstr.o"
-	@echo "... libft-main/ft_strnstr.i"
-	@echo "... libft-main/ft_strnstr.s"
-	@echo "... libft-main/ft_substr.o"
-	@echo "... libft-main/ft_substr.i"
-	@echo "... libft-main/ft_substr.s"
-	@echo "... libft-main/get_next_line.o"
-	@echo "... libft-main/get_next_line.i"
-	@echo "... libft-main/get_next_line.s"
+	@echo "... libft/ft_bzero.o"
+	@echo "... libft/ft_bzero.i"
+	@echo "... libft/ft_bzero.s"
+	@echo "... libft/ft_calloc.o"
+	@echo "... libft/ft_calloc.i"
+	@echo "... libft/ft_calloc.s"
+	@echo "... libft/ft_free.o"
+	@echo "... libft/ft_free.i"
+	@echo "... libft/ft_free.s"
+	@echo "... libft/ft_isolating.o"
+	@echo "... libft/ft_isolating.i"
+	@echo "... libft/ft_isolating.s"
+	@echo "... libft/ft_lastcoldel.o"
+	@echo "... libft/ft_lastcoldel.i"
+	@echo "... libft/ft_lastcoldel.s"
+	@echo "... libft/ft_strchr.o"
+	@echo "... libft/ft_strchr.i"
+	@echo "... libft/ft_strchr.s"
+	@echo "... libft/ft_strdup.o"
+	@echo "... libft/ft_strdup.i"
+	@echo "... libft/ft_strdup.s"
+	@echo "... libft/ft_strjoin.o"
+	@echo "... libft/ft_strjoin.i"
+	@echo "... libft/ft_strjoin.s"
+	@echo "... libft/ft_strlen.o"
+	@echo "... libft/ft_strlen.i"
+	@echo "... libft/ft_strlen.s"
+	@echo "... libft/ft_strncmp.o"
+	@echo "... libft/ft_strncmp.i"
+	@echo "... libft/ft_strncmp.s"
+	@echo "... libft/ft_strnstr.o"
+	@echo "... libft/ft_strnstr.i"
+	@echo "... libft/ft_strnstr.s"
+	@echo "... libft/ft_substr.o"
+	@echo "... libft/ft_substr.i"
+	@echo "... libft/ft_substr.s"
+	@echo "... libft/get_next_line.o"
+	@echo "... libft/get_next_line.i"
+	@echo "... libft/get_next_line.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
