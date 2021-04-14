@@ -48,20 +48,24 @@ char		*findbin(char *cmd, char **envp)
 
 void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 {
-	int pid = fork();
+	int pid;
 	char *path;
+
+	pid = 1;
 	if (ft_strncmp(cmd->tokens[0], "exit", ft_strlen(cmd->tokens[0])) == 0)
 	{
 		exit(0);
 	}
+
+	if ((path = findbin(cmd->tokens[0], *envp))) {
+		pid = fork();
+	}
+	else
+		printf(" А где бинарник то?:%s \n", path);
 	if (pid == 0) {
 //		dup2(fd_out, 1);
-		if ((path = findbin(cmd->tokens[0], *envp))) {
 			printf("~exec path:%s \n", path);
 			execve(path, cmd->tokens, *envp);
-		}
-		else
-			printf(" А где бинарник то?:%s \n", path);
 	}
 	else if (pid < 0)
 	{
