@@ -18,6 +18,7 @@ int main(int ac, char **argv, char **envp)
 
 	char *line = strdup("ls");
 
+	//хехе хфхф
 	while (1) {
 		write(1, "POLUPOKER:", 10);
 		pars_str = termcap_processing(fd, lst);
@@ -26,7 +27,6 @@ int main(int ac, char **argv, char **envp)
 			lets_pars(&pars_str, &envp);
 		}///
 	}
-
 
 	return (0);
 }
