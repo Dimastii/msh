@@ -1,4 +1,4 @@
-#include "main.h"
+#include "minishell.h"
 
 void		error(char *str)
 {
@@ -34,23 +34,6 @@ int			ft_putchar(int c)
 	return (write(1, &c, 1));
 }
 
-char	*copy_string(char *line, size_t len)
-{
-	size_t			i;
-	char			*str;
-
-	i = 0;
-	if (!line)
-		return (NULL);
-	str = ft_strdup("");
-	while (i < len)
-	{
-		str[i] = line[i];
-		i++;
-	}
-	return (str);
-}
-
 t_dlist			*init_list(t_dlist *lst, char *str)
 {
 	t_dlist	*tmp = NULL;
@@ -60,7 +43,6 @@ t_dlist			*init_list(t_dlist *lst, char *str)
 	if (!tmp)
 		error("malloc error");
 	tmp->str = str;
-//	printf("LIST STR: %s\n", tmp->str);
 	tmp->next = NULL;
 	tmp->prev = NULL;
 	if (!lst)
@@ -96,7 +78,6 @@ t_dlist			*sort_history(int fd, t_dlist *lst)
 	return (lst);
 }
 
-
 char		*termcap_processing(int fd, t_dlist *lst)
 {
 	char			*line;
@@ -111,9 +92,6 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	tcgetattr(0, &term);
 	term.c_lflag &= ~(ECHO);
 	term.c_lflag &= ~(ICANON);
-	// каждый раз при работе с форками нужно обратно подключать каконический ввод и печать символов
-	// term.c_lflag |= (ECHO);
-	// term.c_lflag |= (ICANON);
 	if (tcsetattr(0, TCSANOW, &term) < 0)
 		error("Couldn't get terminal database for some reason!");
 	if (tgetent(0, term_type) < 0)
@@ -126,7 +104,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	//TODO не должно сегаться когда нечего удалять
 	while (1)
 	{
-		i += read(0, &str, 100);
+		str[0] = '\0';
+		i = read(0, &str, 100);
 		str[i] = '\0';
 		if (!ft_strcmp(str, "\4"))
 		{
@@ -139,12 +118,12 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		}
 		else if (!ft_strcmp(str, "\e[A"))
 		{
-			write(1, "POLUPOKER:", 10);
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
-			write(1, tmp->str, ft_strlen(tmp->str));
-			free(line);
-			line = tmp->str;
+			write(1, "POLUPOKER:", 10);
+			line = ft_strdup(tmp->str);//leak
+			write(1, line, ft_strlen(line));
+//			free(line);
 			if (tmp->prev)
 				tmp = tmp->prev;
 		}
@@ -154,23 +133,23 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			tputs(tigetstr("ed"), 1, ft_putchar);
 			if (tmp->next)
 				tmp = tmp->next;
+			write(1, "POLUPOKER:", 10);
 			write(1, tmp->str, ft_strlen(tmp->str));
 		}
 		else if (!ft_strcmp(str, "\177"))
 		{
-			if (i > 1)
+			if (ft_strlen(line) > 1)
 			{
 				tputs(cursor_left, 1, ft_putchar);
 				tputs(tgetstr("dc", 0), 1, ft_putchar);
-				line  = copy_string(line, ft_strlen(line) - 1);
-				i--;
+				line[ft_strlen(line) - 1] = '\0';//leak
 			}
 			else
 				continue ;
 		}
 		else if (!ft_strcmp(str, "\e[C") || !ft_strcmp(str, "\e[D"))
 			continue ;
-		else
+		else if (ft_strcmp(str, "\n"))
 		{
 			line = ft_strjoin(line, str);
 			write(1, &str, i);
@@ -178,22 +157,10 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		if (!ft_strcmp(str, "\n"))
 		{
 			write(fd, line, ft_strlen(line));
+			term.c_lflag |= (ECHO);
+			term.c_lflag |= (ICANON);
+			tcsetattr(0, TCSANOW, &term);
 			return (line);
 		}
 	}
 }
-
-//int		main(int argc, char **argv, char **envp)
-//{
-//	char			*pars_str;
-//	int				fd;
-//	t_dlist			*lst = NULL;
-//
-//	fd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND , 0644);
-//	lst = sort_history(fd, lst);
-////	printf("list: %s", lst->str);
-//	pars_str = termcap_processing(fd, lst);
-//	close (fd);
-//	printf("%s", pars_str);
-//	return (0);
-//}
