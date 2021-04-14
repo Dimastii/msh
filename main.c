@@ -19,8 +19,9 @@ int main(int ac, char **argv, char **envp)
 	char *line = strdup("ls");
 
 	//хехе хфхф
-	while (1) {
-		write(1, "POLUPOKER:", 10);
+	while (1)
+	{
+//		write(1, "POLUPOKER:", 10);
 		pars_str = termcap_processing(fd, lst);
 		printf("pars_str: |%s|-|%d|\n", pars_str, ft_strncmp(pars_str, "exit", ft_strlen(pars_str)));
 		if (*pars_str) {

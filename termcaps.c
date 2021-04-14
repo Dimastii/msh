@@ -96,6 +96,7 @@ t_dlist			*sort_history(int fd, t_dlist *lst)
 	return (lst);
 }
 
+
 char		*termcap_processing(int fd, t_dlist *lst)
 {
 	char			*line;
@@ -118,6 +119,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	if (tgetent(0, term_type) < 0)
 		error("Couldn't get terminal database for some reason!");
 	tputs(save_cursor, 1, ft_putchar);
+	write(1, "POLUPOKER:", 10);
 	i = 0;
 	tmp = init_list(tmp, ft_strdup(""));
 	tmp = tmp->next;
@@ -137,9 +139,12 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		}
 		else if (!ft_strcmp(str, "\e[A"))
 		{
+			write(1, "POLUPOKER:", 10);
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
 			write(1, tmp->str, ft_strlen(tmp->str));
+			free(line);
+			line = tmp->str;
 			if (tmp->prev)
 				tmp = tmp->prev;
 		}
