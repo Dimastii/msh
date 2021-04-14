@@ -10,7 +10,6 @@ void		init_cnd(t_cmd *cmd)
 	cmd->mode = -1;
 	cmd->tokens = malloc(sizeof(char **));
 	cmd->tokens[0] = NULL;
-	cmd->cmd = NULL;
 }
 
 void		init_cmds(t_cmd **cmds)

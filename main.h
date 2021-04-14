@@ -30,18 +30,18 @@ typedef struct		s_dlist
 
 typedef struct	s_cmd
 {
-	void	(*cmd) (char *file, char **argv, char ***envp);
 	int		create;
 	int		mode;
 	char	**tokens;
 }				t_cmd;
 
 char		*pwd();
+char		*findbin(char *cmd, char **envp);
 void		cd(char *path);
-void		stdexec(t_cmd *cmd, char ***envp);
+void		stdexec(t_cmd *cmd, char ***envp, int fd_out);
 char		*ft_strchrifnepred(const char *string, int symbol, int flag);
 void		lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode);
-void		lets_pars(char *str_original, t_cmd **cmds, char ***envp);
+void lets_pars(char **str, char ***envp);
 void		pepe(char **argv, char **envp);
 void		exec_ls(char *file, char **argv, char ***envp);
 char		*ft_strjoins(char const *s1, char s2);

@@ -46,7 +46,7 @@ char		*findbin(char *cmd, char **envp)
 	return NULL;
 }
 
-void		stdexec(t_cmd *cmd, char ***envp)
+void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 {
 	int pid = fork();
 	char *path;
@@ -55,6 +55,7 @@ void		stdexec(t_cmd *cmd, char ***envp)
 		exit(0);
 	}
 	if (pid == 0) {
+//		dup2(fd_out, 1);
 		if ((path = findbin(cmd->tokens[0], *envp))) {
 			printf("~exec path:%s \n", path);
 			execve(path, cmd->tokens, *envp);
@@ -68,6 +69,8 @@ void		stdexec(t_cmd *cmd, char ***envp)
 	}
 	else
 	{
+		if (fd_out != 1)
+			close(fd_out);
 		wait(NULL);
 	}
 }

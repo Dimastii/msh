@@ -184,25 +184,6 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 		free(tocken);
 }
 
-//void 		exec_pepe(t_cmd **cmds, int num_enter, t_cmd cmd)
-//{
-//	int pid;
-//
-//
-//	while (cmds[num_enter % 3]->create != 0 )
-//
-//
-//	pid = fork();
-//	if (pid != 0) {
-//
-//	}
-//	//запускаем 1 cmd
-//	while ()
-//	//cmds[(num_enter - 1) % 3] = cmd;//типа удалил пред и положил новую
-//	//waitpid cmds[(num_enter - 2) % 3]
-//	//exec cmds[(num_enter) % 3]
-//}
-
 void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 {
 	int i;
@@ -218,7 +199,6 @@ void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 	{
 		if (cmds[i]->create == 0) {
 			cmds[i]->create = 1;
-			cmds[i]->cmd = cmd.cmd;
 			cmds[i]->mode = cmd.mode;
 			return;
 		}
@@ -226,39 +206,78 @@ void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 	}
 }
 
-
-void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
+int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp)
 {
+	int pipefd[2];
+	int pid;
+	char *path;
+
+	pipe(pipefd);
+
+	pid = fork();
+
+	if (pid == 0)
+	{
+		dup2(fd_out, 1);
+		// child gets here and handles "grep Villanova"
+		// replace standard input with input part of pipe
+		dup2(pipefd[0], 0);
+		// close unused hald of pipe
+		close(pipefd[1]);
+		// execute grep
+		if ((path = findbin(cmd.tokens[0], *envp))) {
+			printf("~exec path:%s \n", path);
+			execve(path, cmd.tokens, *envp);
+		}
+		else
+			printf(" А где бинарник то?:%s \n", path);	}
+	else
+	{
+//		lets_pars(str, envp);
+		// parent gets here and handles "cat scores"
+		// replace standard output with output part of pipe
+		close(fd_out);
+		close(pipefd[0]);
+	}
+	return(pipefd[1]);
+}
+
+
+void		detect_spec(char **str, t_cmd *cmd, char ***envp)
+{
+	static int fd_out;
+
+
     if (**str == '|')
     {
-        ///add (s_cmd cmd) in (s_cmd loop[3])
-		allocate_cmd(cmds, *cmd);
-	}
-	if (**str == ';')
+		fd_out = exec_pepe(str, *cmd, fd_out, envp);
+    }
+    else if (**str == ';')
 	{
+		if (fd_out == 0)
+			fd_out = 1;
 		(*str)++;
 //		printf(" is ;\n");
 //		ft_printcol(cmd->tokens);
 
 		if (cmd->tokens[0])
-			stdexec(cmd, envp);
+			stdexec(cmd, envp, fd_out);
 
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
-		return;
 	}
-	if (**str == '\0')
+    else if (**str == '\0')
 	{
 //		printf(" is \\0\n");
 //		ft_printcol(cmd->tokens);
-
+		if (fd_out == 0)
+			fd_out = 1;
 		if (cmd->tokens[0])
-			stdexec(cmd, envp);
+			stdexec(cmd, envp, fd_out);
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
-		return;
 	}
 
 }
@@ -266,7 +285,6 @@ void		detect_spec(char **str, t_cmd **cmds, t_cmd *cmd, char ***envp)
 void		add_cmd(t_cmd *cmds, int mode, void (*cmd) (char *, char **, char ***))
 {
 	cmds->create = 1;
-	cmds->cmd = cmd;
 	cmds->mode = mode;
 }
 
@@ -280,21 +298,18 @@ int			detect_cmd(char **str, t_cmd *cmd, char **envp)
 }
 
 
-void lets_pars(char *str_original, t_cmd **cmds, char ***envp)
+void lets_pars(char **str, char ***envp)
 {
-    char *str;
-
 	t_cmd cmd;
 
 	init_cnd(&cmd);
-	str = str_original;
-	while (*str)
+	while (**str)
 	{
-		while (ft_isspace(*str))
+		while (ft_isspace(**str))
 			str++;
-		if (detect_cmd(&str, &cmd, *envp))
+		if (detect_cmd(str, &cmd, *envp))
 		{
-			detect_spec(&str, cmds, &cmd, envp);
+			detect_spec(str, &cmd, envp);
 		}
 	}
 }

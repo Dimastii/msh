@@ -148,6 +148,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			write(fd, line, ft_strlen(line));
 			close (fd);
 			line[ft_strlen(line) - 1] = '\0';
+			term.c_lflag |= (ECHO);
+			term.c_lflag |= (ICANON);
 			return (line);
 		}
 	}
