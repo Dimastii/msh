@@ -2,7 +2,7 @@
 // Created by Cloyster Veeta on 3/20/21.
 //
 
-#include "main.h"
+#include "minishell.h"
 
 void exec_ls(char *file, char **argv, char ***envp)
 {

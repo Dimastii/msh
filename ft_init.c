@@ -2,7 +2,7 @@
 // Created by Cloyster Veeta on 4/4/21.
 //
 
-#include "main.h"
+#include "minishell.h"
 
 void		init_cnd(t_cmd *cmd)
 {

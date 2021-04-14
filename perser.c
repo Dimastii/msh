@@ -2,7 +2,7 @@
 // Created by Cloyster Veeta on 3/27/21.
 //
 
-#include "main.h"
+#include "minishell.h"
 
 int		ft_isspace(int c)
 {
@@ -290,11 +290,12 @@ void		add_cmd(t_cmd *cmds, int mode, void (*cmd) (char *, char **, char ***))
 
 int			detect_cmd(char **str, t_cmd *cmd, char **envp)
 {
-    while (!isspec(**str)) {
-    	detect_token(str, cmd, envp);
-    }
-    add_cmd(cmd, 1, &exec_ls);
-    return 1;
+	while (!isspec(**str))
+	{
+		detect_token(str, cmd, envp);
+	}
+	add_cmd(cmd, 1, &exec_ls);
+	return 1;
 }
 
 

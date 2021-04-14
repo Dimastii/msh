@@ -2,7 +2,7 @@
 // Created by Cloyster Veeta on 4/7/21.
 //
 
-#include "main.h"
+#include "minishell.h"
 
 char	*ft_strchrifnepred(const char *string, int symbol, int flag)
 {

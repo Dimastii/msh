@@ -142,7 +142,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			{
 				tputs(cursor_left, 1, ft_putchar);
 				tputs(tgetstr("dc", 0), 1, ft_putchar);
-				line[ft_strlen(line) - 1] = '\0';//leak
+				line[ft_strlen(line) - 1] = '\0';
 			}
 			else
 				continue ;

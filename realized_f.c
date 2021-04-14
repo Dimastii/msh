@@ -1,7 +1,7 @@
 //
 // Created by Cloyster Veeta on 3/20/21.
 //
-#include "main.h"
+#include "minishell.h"
 
 char *pwd()
 {

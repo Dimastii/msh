@@ -2,7 +2,7 @@
 // Created by Cloyster Veeta on 3/27/21.
 //
 
-#include "main.h"
+#include "minishell.h"
 
 void pepe(char **argv, char **envp)
 {
