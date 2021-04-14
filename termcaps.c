@@ -101,7 +101,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	i = 0;
 	tmp = init_list(tmp, ft_strdup(""));
 	tmp = tmp->next;
-	//TODO не должно сегаться когда нечего удалять
+	//TODO
 	while (1)
 	{
 		str[0] = '\0';
@@ -123,7 +123,6 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			write(1, "POLUPOKER:", 10);
 			line = ft_strdup(tmp->str);//leak
 			write(1, line, ft_strlen(line));
-//			free(line);
 			if (tmp->prev)
 				tmp = tmp->prev;
 		}
@@ -134,11 +133,12 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			if (tmp->next)
 				tmp = tmp->next;
 			write(1, "POLUPOKER:", 10);
-			write(1, tmp->str, ft_strlen(tmp->str));
+			line = ft_strdup(tmp->str);
+			write(1, line, ft_strlen(line));
 		}
 		else if (!ft_strcmp(str, "\177"))
 		{
-			if (ft_strlen(line) > 1)
+			if (ft_strlen(line) > 0)
 			{
 				tputs(cursor_left, 1, ft_putchar);
 				tputs(tgetstr("dc", 0), 1, ft_putchar);
