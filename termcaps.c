@@ -98,10 +98,9 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		error("Couldn't get terminal database for some reason!");
 	tputs(save_cursor, 1, ft_putchar);
 	write(1, "POLUPOKER:", 10);
-	i = 0;
 	tmp = init_list(tmp, ft_strdup(""));
 	tmp = tmp->next;
-	//TODO
+	//TODO добавлять в историю сразу
 	while (1)
 	{
 		str[0] = '\0';
@@ -120,8 +119,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		{
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
-			write(1, "POLUPOKEr:", 10);
 			line = ft_strdup(tmp->str);//leak
+			write(1, "POLUPOKER:", 10);
 			write(1, line, ft_strlen(line));
 			if (tmp->prev)
 				tmp = tmp->prev;
@@ -132,8 +131,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			tputs(tigetstr("ed"), 1, ft_putchar);
 			if (tmp->next)
 				tmp = tmp->next;
-			write(1, "POLUPOKER:", 10);
 			line = ft_strdup(tmp->str);
+			write(1, "POLUPOKER:", 10);
 			write(1, line, ft_strlen(line));
 		}
 		else if (!ft_strcmp(str, "\177"))
@@ -157,6 +156,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		if (!ft_strcmp(str, "\n"))
 		{
 			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
+			tmp = init_list(tmp, ft_strdup(line));
 			term.c_lflag |= (ECHO);
 			term.c_lflag |= (ICANON);
 			tcsetattr(0, TCSANOW, &term);

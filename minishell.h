@@ -1,9 +1,5 @@
-//
-// Created by Cloyster Veeta on 3/18/21.
-//
-
-#ifndef MINISHELL_MINISHELL_H
-# define MINISHELL_MINISHELL_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -26,7 +22,6 @@ typedef struct		s_dlist
 	struct s_dlist	*next;
 	struct s_dlist	*prev;
 }					t_dlist;
-
 
 typedef struct	s_cmd
 {
@@ -53,4 +48,4 @@ char		*termcap_processing(int fd, t_dlist *lst);
 char		*check_glob(char *glob, char **envp);
 int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[]);
 
-#endif //MINISHELL_MINISHELL_H
+#endif //MINISHELL_H
