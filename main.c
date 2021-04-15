@@ -16,7 +16,7 @@ int main(int ac, char **argv, char **envp)
 
 //	printf("pars_str: |%s|\n", pars_str);
 
-	char *line = strdup("ls");
+	char *line = strdup("ls | wc");
 
 	//хехе хфхф
 	while (1)

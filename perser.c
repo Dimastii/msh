@@ -205,6 +205,7 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 
     if (**str == '|')
     {
+
 //		if (fd_out == 0)
 //			fd_out = 0;
 		(*str)++;
@@ -212,6 +213,8 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
+		while (ft_isspace(**str))
+			(*str)++;
     }
     else if (**str == ';')
 	{
@@ -227,6 +230,8 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
+		while (ft_isspace(**str))
+			(*str)++;
 	}
     else if (**str == '\0')
 	{
