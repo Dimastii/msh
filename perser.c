@@ -164,18 +164,8 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 				else
 				{
 					search_glob(str, &tocken, tmp, envp);
-					/* функция которая принимает строку и проверяет все символы
-					 * от $ до (**str != '"' && **str != '\'' && **str != ' ' && **str && !isspec(**str))
-					 * и если находит такую переменную окружения то
-					 * джоинит значение переменной к токену и передвигает указатель на конец имени
-					 * найденной переменной
-					 * иначе (если не находит такую переменную окружения)
-					 * то
-					 * передвигает указатель не джоиня токен
-					 * */
 				}
 			}
-			///пока str не ковычка или не пробел мы tok concat;
 		}
 	}
 	if (*tocken)
@@ -206,41 +196,6 @@ void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 	}
 }
 
-int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp)
-{
-	int pipefd[2];
-	int pid;
-	char *path;
-
-	pipe(pipefd);
-
-	pid = fork();
-
-	if (pid == 0)
-	{
-		dup2(fd_out, 1);
-		// child gets here and handles "grep Villanova"
-		// replace standard input with input part of pipe
-		dup2(pipefd[0], 0);
-		// close unused hald of pipe
-		close(pipefd[1]);
-		// execute grep
-		if ((path = findbin(cmd.tokens[0], *envp))) {
-			printf("~exec path:%s \n", path);
-			execve(path, cmd.tokens, *envp);
-		}
-		else
-			printf(" А где бинарник то?:%s \n", path);	}
-	else
-	{
-//		lets_pars(str, envp);
-		// parent gets here and handles "cat scores"
-		// replace standard output with output part of pipe
-		close(fd_out);
-		close(pipefd[0]);
-	}
-	return(pipefd[1]);
-}
 
 
 void		detect_spec(char **str, t_cmd *cmd, char ***envp)
@@ -250,12 +205,16 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 
     if (**str == '|')
     {
+//		if (fd_out == 0)
+//			fd_out = 0;
+		(*str)++;
 		fd_out = exec_pepe(str, *cmd, fd_out, envp);
+		free(cmd->tokens);
+		cmd->tokens = NULL;
+		init_cnd(cmd);
     }
     else if (**str == ';')
 	{
-		if (fd_out == 0)
-			fd_out = 1;
 		(*str)++;
 //		printf(" is ;\n");
 //		ft_printcol(cmd->tokens);
@@ -263,6 +222,8 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		if (cmd->tokens[0])
 			stdexec(cmd, envp, fd_out);
 
+		if (fd_out != 0)
+			fd_out = 0;
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
@@ -271,13 +232,19 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 	{
 //		printf(" is \\0\n");
 //		ft_printcol(cmd->tokens);
-		if (fd_out == 0)
-			fd_out = 1;
+
 		if (cmd->tokens[0])
 			stdexec(cmd, envp, fd_out);
+		else
+		{
+			//тет команды
+		}
+		if (fd_out != 0)
+			fd_out = 0;
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
+		wait(NULL);
 	}
 
 }

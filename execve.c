@@ -48,7 +48,7 @@ char		*findbin(char *cmd, char **envp)
 
 void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 {
-	int pid;
+	pid_t pid;
 	char *path;
 
 	pid = 1;
@@ -63,8 +63,7 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	else
 		printf(" А где бинарник то?:%s \n", path);
 	if (pid == 0) {
-//		dup2(fd_out, 1);
-			printf("~exec path:%s \n", path);
+			dup2(fd_out, 0);
 			execve(path, cmd->tokens, *envp);
 	}
 	else if (pid < 0)
@@ -73,11 +72,60 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	}
 	else
 	{
-		if (fd_out != 1)
+		if (fd_out != 0) {
 			close(fd_out);
-		wait(NULL);
+		}
 	}
+//	wait(NULL);
 }
+
+
+
+int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp)
+{
+	int pipefd[2];
+	pid_t pid;
+	char *path;
+
+
+	pid = 1;
+
+	pipe(pipefd);
+	if ((path = findbin(cmd.tokens[0], *envp)))
+	{
+		pid = fork();
+	}
+	else
+		printf(" А где бинарник то?:%s \n", path);
+
+	if (pid == 0) {
+		dup2(fd_out, 0);
+		// child gets here and handles "grep Villanova"
+		// replace standard input with input part of pipe
+		dup2(pipefd[1], 1);
+		// close unused hald of pipe
+		close(pipefd[0]);
+		// execute grep
+
+//		printf("~exec path:%s \n", path);
+		execve(path, cmd.tokens, *envp);
+	}
+	else
+	{
+//		if (fd_out != 0)
+//			close(fd_out);
+		close(pipefd[1]);
+	}
+//	wait(NULL);
+	return(pipefd[0]);
+}
+
+
+
+
+
+
+
 
 void lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode){
     int	status;

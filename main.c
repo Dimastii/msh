@@ -23,7 +23,8 @@ int main(int ac, char **argv, char **envp)
 	{
 //		write(1, "POLUPOKER:", 10);
 		pars_str = termcap_processing(fd, lst);
-		printf("pars_str: |%s|-|%d|\n", pars_str, ft_strncmp(pars_str, "exit", ft_strlen(pars_str)));
+		write(1, "\n", 1);
+//		printf("pars_str: |%s|-|%d|\n", pars_str, ft_strncmp(pars_str, "exit", ft_strlen(pars_str)));
 		if (*pars_str) {
 			lets_pars(&pars_str, &envp);
 		}///

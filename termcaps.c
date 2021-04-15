@@ -120,7 +120,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		{
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
-			write(1, "POLUPOKER:", 10);
+			write(1, "POLUPOKEr:", 10);
 			line = ft_strdup(tmp->str);//leak
 			write(1, line, ft_strlen(line));
 			if (tmp->prev)

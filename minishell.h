@@ -51,5 +51,6 @@ t_dlist		*sort_history(int fd, t_dlist *lst);
 t_dlist		*init_list(t_dlist *lst, char *str);
 char		*termcap_processing(int fd, t_dlist *lst);
 char		*check_glob(char *glob, char **envp);
+int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp);
 
 #endif //MINISHELL_MINISHELL_H

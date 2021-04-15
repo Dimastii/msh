@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/cveeta/CLionProjects/msh/execve.c
-minishell.h
-/Users/cveeta/CLionProjects/msh/minishell.h
-
 /Users/cveeta/CLionProjects/msh/libft/libft.h
 string.h
 -
@@ -19,6 +15,10 @@ stdlib.h
 -
 unistd.h
 -
+
+/Users/cveeta/CLionProjects/msh/main.c
+minishell.h
+/Users/cveeta/CLionProjects/msh/minishell.h
 
 /Users/cveeta/CLionProjects/msh/minishell.h
 stdio.h
@@ -41,4 +41,8 @@ curses.h
 -
 term.h
 -
+
+/Users/cveeta/CLionProjects/msh/perser.c
+minishell.h
+/Users/cveeta/CLionProjects/msh/minishell.h
 
