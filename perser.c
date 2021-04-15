@@ -201,6 +201,7 @@ void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
 void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 {
 	static int fd_out;
+	static int fd_arr[100];
 
 
     if (**str == '|')
@@ -209,7 +210,7 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 //		if (fd_out == 0)
 //			fd_out = 0;
 		(*str)++;
-		fd_out = exec_pepe(str, *cmd, fd_out, envp);
+		fd_out = exec_pepe(str, *cmd, fd_out, envp, fd_arr);
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
@@ -221,7 +222,13 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		(*str)++;
 //		printf(" is ;\n");
 //		ft_printcol(cmd->tokens);
-
+		int i = 0;
+		while(fd_arr[i] != 0)
+		{
+			printf("lol\n");
+			close(fd_arr[i]);
+			i++;
+		}
 		if (cmd->tokens[0])
 			stdexec(cmd, envp, fd_out);
 
@@ -249,9 +256,16 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
-//		wait(NULL);
-	}
 
+		int i = 0;
+		while(fd_arr[i] != 0)
+		{
+			wait(0);
+			printf("lol\n");
+			close(fd_arr[i]);
+			i++;
+		}
+	}
 }
 
 void		add_cmd(t_cmd *cmds, int mode, void (*cmd) (char *, char **, char ***))

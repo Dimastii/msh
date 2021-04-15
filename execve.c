@@ -76,21 +76,23 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 			close(fd_out);
 		}
 	}
-	wait(NULL);
+	wait(0);
 }
 
 
 
-int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp)
+int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
 {
 	int pipefd[2];
 	pid_t pid;
 	char *path;
+	static int i;
 
 
 	pid = 1;
 
 	pipe(pipefd);
+	fd_arr[i] = pipefd[0];
 	if ((path = findbin(cmd.tokens[0], *envp)))
 	{
 		pid = fork();
@@ -106,16 +108,19 @@ int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp)
 		// close unused hald of pipe
 		close(pipefd[0]);
 		// execute grep
-
 //		printf("~exec path:%s \n", path);
 		execve(path, cmd.tokens, *envp);
 	}
 	else
 	{
-//		if (fd_out != 0)
+//		if (fd_out != 0) {
+//			waitpid(pid, NULL, 0);
 //			close(fd_out);
+//		}
+//		waitpid(pid, NULL, 0);
 		close(pipefd[1]);
 	}
+	++i;
 //	wait(NULL);
 	return(pipefd[0]);
 }
