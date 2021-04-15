@@ -76,7 +76,7 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 			close(fd_out);
 		}
 	}
-//	wait(NULL);
+	wait(NULL);
 }
 
 

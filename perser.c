@@ -249,7 +249,7 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		free(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
-		wait(NULL);
+//		wait(NULL);
 	}
 
 }
