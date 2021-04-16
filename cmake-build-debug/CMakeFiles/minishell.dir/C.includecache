@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/cveeta/msh/execve.c
+minishell.h
+/Users/cveeta/msh/minishell.h
+
+/Users/cveeta/msh/libft/libft.h
+string.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+
+/Users/cveeta/msh/minishell.h
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+libft/libft.h
+/Users/cveeta/msh/libft/libft.h
+fcntl.h
+-
+termcap.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+curses.h
+-
+term.h
+-
+
