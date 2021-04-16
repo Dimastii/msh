@@ -91,6 +91,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 
 	line = ft_strdup("");
 	tmp = lst;
+	while (tmp->next)
+		tmp = tmp->next;
 	tcgetattr(0, &term);
 	term.c_lflag &= ~(ECHO);
 	term.c_lflag &= ~(ICANON);
