@@ -69,9 +69,10 @@ t_dlist			*sort_history(int fd, t_dlist *lst)
 	while (1)
 	{
 		ret_gnl = get_next_line(fd, &line);
-		lst = init_list(lst, line);
+		if (*line != '\0')
+			lst = init_list(lst, line);
 		if (!ret_gnl)
-			break ;
+			break;
 	}
 	while (lst->next)
 		lst = lst->next;
@@ -84,6 +85,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	struct	termios	term;
 	char			*term_type = "xterm-256color";
 	int				i;
+	int				j;
 	char			str[2000];
 	t_dlist			*tmp;
 
@@ -98,9 +100,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		error("Couldn't get terminal database for some reason!");
 	tputs(save_cursor, 1, ft_putchar);
 	write(1, "POLUPOKER:", 10);
-	tmp = init_list(tmp, ft_strdup(""));
-	tmp = tmp->next;
-	//TODO добавлять в историю сразу
+	j = 0;
+	//TODO добавлять в историю сразу и стрелки вправо/влево
 	while (1)
 	{
 		str[0] = '\0';
@@ -146,8 +147,14 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			else
 				continue ;
 		}
-		else if (!ft_strcmp(str, "\e[C") || !ft_strcmp(str, "\e[D"))
-			continue ;
+		else if (!ft_strcmp(str, "\e[C"))//вправо
+		{
+			tputs(cursor_right, 1, ft_putchar);
+		}
+		else if (!ft_strcmp(str, "\e[D"))//влево
+		{
+			tputs(cursor_left, 1, ft_putchar);
+		}
 		else if (ft_strcmp(str, "\n"))
 		{
 			line = ft_strjoin(line, str);
@@ -155,9 +162,15 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		}
 		if (!ft_strcmp(str, "\n"))
 		{
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-			tmp = init_list(tmp, ft_strdup(line));
+			if (*line != '\0')
+			{
+				write(fd, line, ft_strlen(line));
+				write(fd, "\n", 1);
+				tmp = init_list(tmp, ft_strdup(line));
+				tmp->next->prev = tmp;
+				tmp = tmp->next;
+				lst = tmp;
+			}
 			term.c_lflag |= (ECHO);
 			term.c_lflag |= (ICANON);
 			tcsetattr(0, TCSANOW, &term);
