@@ -16,12 +16,13 @@ char		*findbin(char *cmd, char **envp)
 	char *fre;
 	char *fre_str;
 	path = NULL;
-//	cmd[ft_strlen(cmd)] = '\0';
 	struct stat buff;
+	if (stat(cmd, &buff) == 0) {
+		return (cmd);
+	}
 	if ((str = ft_strdup(check_glob("PATH", envp)))) {
 		fre_str = str;
 		path = str;
-//		printf("1 |%s \n", path);
 		while ((str = ft_strchr(str, ':'))) {
 			*str = '\0';
 			str++;
@@ -30,7 +31,6 @@ char		*findbin(char *cmd, char **envp)
 			path = ft_strjoin(path, cmd);
 			free(fre);
 			if (stat(path, &buff) == 0) {
-//				printf("0 |%s \n", path);
 				return (path);
 			}
 			fre = path;
@@ -50,18 +50,19 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 {
 	pid_t pid;
 	char *path;
+	struct stat buff;
 
 	pid = 1;
 	if (ft_strncmp(cmd->tokens[0], "exit", ft_strlen(cmd->tokens[0])) == 0)
 	{
 		exit(0);
 	}
-
 	if ((path = findbin(cmd->tokens[0], *envp))) {
 		pid = fork();
 	}
 	else
 		printf(" А где бинарник то?:%s \n", path);
+
 	if (pid == 0) {
 			dup2(fd_out, 0);
 			execve(path, cmd->tokens, *envp);

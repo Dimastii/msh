@@ -30,6 +30,8 @@ typedef struct	s_cmd
 	char	**tokens;
 }				t_cmd;
 
+void ft_write_list(t_dlist *lstt);
+
 char		*pwd();
 char		*findbin(char *cmd, char **envp);
 void		cd(char *path);

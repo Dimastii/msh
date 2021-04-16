@@ -17,6 +17,12 @@ int main(int ac, char **argv, char **envp)
 
 	char *line = strdup("ls | wc");
 
+
+	struct stat buff;
+//	write(1, "1\n", 1);
+//	printf(")%d", stat("./minishell", &buff));
+//	execve("./minishell", NULL, envp);
+
 	//хехе хфхф
 	while (1)
 	{
