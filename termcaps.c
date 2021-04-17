@@ -102,7 +102,9 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		error("Couldn't get terminal database for some reason!");
 	tputs(save_cursor, 1, ft_putchar);
 	write(1, "POLUPOKER:", 10);
-	j = 0;
+//	tmp = init_list(tmp, ft_strdup(""));
+//	tmp->next->prev = tmp;
+//	tmp = tmp->next;
 	//TODO добавлять в историю сразу и стрелки вправо/влево
 	while (1)
 	{
@@ -118,7 +120,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			}
 			continue ;
 		}
-		else if (!ft_strcmp(str, "\e[A"))
+		else if (!ft_strcmp(str, "\e[A"))//вверх
 		{
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
@@ -128,7 +130,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			if (tmp->prev)
 				tmp = tmp->prev;
 		}
-		else if (!ft_strcmp(str, "\e[B"))
+		else if (!ft_strcmp(str, "\e[B"))//вниз
 		{
 			tputs(tigetstr("rc"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
@@ -157,6 +159,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		{
 			tputs(cursor_left, 1, ft_putchar);
 		}
+		else if (!ft_strcmp(str, "\t"))
+			continue ;
 		else if (ft_strcmp(str, "\n"))
 		{
 			line = ft_strjoin(line, str);
