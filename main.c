@@ -1,9 +1,8 @@
 #include "minishell.h"
 
-
-int main(int ac, char **argv, char **envp)
+int	main(int ac, char **argv, char **envp)
 {
-    t_cmd			*cmds;
+	t_cmd			*cmds;
 	char			*pars_str;
 	int				fd;
 	t_dlist			*lst = NULL;
@@ -16,13 +15,10 @@ int main(int ac, char **argv, char **envp)
 //	printf("pars_str: |%s|\n", pars_str);
 
 	char *line = strdup("ls | wc");
-
-
 	struct stat buff;
 //	write(1, "1\n", 1);
 //	printf(")%d", stat("./minishell", &buff));
 //	execve("./minishell", NULL, envp);
-
 	//хехе хфхф
 	while (1)
 	{

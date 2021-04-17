@@ -115,7 +115,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		{
 			if (*line == '\0')
 			{
-				write(1, "exit", 4);
+				write(1, "exit\n", 5);
 				exit(0);
 			}
 			continue ;

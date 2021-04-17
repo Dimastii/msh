@@ -261,7 +261,6 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		while(fd_arr[i] != 0)
 		{
 			wait(0);
-			printf("lol\n");
 			close(fd_arr[i]);
 			i++;
 		}
@@ -280,7 +279,6 @@ int			detect_cmd(char **str, t_cmd *cmd, char **envp)
 	{
 		detect_token(str, cmd, envp);
 	}
-	add_cmd(cmd, 1, &exec_ls);
 	return 1;
 }
 

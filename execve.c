@@ -4,11 +4,6 @@
 
 #include "minishell.h"
 
-void exec_ls(char *file, char **argv, char ***envp)
-{
-	execve(file, argv, *envp);
-}
-
 char		*findbin(char *cmd, char **envp)
 {
 	char *path;
@@ -57,7 +52,8 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	{
 		exit(0);
 	}
-	if ((path = findbin(cmd->tokens[0], *envp))) {
+	if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0 || (path = findbin(cmd->tokens[0], *envp)))
+	{
 		pid = fork();
 	}
 	else
@@ -65,7 +61,13 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 
 	if (pid == 0) {
 			dup2(fd_out, 0);
-			execve(path, cmd->tokens, *envp);
+			if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0)
+			{
+				exec_echo(cmd);
+			}
+			else {
+				execve(path, cmd->tokens, *envp);
+			}
 	}
 	else if (pid < 0)
 	{
@@ -80,8 +82,6 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	wait(0);
 }
 
-
-
 int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
 {
 	int pipefd[2];
@@ -94,7 +94,7 @@ int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
 
 	pipe(pipefd);
 	fd_arr[i] = pipefd[0];
-	if ((path = findbin(cmd.tokens[0], *envp)))
+	if (ft_strncmp(cmd.tokens[0], "echo", ft_strlen(cmd.tokens[0])) == 0 || (path = findbin(cmd.tokens[0], *envp)))
 	{
 		pid = fork();
 	}
@@ -103,14 +103,16 @@ int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
 
 	if (pid == 0) {
 		dup2(fd_out, 0);
-		// child gets here and handles "grep Villanova"
-		// replace standard input with input part of pipe
+
 		dup2(pipefd[1], 1);
-		// close unused hald of pipe
 		close(pipefd[0]);
-		// execute grep
-//		printf("~exec path:%s \n", path);
-		execve(path, cmd.tokens, *envp);
+		if (ft_strncmp(cmd.tokens[0], "echo", ft_strlen(cmd.tokens[0])) == 0)
+		{
+			printf("qwe\n\n\n\n\n\n\n");
+			exec_echo(&cmd);
+		}
+		else
+			execve(path, cmd.tokens, *envp);
 	}
 	else
 	{

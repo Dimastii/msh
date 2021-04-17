@@ -21,4 +21,4 @@ add_executable(minishell
         libft/ft_strnstr.c
         termcaps.c
         libft/get_next_line.c
-        f.c minishell.h realized_f.c execve.c perser.c pepe.c libft/ft_free.c ft_init.c libft/ft_isolating.c libft/ft_lastcoldel.c utils.c)
+        f.c minishell.h realized_f.c execve.c perser.c pepe.c libft/ft_free.c ft_init.c libft/ft_isolating.c libft/ft_lastcoldel.c utils.c echo.c)

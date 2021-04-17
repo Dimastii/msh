@@ -16,7 +16,7 @@
 # include <curses.h>
 # include <term.h>
 
-typedef struct		s_dlist
+typedef	struct		s_dlist
 {
 	char			*str;
 	struct s_dlist	*next;
@@ -29,8 +29,6 @@ typedef struct	s_cmd
 	int		mode;
 	char	**tokens;
 }				t_cmd;
-
-void ft_write_list(t_dlist *lstt);
 
 char		*pwd();
 char		*findbin(char *cmd, char **envp);
@@ -48,6 +46,8 @@ t_dlist		*sort_history(int fd, t_dlist *lst);
 t_dlist		*init_list(t_dlist *lst, char *str);
 char		*termcap_processing(int fd, t_dlist *lst);
 char		*check_glob(char *glob, char **envp);
-int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[]);
+int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[]);
+void		exec_echo(t_cmd	*cmd);
+
 
 #endif //MINISHELL_H

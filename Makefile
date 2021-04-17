@@ -58,8 +58,8 @@ SRC			= main.c \
 			utils.c \
 			libft/ft_free.c \
 			libft/ft_lastcoldel.c \
-			libft/ft_isolating.c
-
+			libft/ft_isolating.c \
+			echo.c
 
 HEADER		= minishell.h
 

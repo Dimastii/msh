@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/minishell.dir/echo.c.o"
   "CMakeFiles/minishell.dir/execve.c.o"
   "CMakeFiles/minishell.dir/f.c.o"
   "CMakeFiles/minishell.dir/ft_init.c.o"
