@@ -40,7 +40,9 @@ char		*findbin(char *cmd, char **envp)
 	}
 	return NULL;
 }
-
+void sighandler(int signum) {
+	printf("Caught signal %d, coming out...\n", signum);
+}
 void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 {
 	pid_t pid;
@@ -59,15 +61,17 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	else
 		printf(" А где бинарник то?:%s \n", path);
 
+	signal(SIGINT, sighandler);
 	if (pid == 0) {
-			dup2(fd_out, 0);
-			if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0)
-			{
-				exec_echo(cmd);
-			}
-			else {
-				execve(path, cmd->tokens, *envp);
-			}
+
+		dup2(fd_out, 0);
+		if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0)
+		{
+			exec_echo(cmd);
+		}
+		else {
+			execve(path, cmd->tokens, *envp);
+		}
 	}
 	else if (pid < 0)
 	{

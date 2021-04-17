@@ -15,6 +15,8 @@
 
 # include <curses.h>
 # include <term.h>
+# include <signal.h>
+
 
 typedef	struct		s_dlist
 {
