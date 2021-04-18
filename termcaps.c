@@ -96,22 +96,20 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	tcgetattr(0, &term);
 	term.c_lflag &= ~(ECHO);
 	term.c_lflag &= ~(ICANON);
+	term.c_lflag &= ~(ISIG);
 	if (tcsetattr(0, TCSANOW, &term) < 0)
 		error("Couldn't get terminal database for some reason!");
 	if (tgetent(0, term_type) < 0)
 		error("Couldn't get terminal database for some reason!");
 	tputs(save_cursor, 1, ft_putchar);
 	write(1, "POLUPOKER:", 10);
-//	tmp = init_list(tmp, ft_strdup(""));
-//	tmp->next->prev = tmp;
-//	tmp = tmp->next;
 	//TODO добавлять в историю сразу и стрелки вправо/влево
 	while (1)
 	{
 		str[0] = '\0';
 		i = read(0, &str, 100);
 		str[i] = '\0';
-		if (!ft_strcmp(str, "\4"))
+		if (!ft_strcmp(str, "\4"))//ctrl + D
 		{
 			if (*line == '\0')
 			{
@@ -120,6 +118,14 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			}
 			continue ;
 		}
+		else if (!ft_strcmp(str, "\3"))//ctrl + C
+		{
+			write(1, "\nPOLUPOKER:", 11);
+			ft_bzero(line, ft_strlen(line));
+			continue ;
+		}
+		else if ((int)str[0] == 28 || !ft_strcmp(str, "\t"))//(ctrl + \) and tab
+			continue ;
 		else if (!ft_strcmp(str, "\e[A"))//вверх
 		{
 			tputs(tigetstr("cr"), 1, ft_putchar);
@@ -159,8 +165,6 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		{
 			tputs(cursor_left, 1, ft_putchar);
 		}
-		else if (!ft_strcmp(str, "\t"))
-			continue ;
 		else if (ft_strcmp(str, "\n"))
 		{
 			line = ft_strjoin(line, str);
@@ -179,6 +183,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			}
 			term.c_lflag |= (ECHO);
 			term.c_lflag |= (ICANON);
+			term.c_lflag |= (ISIG);
 			tcsetattr(0, TCSANOW, &term);
 			return (line);
 		}
