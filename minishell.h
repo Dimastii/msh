@@ -32,6 +32,7 @@ typedef struct	s_cmd
 	char	**tokens;
 }				t_cmd;
 
+void		exec_pwd();
 char		*pwd();
 char		*findbin(char *cmd, char **envp);
 void		cd(char *path);

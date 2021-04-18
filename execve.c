@@ -71,6 +71,10 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 		{
 			exec_echo(cmd);
 		}
+		else if (ft_strncmp(cmd->tokens[0], "pwd", ft_strlen(cmd->tokens[0])) == 0)
+		{
+			exec_pwd();
+		}
 		else
 		{
 			execve(path, cmd->tokens, *envp);

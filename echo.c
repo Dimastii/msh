@@ -23,4 +23,5 @@ void		exec_echo(t_cmd	*cmd)
 	}
 	if (!flag)
 		write(1, "\n", 1);
+	exit (0);
 }
