@@ -1,7 +1,6 @@
 //
 // Created by Cloyster Veeta on 3/20/21.
 //
-
 #include "minishell.h"
 
 char		*findbin(char *cmd, char **envp)
@@ -12,7 +11,8 @@ char		*findbin(char *cmd, char **envp)
 	char *fre_str;
 	path = NULL;
 	struct stat buff;
-	if (stat(cmd, &buff) == 0) {
+	if (stat(cmd, &buff) == 0)
+	{
 		return (cmd);
 	}
 	if ((str = ft_strdup(check_glob("PATH", envp)))) {
@@ -40,14 +40,17 @@ char		*findbin(char *cmd, char **envp)
 	}
 	return NULL;
 }
-void sighandler(int signum) {
-	printf("Caught signal %d, coming out...\n", signum);
+
+void	sighandler(int signum)
+{
+	write(1, "\n", 1);
+//	printf("Caught signal %d, coming out...\n", signum);
 }
 void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 {
-	pid_t pid;
-	char *path;
-	struct stat buff;
+	pid_t		pid;
+	char		*path;
+	struct stat	buff;
 
 	pid = 1;
 	if (ft_strncmp(cmd->tokens[0], "exit", ft_strlen(cmd->tokens[0])) == 0)
@@ -60,33 +63,41 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	}
 	else
 		printf(" А где бинарник то?:%s \n", path);
-
-	signal(SIGINT, sighandler);
-	if (pid == 0) {
-
+	if (pid == 0)
+	{
+		///pid == 0 - сигнал отправляется всем членам группы
 		dup2(fd_out, 0);
 		if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0)
 		{
 			exec_echo(cmd);
 		}
-		else {
+		else
+		{
 			execve(path, cmd->tokens, *envp);
 		}
 	}
 	else if (pid < 0)
 	{
 		//принт еррор
+		///pid < -1 - сигнал отправляется группе с номером -pid
 	}
 	else
 	{
+		///pid > 0 - сигнал отправляется конкретному процессу
 		if (fd_out != 0) {
 			close(fd_out);
 		}
 	}
+	signal(SIGINT, sighandler);///SIGINT code:2 Term Interrupt from keyboard
+	signal(SIGQUIT, sighandler);///SIGQUIT code:3 Core Quit from keyboard
+//	waitpid(pid, );
+//	if (pid)
+//	kill(getpid(), SIGINT);
+//	kill(pid, SIGINT);
 	wait(0);
 }
 
-int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
+int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
 {
 	int pipefd[2];
 	pid_t pid;
@@ -132,36 +143,24 @@ int 		exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
 	return(pipefd[0]);
 }
 
+void	lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode) {
+	int		status;
+	char	*text = malloc(100);
+	int		pid;
+	int		fd = open("/Users/cveeta/CLionProjects/minishell/qqq.txt", O_CREAT | O_WRONLY, 0777);
+	pid = fork();
 
-
-
-
-
-
-
-void lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode){
-    int	status;
-    char *text = malloc(100);
-    int pid;
-    int fd = open("/Users/cveeta/CLionProjects/minishell/qqq.txt", O_CREAT | O_WRONLY, 0777);
-    pid = fork();
-
-    if (pid == 0) {
-        if (mode) {
-            dup2(pepeout[0], 0);
-        }
-        else {
-        }
-        dup2(pepein[1], 1);
-        status = execve(file, argv, envp);
-    }
-    else if (pid < 0)
-    {
-        //принт еррор
-    }
-    else
-    {
-        wait(NULL);
-    }
+	if (pid == 0) {
+		if (mode) {
+			dup2(pepeout[0], 0);
+		} else {
+		}
+		dup2(pepein[1], 1);
+		status = execve(file, argv, envp);
+	} else if (pid < 0) {
+		//принт еррор
+	}
+//	else {
+//		wait
+//	}
 }
-

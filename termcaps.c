@@ -126,7 +126,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		}
 		else if ((int)str[0] == 28 || !ft_strcmp(str, "\t"))//(ctrl + \) and tab
 			continue ;
-		else if (!ft_strcmp(str, "\e[A"))//вверх
+		else if (!ft_strcmp(str, "\e[A"))//arrow up
 		{
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
@@ -136,7 +136,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			if (tmp->prev)
 				tmp = tmp->prev;
 		}
-		else if (!ft_strcmp(str, "\e[B"))//вниз
+		else if (!ft_strcmp(str, "\e[B"))//arrow down
 		{
 			tputs(tigetstr("rc"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
@@ -146,7 +146,7 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			write(1, "POLUPOKER:", 10);
 			write(1, line, ft_strlen(line));
 		}
-		else if (!ft_strcmp(str, "\177"))
+		else if (!ft_strcmp(str, "\177"))//delete
 		{
 			if (ft_strlen(line) > 0)
 			{
@@ -157,11 +157,11 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			else
 				continue ;
 		}
-		else if (!ft_strcmp(str, "\e[C"))//вправо
+		else if (!ft_strcmp(str, "\e[C"))//arrow right
 		{
 			tputs(cursor_right, 1, ft_putchar);
 		}
-		else if (!ft_strcmp(str, "\e[D"))//влево
+		else if (!ft_strcmp(str, "\e[D"))//arrow left
 		{
 			tputs(cursor_left, 1, ft_putchar);
 		}
