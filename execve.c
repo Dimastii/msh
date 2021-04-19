@@ -55,6 +55,10 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	pid = 1;
 	if (ft_strncmp(cmd->tokens[0], "exit", ft_strlen(cmd->tokens[0])) == 0)
 	{
+//		while (cmd->tokens[1])
+//		{
+//			if (!ft_isalpha(*cmd->tokens[1]))
+//		}
 		exit(0);
 	}
 	if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0 || (path = findbin(cmd->tokens[0], *envp)))
@@ -82,7 +86,6 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	}
 	else if (pid < 0)
 	{
-		//принт еррор
 		///pid < -1 - сигнал отправляется группе с номером -pid
 	}
 	else

@@ -36,9 +36,10 @@ int			ft_putchar(int c)
 
 t_dlist			*init_list(t_dlist *lst, char *str)
 {
-	t_dlist	*tmp = NULL;
+	t_dlist	*tmp;
 	t_dlist	*cur;
 
+	tmp = NULL;
 	tmp = (t_dlist *)malloc(sizeof(t_dlist));
 	if (!tmp)
 		error("malloc error");
@@ -71,6 +72,7 @@ t_dlist			*sort_history(int fd, t_dlist *lst)
 		ret_gnl = get_next_line(fd, &line);
 		if (*line != '\0')
 			lst = init_list(lst, line);
+		free(line);
 		if (!ret_gnl)
 			break;
 	}
@@ -85,8 +87,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 	struct	termios	term;
 	char			*term_type = "xterm-256color";
 	int				i;
-	int				j;
 	char			str[2000];
+	char			*fre;
 	t_dlist			*tmp;
 
 	line = ft_strdup("");
@@ -124,15 +126,20 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			ft_bzero(line, ft_strlen(line));
 			continue ;
 		}
-		else if ((int)str[0] == 28 || !ft_strcmp(str, "\t"))//(ctrl + \) and tab
+		else if ((int)str[0] == 28 || !ft_strcmp(str, "\t")
+		|| !ft_strcmp(str, "\e[C") || !ft_strcmp(str, "\e[D"))//(ctrl + \) tab arrow right arrow left
 			continue ;
 		else if (!ft_strcmp(str, "\e[A"))//arrow up
 		{
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
+			fre = line;
 			line = ft_strdup(tmp->str);//leak
+			free(fre);
 			write(1, "POLUPOKER:", 10);
 			write(1, line, ft_strlen(line));
+//			tmp->next = init_list(tmp, str);
+//			tmp->next->prev = tmp;
 			if (tmp->prev)
 				tmp = tmp->prev;
 		}
@@ -142,7 +149,9 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			tputs(tigetstr("ed"), 1, ft_putchar);
 			if (tmp->next)
 				tmp = tmp->next;
+			fre = line;
 			line = ft_strdup(tmp->str);
+			free(fre);
 			write(1, "POLUPOKER:", 10);
 			write(1, line, ft_strlen(line));
 		}
@@ -157,17 +166,11 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			else
 				continue ;
 		}
-		else if (!ft_strcmp(str, "\e[C"))//arrow right
-		{
-			tputs(cursor_right, 1, ft_putchar);
-		}
-		else if (!ft_strcmp(str, "\e[D"))//arrow left
-		{
-			tputs(cursor_left, 1, ft_putchar);
-		}
 		else if (ft_strcmp(str, "\n"))
 		{
+			fre = line;
 			line = ft_strjoin(line, str);
+			free(fre);
 			write(1, &str, i);
 		}
 		if (!ft_strcmp(str, "\n"))

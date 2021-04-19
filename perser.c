@@ -283,7 +283,7 @@ int			detect_cmd(char **str, t_cmd *cmd, char **envp)
 }
 
 
-void lets_pars(char **str, char ***envp)
+void	lets_pars(char **str, char ***envp)
 {
 	t_cmd cmd;
 

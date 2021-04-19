@@ -21,8 +21,8 @@
 typedef	struct		s_dlist
 {
 	char			*str;
-	struct s_dlist	*next;
-	struct s_dlist	*prev;
+	struct	s_dlist	*next;
+	struct	s_dlist	*prev;
 }					t_dlist;
 
 typedef struct	s_cmd
@@ -51,6 +51,5 @@ char		*termcap_processing(int fd, t_dlist *lst);
 char		*check_glob(char *glob, char **envp);
 int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[]);
 void		exec_echo(t_cmd	*cmd);
-
 
 #endif //MINISHELL_H

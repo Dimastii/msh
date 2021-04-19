@@ -2,8 +2,8 @@
 
 void		exec_echo(t_cmd	*cmd)
 {
-	int i;
-	int flag;
+	int		i;
+	int		flag;
 
 	flag = 0;
 	i = 1;
