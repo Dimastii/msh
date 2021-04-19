@@ -23,7 +23,7 @@ int	main(int ac, char **argv, char **envp)
 		if (*pars_str)
 		{
 			lets_pars(&pars_str, &envp);
-			free(fre);
+			free(fre);//lol
 		}
 	}
 }
