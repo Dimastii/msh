@@ -14,7 +14,7 @@ int	main(int ac, char **argv, char **envp)
 	fd = open("minishell_history", O_CREAT | O_RDWR | O_APPEND , 0644);
 //	lst = sort_history(fd, lst);
 
-	char *line = strdup("ls -la | wc | cat -e | wc ");
+	char *line = strdup("ls -la ");
 
 
 //		pars_str = termcap_processing(fd, lst);

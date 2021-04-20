@@ -76,8 +76,11 @@ t_dlist			*sort_history(int fd, t_dlist *lst)
 		if (!ret_gnl)
 			break;
 	}
-	while (lst->next)
-		lst = lst->next;
+	if (lst)
+	{
+		while (lst->next)
+			lst = lst->next;
+	}
 	return (lst);
 }
 
@@ -93,8 +96,8 @@ char		*termcap_processing(int fd, t_dlist *lst)
 
 	line = ft_strdup("");
 	tmp = lst;
-	while (tmp->next)
-		tmp = tmp->next;
+	if (!tmp)
+		tmp = init_list(tmp, ft_strdup(""));
 	tcgetattr(0, &term);
 	term.c_lflag &= ~(ECHO);
 	term.c_lflag &= ~(ICANON);
@@ -133,13 +136,11 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		{
 			tputs(tigetstr("cr"), 1, ft_putchar);
 			tputs(tigetstr("ed"), 1, ft_putchar);
-			fre = line;
-			line = ft_strdup(tmp->str);//leak
-			free(fre);
+//			fre = line;
+//			line = ft_strdup(tmp->str);//leak
+//			free(fre);
 			write(1, "POLUPOKER:", 10);
-			write(1, line, ft_strlen(line));
-//			tmp->next = init_list(tmp, str);
-//			tmp->next->prev = tmp;
+			write(1, tmp->str, ft_strlen(tmp->str));
 			if (tmp->prev)
 				tmp = tmp->prev;
 		}
@@ -149,46 +150,44 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			tputs(tigetstr("ed"), 1, ft_putchar);
 			if (tmp->next)
 				tmp = tmp->next;
-			fre = line;
-			line = ft_strdup(tmp->str);
-			free(fre);
+//			fre = line;
+//			line = ft_strdup(tmp->str);
+//			free(fre);
 			write(1, "POLUPOKER:", 10);
-			write(1, line, ft_strlen(line));
+			write(1, tmp->str, ft_strlen(tmp->str));
 		}
 		else if (!ft_strcmp(str, "\177"))//delete
 		{
-			if (ft_strlen(line) > 0)
+			if (ft_strlen(tmp->str) > 0)
 			{
 				tputs(cursor_left, 1, ft_putchar);
 				tputs(tgetstr("dc", 0), 1, ft_putchar);
-				line[ft_strlen(line) - 1] = '\0';
+				tmp->str[ft_strlen(tmp->str) - 1] = '\0';
 			}
 			else
 				continue ;
 		}
 		else if (ft_strcmp(str, "\n"))
 		{
-			fre = line;
-			line = ft_strjoin(line, str);
-			free(fre);
+			tmp->str = ft_strjoin(tmp->str, str);
 			write(1, &str, i);
 		}
 		if (!ft_strcmp(str, "\n"))
 		{
-			if (*line != '\0')
+			if (ft_strlen(tmp->str) != 0)
 			{
-				write(fd, line, ft_strlen(line));
+				write(fd, tmp->str, ft_strlen(tmp->str));
 				write(fd, "\n", 1);
-				tmp = init_list(tmp, ft_strdup(line));
-				tmp->next->prev = tmp;
-				tmp = tmp->next;
-				lst = tmp;
+//				tmp = init_list(tmp, ft_strdup(tmp->str));
+//				tmp->next->prev = tmp;
+//				tmp = tmp->next;
+//				lst = tmp;
 			}
 			term.c_lflag |= (ECHO);
 			term.c_lflag |= (ICANON);
 			term.c_lflag |= (ISIG);
 			tcsetattr(0, TCSANOW, &term);
-			return (line);
+			return (tmp->str);
 		}
 	}
 }

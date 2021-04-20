@@ -51,15 +51,14 @@ SRC			= main.c \
 			libft/get_next_line.c \
 			termcaps.c \
 			perser.c \
-			pepe.c \
 			ft_init.c \
 			execve.c \
-			realized_f.c \
 			utils.c \
 			libft/ft_free.c \
 			libft/ft_lastcoldel.c \
 			libft/ft_isolating.c \
-			echo.c
+			echo.c \
+			pwd.c
 
 HEADER		= minishell.h
 
