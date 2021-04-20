@@ -17,6 +17,7 @@ int	main(int ac, char **argv, char **envp)
 	char *line = strdup("ls -la ");
 
 //гыгыгыыгыыг
+/// ututututuut
 //		pars_str = termcap_processing(fd, lst);
 //		fre = pars_str;
 		write(1, "\n", 1);
