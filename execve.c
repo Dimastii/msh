@@ -26,13 +26,14 @@ char		*findbin(char *cmd, char **envp)
 			path = ft_strjoin(path, cmd);
 			free(fre);
 			if (stat(path, &buff) == 0) {
+				free(fre_str);
 				return (path);
 			}
 			fre = path;
-			path = str;//лик
+			path = str;
 			free(fre);
 		}
-//		free(fre_str);
+		free(fre_str);
 	}
 	else
 	{
@@ -52,13 +53,10 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	char		*path;
 	struct stat	buff;
 
+	path = NULL;
 	pid = 1;
 	if (ft_strncmp(cmd->tokens[0], "exit", ft_strlen(cmd->tokens[0])) == 0)
 	{
-//		while (cmd->tokens[1])
-//		{
-//			if (!ft_isalpha(*cmd->tokens[1]))
-//		}
 		exit(0);
 	}
 	if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0 || (path = findbin(cmd->tokens[0], *envp)))
@@ -95,27 +93,23 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 			close(fd_out);
 		}
 	}
-	signal(SIGINT, sighandler);///SIGINT code:2 Term Interrupt from keyboard
-	signal(SIGQUIT, sighandler);///SIGQUIT code:3 Core Quit from keyboard
-//	waitpid(pid, );
-//	if (pid)
-//	kill(getpid(), SIGINT);
-//	kill(pid, SIGINT);
+//	signal(SIGINT, ft_quit);///SIGINT code:2 Term Interrupt from keyboard
+//	signal(SIGQUIT, ft_quit);///SIGQUIT code:3 Core Quit from keyboard
+	if (path)
+		free(path);
 	wait(0);
 }
 
-int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
+int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp)
 {
 	int pipefd[2];
 	pid_t pid;
 	char *path;
-	static int i;
 
 
 	pid = 1;
-
+	path = NULL;
 	pipe(pipefd);
-	fd_arr[i] = pipefd[0];
 	if (ft_strncmp(cmd.tokens[0], "echo", ft_strlen(cmd.tokens[0])) == 0 || (path = findbin(cmd.tokens[0], *envp)))
 	{
 		pid = fork();
@@ -130,7 +124,6 @@ int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
 		close(pipefd[0]);
 		if (ft_strncmp(cmd.tokens[0], "echo", ft_strlen(cmd.tokens[0])) == 0)
 		{
-			printf("qwe\n\n\n\n\n\n\n");
 			exec_echo(&cmd);
 		}
 		else
@@ -138,36 +131,10 @@ int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp, int fd_arr[])
 	}
 	else
 	{
-//		if (fd_out != 0) {
-//			waitpid(pid, NULL, 0);
-//			close(fd_out);
-//		}
-//		waitpid(pid, NULL, 0);
 		close(pipefd[1]);
 	}
-	++i;
-//	wait(NULL);
+
+	if (path)
+		free(path);
 	return(pipefd[0]);
-}
-
-void	lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode) {
-	int		status;
-	char	*text = malloc(100);
-	int		pid;
-	int		fd = open("/Users/cveeta/CLionProjects/minishell/qqq.txt", O_CREAT | O_WRONLY, 0777);
-	pid = fork();
-
-	if (pid == 0) {
-		if (mode) {
-			dup2(pepeout[0], 0);
-		} else {
-		}
-		dup2(pepein[1], 1);
-		status = execve(file, argv, envp);
-	} else if (pid < 0) {
-		//принт еррор
-	}
-//	else {
-//		wait
-//	}
 }

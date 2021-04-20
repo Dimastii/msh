@@ -16,26 +16,9 @@ int		ft_isspace(int c)
 int 	isspec(int c)
 {
 	c = (unsigned char)c;
-	if (c == ';' || c == '|' || c == '>' || c == '<' || c == '\0')
+	if (c == ';' || c == '|' || c == '\0')
 		return (1);
 	return (0);
-}
-
-void			check_tocken(char **token)
-{
-	int i;
-	int count;
-
-	i = 0;
-	count = 0;
-	if ((*token)[0] == '"' && (*token)[ft_strlen(*token) - 1] == '"')
-	{
-		count = ft_count_c(*token, '"');
-		if (count % 2 == 0) {
-			*token = ft_isolating(*token, '"');///тут лик
-//			free(*token);
-		}
-	}
 }
 
 char	*check_glob(char *glob, char **envp) {
@@ -73,7 +56,7 @@ void	search_glob(char **str, char **tocken, char const *tmp, char **envp)
 		fre = NULL;
 		(*str)++;
 	}//в этом условии будет поиск по глобальным переменным
-	if ((value = check_glob(glob, envp))/*ft_strncmp(glob, "USER", 10) == 0*/)
+	if ((value = check_glob(glob, envp)))
 	{
 		fre = *tocken;
 		*tocken = ft_strjoin(*tocken, value);
@@ -88,7 +71,7 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 	char *tmp;
 	char *fre;
 	int flag;
-
+	int redir;
 	tocken = ft_strdup("");
 	while (ft_isspace(**str))
 		(*str)++;
@@ -137,7 +120,7 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 					tocken = ft_strdup("");
 					free(fre);
 				}
-				printf("ERROR \n");
+				printf("Мультилайн \n");
 			}
 		}
 		else // если не кавычка
@@ -155,63 +138,62 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 					(*str) = (*str) + 2;
 					free(fre);
 				}//теперь пока это слово мы будем посимвольно джоинить
-				else if (**str != '$') {
+				else if (**str == '>')
+				{
+					redir = 1;
+					(*str)++;
+				}
+				else if (**str == '<')
+				{
+					redir = 2;
+					(*str)++;
+				}
+				else if (**str == '$') {
+					search_glob(str, &tocken, tmp, envp);
+				}
+				else
+				{
 					fre = tocken;
 					tocken = ft_strjoins(tocken, **str);
 					free(fre);
 					(*str)++;
 				}
-				else
-				{
-					search_glob(str, &tocken, tmp, envp);
-				}
 			}
 		}
 	}
-	if (*tocken)
-		cmd->tokens = ft_coljoins(cmd->tokens, tocken);///лик
-	else
-		free(tocken);
-}
-
-void		allocate_cmd(t_cmd **cmds, t_cmd cmd)
-{
-	int i;
-	static int num_enter;
-
-	i = 0;
-	num_enter++;
-//	if (num_enter > 4)
-//	{
-//		exec_pepe(cmds, num_enter, cmd);
-//	}
-	while (i < 3)
-	{
-		if (cmds[i]->create == 0) {
-			cmds[i]->create = 1;
-			cmds[i]->mode = cmd.mode;
-			return;
+	int fd_redir;
+	if (*tocken) {
+		if (redir == 1)
+		{
+			fd_redir = open(tocken, O_CREAT | O_RDWR | O_APPEND , 0644);
+			//меняем фд на выход
 		}
-		i++;
+		else if (redir == 2)
+		{
+			fd_redir = open(tocken, O_CREAT | O_RDWR | O_APPEND , 0644);
+//			dup(fd_redir, 0);
+			//меняем фд на вход
+		}
+		else
+		{
+			cmd->tokens = ft_coljoins(cmd->tokens, tocken);///лик
+		}
 	}
+	free(tocken);
 }
-
-
 
 void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 {
 	static int fd_out;
 	static int fd_arr[100];
+	static int i;
 
 
     if (**str == '|')
     {
-
-//		if (fd_out == 0)
-//			fd_out = 0;
 		(*str)++;
-		fd_out = exec_pepe(str, *cmd, fd_out, envp, fd_arr);
-		free(cmd->tokens);
+		fd_arr[i++] = exec_pepe(str, *cmd, fd_out, envp);
+		ft_freecol(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
 		while (ft_isspace(**str))
@@ -220,21 +202,17 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
     else if (**str == ';')
 	{
 		(*str)++;
-//		printf(" is ;\n");
-//		ft_printcol(cmd->tokens);
-		int i = 0;
+		i = 0;
 		while(fd_arr[i] != 0)
 		{
-			printf("lol\n");
 			close(fd_arr[i]);
 			i++;
 		}
 		if (cmd->tokens[0])
 			stdexec(cmd, envp, fd_out);
-
 		if (fd_out != 0)
 			fd_out = 0;
-		free(cmd->tokens);
+		ft_freecol(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
 		while (ft_isspace(**str))
@@ -242,9 +220,6 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 	}
     else if (**str == '\0')
 	{
-//		printf(" is \\0\n");
-//		ft_printcol(cmd->tokens);
-
 		if (cmd->tokens[0])
 			stdexec(cmd, envp, fd_out);
 		else
@@ -253,11 +228,11 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		}
 		if (fd_out != 0)
 			fd_out = 0;
-		free(cmd->tokens);
+		ft_freecol(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
 
-		int i = 0;
+		i = 0;
 		while(fd_arr[i] != 0)
 		{
 			wait(0);

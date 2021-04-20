@@ -1,7 +1,0 @@
-       7       8      89
-
-Makefile
-Testing
-cmake_install.cmake
-minishell
-minishell.cbp
