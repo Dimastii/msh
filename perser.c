@@ -72,6 +72,8 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 	char *fre;
 	int flag;
 	int redir;
+
+	redir = -1;
 	tocken = ft_strdup("");
 	while (ft_isspace(**str))
 		(*str)++;
@@ -138,15 +140,48 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 					(*str) = (*str) + 2;
 					free(fre);
 				}//теперь пока это слово мы будем посимвольно джоинить
+				else if (**str == '>' && *(*str + 1) == '>')
+				{
+					if (!(*tocken)) {
+						**str = ' ';
+						*(*str + 1) = ' ';
+						while (ft_isspace(**str))
+							(*str)++;
+						redir = 3;
+						break;
+					} else
+					{
+						--(*str);
+						**str = ' ';
+					}
+				}
 				else if (**str == '>')
 				{
-					redir = 1;
-					(*str)++;
+					if (!(*tocken)) {
+						**str = ' ';
+						while (ft_isspace(**str))
+							(*str)++;
+						redir = 1;
+						break;
+					} else
+					{
+						--(*str);
+						**str = ' ';
+					}
 				}
 				else if (**str == '<')
 				{
-					redir = 2;
-					(*str)++;
+					if (!(*tocken)) {
+						**str = ' ';
+						while (ft_isspace(**str))
+							(*str)++;
+						redir = 2;
+						break;
+					} else
+					{
+						--(*str);
+						**str = ' ';
+					}
 				}
 				else if (**str == '$') {
 					search_glob(str, &tocken, tmp, envp);
@@ -163,21 +198,32 @@ void	detect_token(char **str, t_cmd *cmd, char **envp)
 	}
 	int fd_redir;
 	if (*tocken) {
-		if (redir == 1)
+		if (redir == 2)
 		{
-			fd_redir = open(tocken, O_CREAT | O_RDWR | O_APPEND , 0644);
-			//меняем фд на выход
+			fd_redir = open(tocken,  O_RDONLY);
+			cmd->fd_read = fd_redir;
+			printf("read %d\n", cmd->fd_read);
+			//отсюда читаем
 		}
-		else if (redir == 2)
+		else if (redir == 1)
 		{
-			fd_redir = open(tocken, O_CREAT | O_RDWR | O_APPEND , 0644);
-//			dup(fd_redir, 0);
-			//меняем фд на вход
+			fd_redir = open(tocken, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+			cmd->fd_write = fd_redir;
+			printf("write %d\n", cmd->fd_write);
+			//сюда пишем
+		}
+		else if (redir == 3)
+		{
+			fd_redir = open(tocken, O_WRONLY | O_APPEND);
+			cmd->fd_write = fd_redir;
+			printf("append %d\n", cmd->fd_write);
+			//сюда дописываем
 		}
 		else
 		{
-			cmd->tokens = ft_coljoins(cmd->tokens, tocken);///лик
+			cmd->tokens = ft_coljoins(cmd->tokens, tocken);
 		}
+		printf("%s | %d\n", tocken, redir);
 	}
 	free(tocken);
 }
@@ -188,11 +234,13 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 	static int fd_arr[100];
 	static int i;
 
-
+//	if (cmd->fd_read != 0)
+//		fd_out = cmd->fd_read;
     if (**str == '|')
     {
-		(*str)++;
+    	(*str)++;
 		fd_arr[i++] = exec_pepe(str, *cmd, fd_out, envp);
+		fd_out = fd_arr[i - 1];
 		ft_freecol(cmd->tokens);
 		cmd->tokens = NULL;
 		init_cnd(cmd);
@@ -240,12 +288,6 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 			i++;
 		}
 	}
-}
-
-void		add_cmd(t_cmd *cmds, int mode, void (*cmd) (char *, char **, char ***))
-{
-	cmds->create = 1;
-	cmds->mode = mode;
 }
 
 int			detect_cmd(char **str, t_cmd *cmd, char **envp)

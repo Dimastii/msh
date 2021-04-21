@@ -27,8 +27,8 @@ typedef	struct		s_dlist
 
 typedef struct	s_cmd
 {
-	int		create;
-	int		mode;
+	int		fd_read;
+	int		fd_write;
 	char	**tokens;
 }				t_cmd;
 

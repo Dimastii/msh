@@ -51,7 +51,6 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 {
 	pid_t		pid;
 	char		*path;
-	struct stat	buff;
 
 	path = NULL;
 	pid = 1;
@@ -69,6 +68,8 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	{
 		///pid == 0 - сигнал отправляется всем членам группы
 		dup2(fd_out, 0);
+		if (cmd->fd_write != 1)
+			dup2(cmd->fd_write, 1);
 		if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0)
 		{
 			exec_echo(cmd);
@@ -117,10 +118,13 @@ int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp)
 	else
 		printf(" А где бинарник то?:%s \n", path);
 
+
 	if (pid == 0) {
 		dup2(fd_out, 0);
-
-		dup2(pipefd[1], 1);
+		if (cmd.fd_write == 1)
+			dup2(pipefd[1], 1);
+		else
+			dup2(cmd.fd_write, 1);
 		close(pipefd[0]);
 		if (ft_strncmp(cmd.tokens[0], "echo", ft_strlen(cmd.tokens[0])) == 0)
 		{
