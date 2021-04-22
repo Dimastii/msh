@@ -7,13 +7,15 @@ int	main(int ac, char **argv, char **envp) {
 	char *fre;
 	int fd;
 	t_dlist *lst = NULL;
-
+	g_envp = envp;
 //	pars_str = ft_strdup("1");//потом очистить
 
 	fd = open("minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
 //	lst = sort_history(fd, lst);
 
-	char *line = strdup("ls > c");
+	char *line = strdup("ls \'$USER\'");
+
+
 //	while (1) {
 //		pars_str = termcap_processing(fd, lst);
 //		fre = pars_str;
@@ -28,3 +30,5 @@ int	main(int ac, char **argv, char **envp) {
 //	{
 //	}
 }
+
+

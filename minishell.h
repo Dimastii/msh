@@ -32,10 +32,19 @@ typedef struct	s_cmd
 	char	**tokens;
 }				t_cmd;
 
+char **g_envp;
+
+char *ft_freeline(char *fre, char *str);
+void	detect_token(char **str, t_cmd *cmd);
+void		detect_spec(char **str, t_cmd *cmd, char ***envp);
+void	search_glob(char **str, char **tocken, char const *tmp, char **envp);
+void 	this_not_quote(char **str, char **tocken, int *redir, char **tmp);
+void 	this_quote(char **str, char **tocken, char **tmp);
 void		exec_pwd();
+int 	isspec(int c);
+int		ft_isspace(int c);
 char		*pwd();
 char		*findbin(char *cmd, char **envp);
-void		cd(char *path);
 void		stdexec(t_cmd *cmd, char ***envp, int fd_out);
 char		*ft_strchrifnepred(const char *string, int symbol, int flag);
 void		lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode);
