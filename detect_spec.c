@@ -3,6 +3,28 @@
 //
 #include "minishell.h"
 
+//void		end_cmd(char **str,)
+//{
+//	(*str)++;
+//	i = 0;
+//
+//	if (cmd->tokens[0])
+//		stdexec(cmd, fd_out);
+//	if (fd_out != 0)
+//		fd_out = 0;
+//	ft_freecol(cmd->tokens);
+//	cmd->tokens = NULL;
+//	init_cnd(cmd);
+//	while (ft_isspace(**str))
+//		(*str)++;
+//	while(fd_arr[i] != 0)
+//	{
+//		close(fd_arr[i]);
+//		i++;
+//	}
+//	i = 0;
+//}
+
 void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 {
 	static int fd_out;
@@ -22,31 +44,30 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 	}
 	else if (**str == ';')
 	{
-		(*str)++;
+//		(*str)++;
+//		i = 0;
+//
+//		if (cmd->tokens[0])
+//			stdexec(cmd, fd_out);
+//		if (fd_out != 0)
+//			fd_out = 0;
+//		ft_freecol(cmd->tokens);
+//		cmd->tokens = NULL;
+//		init_cnd(cmd);
+//		while (ft_isspace(**str))
+//			(*str)++;
+//		while(fd_arr[i] != 0)
+//		{
+//			close(fd_arr[i]);
+//			i++;
+//		}
+		end_cmd();
 		i = 0;
-		while(fd_arr[i] != 0)
-		{
-			close(fd_arr[i]);
-			i++;
-		}
-		if (cmd->tokens[0])
-			stdexec(cmd, envp, fd_out);
-		if (fd_out != 0)
-			fd_out = 0;
-		ft_freecol(cmd->tokens);
-		cmd->tokens = NULL;
-		init_cnd(cmd);
-		while (ft_isspace(**str))
-			(*str)++;
 	}
 	else if (**str == '\0')
 	{
 		if (cmd->tokens[0])
-			stdexec(cmd, envp, fd_out);
-		else
-		{
-			//тет команды
-		}
+			stdexec(cmd, fd_out);
 		if (fd_out != 0)
 			fd_out = 0;
 		ft_freecol(cmd->tokens);

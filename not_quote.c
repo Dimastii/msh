@@ -3,73 +3,79 @@
 //
 #include "minishell.h"
 
+int 	redir_(char **str, char **tocken, int *redir, int mode)
+{
+	if (!(**tocken))
+	{
+		**str = ' ';
+		while (ft_isspace(**str))
+			(*str)++;
+		*redir = mode;
+		return (1);
+	}
+	else
+	{
+		--(*str);
+		**str = ' ';
+	}
+	return (0);
+}
+
+int		double_redir(char **str, char **tocken, int *redir)
+{
+	if (!(**tocken))
+	{
+		**str = ' ';
+		*(*str + 1) = ' ';
+		while (ft_isspace(**str))
+			(*str)++;
+		*redir = 3;
+		return (1);
+	}
+	else
+	{
+		--(*str);
+		**str = ' ';
+	}
+	return (0);
+}
+
 void 	this_not_quote(char **str, char **tocken, int *redir, char **tmp)
 {
-	char *fre;
 	while (**str && **str != '"' && **str != '\'' && **str != ' ' && !isspec(**str))
-	{//но только в том случае если не наткнёмся на переменную
-		if (**str == '\\')//если экран то мы просто джоиним
+	{
+		if (**str == '\\')
 		{
-			if (!(*(*str + 1))) {
+			if (!(*(*str + 1)))
+			{
 				(*str)++;
 				continue;
 			}
-			fre = *tocken;
-			*tocken = ft_strjoins(*tocken, *(*str + 1));
+			*tocken = ft_freeline(*tocken,ft_strjoins(*tocken, *(*str + 1)));
 			(*str) = (*str) + 2;
-			free(fre);
-		}//теперь пока это слово мы будем посимвольно джоинить
+		}
 		else if (**str == '>' && *(*str + 1) == '>')
 		{
-			if (!(**tocken)) {
-				**str = ' ';
-				*(*str + 1) = ' ';
-				while (ft_isspace(**str))
-					(*str)++;
-				*redir = 3;
+			if (double_redir(str, tocken, redir))
 				break;
-			} else
-			{
-				--(*str);
-				**str = ' ';
-			}
 		}
 		else if (**str == '>')
 		{
-			if (!(**tocken)) {
-				**str = ' ';
-				while (ft_isspace(**str))
-					(*str)++;
-				*redir = 1;
+			if (redir_(str, tocken, redir, 1))
 				break;
-			} else
-			{
-				--(*str);
-				**str = ' ';
-			}
 		}
 		else if (**str == '<')
 		{
-			if (!(**tocken)) {
-				**str = ' ';
-				while (ft_isspace(**str))
-					(*str)++;
-				*redir = 2;
+			if (redir_(str, tocken, redir, 2))
 				break;
-			} else
-			{
-				--(*str);
-				**str = ' ';
-			}
 		}
-		else if (**str == '$') {
+		else if (**str == '$')
+		{
 			search_glob(str, tocken, *tmp, g_envp);
 		}
 		else
 		{
-			fre = *tocken;
-			*tocken = ft_strjoins(*tocken, **str);
-			free(fre);
+			*tocken = ft_freeline(*tocken,ft_strjoins(*tocken, **str));
 			(*str)++;
 		}
 	}

@@ -45,7 +45,7 @@ int 	isspec(int c);
 int		ft_isspace(int c);
 char		*pwd();
 char		*findbin(char *cmd, char **envp);
-void		stdexec(t_cmd *cmd, char ***envp, int fd_out);
+void		stdexec(t_cmd *cmd, int fd_out);
 char		*ft_strchrifnepred(const char *string, int symbol, int flag);
 void		lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode);
 void		lets_pars(char **str, char ***envp);

@@ -3,12 +3,39 @@
 //
 #include "minishell.h"
 
+void	check_token(char *token, int redir, t_cmd *cmd)
+{
+	int		fd_redir;
+
+	if (*token)
+	{
+		if (redir == 2)
+		{
+			fd_redir = open(token, O_RDONLY);
+			cmd->fd_read = fd_redir;
+		}
+		else if (redir == 1)
+		{
+			fd_redir = open(token, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+			cmd->fd_write = fd_redir;
+		}
+		else if (redir == 3)
+		{
+			fd_redir = open(token, O_WRONLY | O_APPEND);
+			cmd->fd_write = fd_redir;
+		}
+		else
+		{
+			cmd->tokens = ft_coljoins(cmd->tokens, token);
+		}
+	}
+}
+
 void	detect_token(char **str, t_cmd *cmd)
 {
-	char *token;
-	char *tmp;
-	int redir;
-	int fd_redir;
+	char	*token;
+	char	*tmp;
+	int		redir;
 
 	redir = -1;
 	token = ft_strdup("");
@@ -16,38 +43,15 @@ void	detect_token(char **str, t_cmd *cmd)
 		(*str)++;
 	while (**str != ' ' && !(isspec(**str)) && **str)
 	{
-		if (**str == '"' || **str == '\'')//если кавычка
+		if (**str == '"' || **str == '\'')
 		{
 			this_quote(str, &token, &tmp);
 		}
-		else // если не кавычка
+		else
 		{
 			this_not_quote(str, &token, &redir, &tmp);
 		}
 	}
-	if (*token) {
-		if (redir == 2)
-		{
-			fd_redir = open(token,  O_RDONLY);
-			cmd->fd_read = fd_redir;
-			//отсюда читаем
-		}
-		else if (redir == 1)
-		{
-			fd_redir = open(token, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-			cmd->fd_write = fd_redir;
-			//сюда пишем
-		}
-		else if (redir == 3)
-		{
-			fd_redir = open(token, O_WRONLY | O_APPEND);
-			cmd->fd_write = fd_redir;
-			//сюда дописываем
-		}
-		else
-		{
-			cmd->tokens = ft_coljoins(cmd->tokens, token);
-		}
-	}
+	check_token(token, redir, cmd);
 	free(token);
 }
