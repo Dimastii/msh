@@ -59,7 +59,16 @@ SRC			= main.c \
 			libft/ft_lastcoldel.c \
 			libft/ft_isolating.c \
 			echo.c \
-			pwd.c
+			pwd.c \
+			detct_token.c \
+			detect_spec.c \
+			quote.c \
+			not_quote.c \
+			search_glob.c \
+
+
+
+
 
 HEADER		= minishell.h
 
