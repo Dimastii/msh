@@ -16,7 +16,8 @@
 # include <curses.h>
 # include <term.h>
 # include <signal.h>
-
+# define HISTORY_FILE "./minishell_history"
+# define BASH_NAME "POLUPOKER:"
 
 typedef	struct		s_dlist
 {
@@ -32,8 +33,11 @@ typedef struct	s_cmd
 	char	**tokens;
 }				t_cmd;
 
+void		sort_history(int fd, t_dlist **lst);
+void		init_list(t_dlist **list, char *str);
+void		error(char *str);
+char		*termcap_processing_2(int fd, t_dlist **lst);
 void		exec_pwd();
-char		*pwd();
 char		*findbin(char *cmd, char **envp);
 void		cd(char *path);
 void		stdexec(t_cmd *cmd, char ***envp, int fd_out);
@@ -45,11 +49,7 @@ void		exec_ls(char *file, char **argv, char ***envp);
 char		*ft_strjoins(char const *s1, char s2);
 void		init_cnd(t_cmd *cmd);
 void		init_cmds(t_cmd **cmds);
-t_dlist		*sort_history(int fd, t_dlist *lst);
-t_dlist		*init_list(t_dlist *lst, char *str);
-char		*termcap_processing(int fd, t_dlist *lst);
 char		*check_glob(char *glob, char **envp);
 int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp);
 void		exec_echo(t_cmd	*cmd);
-
 #endif //MINISHELL_H

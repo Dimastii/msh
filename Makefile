@@ -54,6 +54,7 @@ SRC			= main.c \
 			ft_init.c \
 			execve.c \
 			utils.c \
+			libft/ft_itoa.c	\
 			libft/ft_free.c \
 			libft/ft_lastcoldel.c \
 			libft/ft_isolating.c \
@@ -65,7 +66,6 @@ HEADER		= minishell.h
 OBJS		= ${SRC:.c=.o}
 
 LIBFT		= make all -C libft
-
 
 FLAGS		= -ltermcap
 

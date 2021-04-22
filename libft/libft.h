@@ -24,7 +24,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-void				*ft_memset(void **memptr, int val, size_t num);
+void				*ft_memset(void *memptr, int val, size_t num);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t num);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
@@ -33,8 +33,8 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *s);
 size_t				ft_collen(char **s);
-size_t ft_count_c(char *token, char c);
-char *ft_isolating(char *token, char c);
+size_t				ft_count_c(char *token, char c);
+char				*ft_isolating(char *token, char c);
 void				ft_freecol(char **col);
 void				ft_freestr(char *col);
 void				ft_printcol(char **s);
@@ -44,7 +44,7 @@ char				*ft_strchr(const char *string, int symbol);
 char				*ft_strrchr(const char *string, int symbol);
 char				*ft_strnstr(const char *big, const char *little,
 					size_t len);
-char	**ft_coljoins(char **s1, char const *s2);
+char				**ft_coljoins(char **s1, char const *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
@@ -56,7 +56,6 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 void				*ft_calloc(size_t count, size_t size);
 char				*ft_strdup(const char *s);
-char				*ft_strdup(const char *s1);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 1
 # endif
 
 #include "libft.h"
@@ -84,7 +84,7 @@ int		get_next_line(int fd, char **line)
 {
 	static char	*remainder;
 	char		*temp;
-	int			r_bytes;
+	size_t		r_bytes;
 	char		*buff;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line || (read(fd, 0, 0) == -1))

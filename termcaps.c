@@ -34,35 +34,36 @@ int			ft_putchar(int c)
 	return (write(1, &c, 1));
 }
 
-t_dlist			*init_list(t_dlist *lst, char *str)
+void			init_list(t_dlist **list, char *str)
 {
 	t_dlist	*tmp;
 	t_dlist	*cur;
 
+	cur = NULL;
 	tmp = NULL;
-	tmp = (t_dlist *)malloc(sizeof(t_dlist));
+	tmp = malloc(sizeof(t_dlist));
 	if (!tmp)
 		error("malloc error");
-	tmp->str = str;
+	tmp->str = ft_strdup(str);
 	tmp->next = NULL;
 	tmp->prev = NULL;
-	if (!lst)
+	if (!(*list))
 	{
-		lst = tmp;
-		return (lst);
+		*list = tmp;
+		write(1, "lol\n", 4);
 	}
 	else
 	{
-		cur = lst;
+		cur = *list;
 		while (cur->next)
 			cur = cur->next;
 		cur->next = tmp;
 		tmp->prev = cur;
+		*list = tmp;
 	}
-	return (lst);
 }
 
-t_dlist			*sort_history(int fd, t_dlist *lst)
+void			sort_history(int fd, t_dlist **lst)
 {
 	char		*line;
 	int			ret_gnl;
@@ -70,45 +71,36 @@ t_dlist			*sort_history(int fd, t_dlist *lst)
 	while (1)
 	{
 		ret_gnl = get_next_line(fd, &line);
+		if (ret_gnl < 0)
+			error("history file problem");
 		if (*line != '\0')
-			lst = init_list(lst, line);
+			init_list(lst, line);
 		free(line);
 		if (!ret_gnl)
 			break;
 	}
-	if (lst)
-	{
-		while (lst->next)
-			lst = lst->next;
-	}
-	return (lst);
 }
 
-char		*termcap_processing(int fd, t_dlist *lst)
+char		*termcap_processing_2(int fd, t_dlist **lst)
 {
-	char			*line;
-	struct	termios	term;
-	char			*term_type = "xterm-256color";
-	int				i;
+	struct termios	term;
+	size_t			i;
 	char			str[2000];
 	char			*fre;
 	t_dlist			*tmp;
 
-	line = ft_strdup("");
-	tmp = lst;
-	if (!tmp)
-		tmp = init_list(tmp, ft_strdup(""));
 	tcgetattr(0, &term);
 	term.c_lflag &= ~(ECHO);
 	term.c_lflag &= ~(ICANON);
 	term.c_lflag &= ~(ISIG);
 	if (tcsetattr(0, TCSANOW, &term) < 0)
 		error("Couldn't get terminal database for some reason!");
-	if (tgetent(0, term_type) < 0)
+	if (tgetent(0, "xterm-256color") < 0)
 		error("Couldn't get terminal database for some reason!");
 	tputs(save_cursor, 1, ft_putchar);
-	write(1, "POLUPOKER:", 10);
-	//TODO добавлять в историю сразу и стрелки вправо/влево
+	tmp = *lst;
+	init_list(&tmp, ft_strdup(""));
+	write(1, BASH_NAME, 10);
 	while (1)
 	{
 		str[0] = '\0';
@@ -116,45 +108,16 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		str[i] = '\0';
 		if (!ft_strcmp(str, "\4"))//ctrl + D
 		{
-			if (*line == '\0')
+			if (*tmp->str == '\0')
 			{
 				write(1, "exit\n", 5);
+				term.c_lflag |= (ECHO);
+				term.c_lflag |= (ICANON);
+				term.c_lflag |= (ISIG);
+				tcsetattr(0, TCSANOW, &term);
 				exit(0);
 			}
 			continue ;
-		}
-		else if (!ft_strcmp(str, "\3"))//ctrl + C
-		{
-			write(1, "\nPOLUPOKER:", 11);
-			ft_bzero(line, ft_strlen(line));
-			continue ;
-		}
-		else if ((int)str[0] == 28 || !ft_strcmp(str, "\t")
-		|| !ft_strcmp(str, "\e[C") || !ft_strcmp(str, "\e[D"))//(ctrl + \) tab arrow right arrow left
-			continue ;
-		else if (!ft_strcmp(str, "\e[A"))//arrow up
-		{
-			tputs(tigetstr("cr"), 1, ft_putchar);
-			tputs(tigetstr("ed"), 1, ft_putchar);
-//			fre = line;
-//			line = ft_strdup(tmp->str);//leak
-//			free(fre);
-			write(1, "POLUPOKER:", 10);
-			write(1, tmp->str, ft_strlen(tmp->str));
-			if (tmp->prev)
-				tmp = tmp->prev;
-		}
-		else if (!ft_strcmp(str, "\e[B"))//arrow down
-		{
-			tputs(tigetstr("rc"), 1, ft_putchar);
-			tputs(tigetstr("ed"), 1, ft_putchar);
-			if (tmp->next)
-				tmp = tmp->next;
-//			fre = line;
-//			line = ft_strdup(tmp->str);
-//			free(fre);
-			write(1, "POLUPOKER:", 10);
-			write(1, tmp->str, ft_strlen(tmp->str));
 		}
 		else if (!ft_strcmp(str, "\177"))//delete
 		{
@@ -167,6 +130,34 @@ char		*termcap_processing(int fd, t_dlist *lst)
 			else
 				continue ;
 		}
+		else if (!ft_strcmp(str, "\e[A"))//arrow up
+		{
+			tputs(tigetstr("cr"), 1, ft_putchar);
+			tputs(tigetstr("ed"), 1, ft_putchar);
+			write(1, BASH_NAME, 10);
+			if (tmp->prev && tmp->prev->str )
+				tmp = tmp->prev;
+			write(1, tmp->str, ft_strlen(tmp->str));
+		}
+		else if (!ft_strcmp(str, "\e[B"))//arrow down
+		{
+			tputs(tigetstr("rc"), 1, ft_putchar);
+			tputs(tigetstr("ed"), 1, ft_putchar);
+			if (tmp->next)
+				tmp = tmp->next;
+			write(1, BASH_NAME, 10);
+			write(1, tmp->str, ft_strlen(tmp->str));
+		}
+		else if (!ft_strcmp(str, "\3"))//ctrl + C
+		{
+			write(1, "\n", 1);
+			write(1, BASH_NAME, 10);
+			ft_bzero(tmp->str, ft_strlen(tmp->str));
+			continue ;
+		}
+		else if ((int)str[0] == 28 || !ft_strcmp(str, "\t")
+				 || !ft_strcmp(str, "\e[C") || !ft_strcmp(str, "\e[D"))//(ctrl + \) tab arrow right arrow left
+			continue ;
 		else if (ft_strcmp(str, "\n"))
 		{
 			tmp->str = ft_strjoin(tmp->str, str);
@@ -174,19 +165,16 @@ char		*termcap_processing(int fd, t_dlist *lst)
 		}
 		if (!ft_strcmp(str, "\n"))
 		{
-			if (ft_strlen(tmp->str) != 0)
-			{
-				write(fd, tmp->str, ft_strlen(tmp->str));
-				write(fd, "\n", 1);
-//				tmp = init_list(tmp, ft_strdup(tmp->str));
-//				tmp->next->prev = tmp;
-//				tmp = tmp->next;
-//				lst = tmp;
-			}
 			term.c_lflag |= (ECHO);
 			term.c_lflag |= (ICANON);
 			term.c_lflag |= (ISIG);
 			tcsetattr(0, TCSANOW, &term);
+			write(1, "tut\n", 4);
+			if (*tmp->str != '\0')
+			{
+				write(fd, tmp->str, ft_strlen(tmp->str));
+				write(fd, "\n", 1);
+			}
 			return (tmp->str);
 		}
 	}

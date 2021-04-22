@@ -1,30 +1,47 @@
 #include "minishell.h"
 
+void	lst_clear(t_dlist **lst, void (*del)(char *))
+{
+	t_dlist *temp;
 
+	if (lst && *lst)
+	{
+		while (*lst)
+		{
+			temp = *lst;
+			(*lst) = (*lst)->prev;
+			del(temp->str);
+			free(temp);
+		}
+	}
+}
 
-int	main(int ac, char **argv, char **envp) {
-	char *pars_str;
-	char *fre;
-	int fd;
-	t_dlist *lst = NULL;
+void		del_str(char *str)
+{
+	free(str);
+}
 
-//	pars_str = ft_strdup("1");//потом очистить
+int	main(int ac, char **argv, char **envp)
+{
+	char			*pars_str;
+	char			*fre;
+	int				fd;
+	t_dlist			*lst;
 
-	fd = open("minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
-//	lst = sort_history(fd, lst);
-
-	char *line = strdup("ls > c");
-//	while (1) {
-//		pars_str = termcap_processing(fd, lst);
-//		fre = pars_str;
-//		write(1, "\n", 1);
-//		if (*pars_str) {
-			lets_pars(&line, &envp);
-//			free(fre);
-//		}
-//	}
-//	char *r;
-//	while (read(0, &r, 1))
-//	{
-//	}
+	lst = NULL;
+	fd = open(HISTORY_FILE, O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (fd < 0)
+		error("couldn't open history file");
+	while (1)
+	{
+		sort_history(fd, &lst);
+		pars_str = termcap_processing_2(fd, &lst);
+		fre = pars_str;
+		write(1, "\n", 1);
+		if (*pars_str)
+		{
+			lets_pars(&pars_str, &envp);
+			free(fre);
+		}
+	}
 }
