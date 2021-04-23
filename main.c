@@ -13,7 +13,7 @@ int	main(int ac, char **argv, char **envp) {
 	fd = open("minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
 //	lst = sort_history(fd, lst);
 
-	char *line = strdup("ls -a >      c   ;   ");
+	char *line = strdup("ls > c ");
 
 
 //	while (1) {

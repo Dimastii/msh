@@ -3,7 +3,7 @@
 //
 #include "minishell.h"
 
-int 	redir_(char **str, char **tocken, int *redir, int mode)
+int	redir_(char **str, char **tocken, int *redir, int mode)
 {
 	if (!(**tocken))
 	{
@@ -21,7 +21,7 @@ int 	redir_(char **str, char **tocken, int *redir, int mode)
 	return (0);
 }
 
-int		double_redir(char **str, char **tocken, int *redir)
+int	double_redir(char **str, char **tocken, int *redir)
 {
 	if (!(**tocken))
 	{
@@ -40,43 +40,38 @@ int		double_redir(char **str, char **tocken, int *redir)
 	return (0);
 }
 
-void 	this_not_quote(char **str, char **tocken, int *redir, char **tmp)
+void 	this_not_quote(char **s, char **tocken, int *redir, char **tmp)
 {
-	while (**str && **str != '"' && **str != '\'' && **str != ' ' && !isspec(**str))
+	while (**s && **s != '"' && **s != '\'' && **s != ' ' && !isspec(**s))
 	{
-		if (**str == '\\')
+		if (**s == '\\')
 		{
-			if (!(*(*str + 1)))
+			if (!(*(*s + 1)))
 			{
-				(*str)++;
-				continue;
+				(*s)++;
+				continue ;
 			}
-			*tocken = ft_freeline(*tocken,ft_strjoins(*tocken, *(*str + 1)));
-			(*str) = (*str) + 2;
+			*tocken = ft_freeline(*tocken, ft_strjoins(*tocken, *(*s + 1)));
+			(*s) = (*s) + 2;
 		}
-		else if (**str == '>' && *(*str + 1) == '>')
+		else if (**s == '>' && *(*s + 1) == '>')
 		{
-			if (double_redir(str, tocken, redir))
-				break;
+			if (double_redir(s, tocken, redir))
+				break ;
 		}
-		else if (**str == '>')
+		else if (**s == '>')
 		{
-			if (redir_(str, tocken, redir, 1))
-				break;
+			if (redir_(s, tocken, redir, 1))
+				break ;
 		}
-		else if (**str == '<')
-		{
-			if (redir_(str, tocken, redir, 2))
-				break;
-		}
-		else if (**str == '$')
-		{
-			search_glob(str, tocken, *tmp, g_envp);
-		}
+		else if (**s == '<' && redir_(s, tocken, redir, 2))
+			break ;
+		else if (**s == '$')
+			search_glob(s, tocken, *tmp, g_envp);
 		else
 		{
-			*tocken = ft_freeline(*tocken,ft_strjoins(*tocken, **str));
-			(*str)++;
+			*tocken = ft_freeline(*tocken, ft_strjoins(*tocken, **s));
+			(*s)++;
 		}
 	}
 }
