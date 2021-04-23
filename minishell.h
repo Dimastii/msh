@@ -29,14 +29,14 @@ typedef struct	s_cmd
 {
 	int		fd_read;
 	int		fd_write;
-	char	**tokens;
+	char	**tkn;
 }				t_cmd;
 
 char **g_envp;
 
 char *ft_freeline(char *fre, char *str);
 void	detect_token(char **str, t_cmd *cmd);
-void		detect_spec(char **str, t_cmd *cmd, char ***envp);
+void		detect_spec(char **str, t_cmd *cmd);
 void	search_glob(char **str, char **tocken, char const *tmp, char **envp);
 void 	this_not_quote(char **str, char **tocken, int *redir, char **tmp);
 void 	this_quote(char **str, char **tocken, char **tmp);
@@ -46,14 +46,15 @@ int		ft_isspace(int c);
 char		*findbin(char *cmd, char **envp);
 void		stdexec(t_cmd *cmd, int fd_out);
 char		*ft_strchrifnepred(const char *string, int symbol, int flag);
-void		lets_pars(char **str, char ***envp);
+void		lets_pars(char **str);
 char		*ft_strjoins(char const *s1, char s2);
 void		init_cnd(t_cmd *cmd);
 t_dlist		*sort_history(int fd, t_dlist *lst);
 t_dlist		*init_list(t_dlist *lst, char *str);
 char		*termcap_processing(int fd, t_dlist *lst);
 char		*check_glob(char *glob, char **envp);
-int			exec_pepe(t_cmd cmd, int fd_out, char ***envp);
+int			exec_pepe(t_cmd cmd, int fd_out);
 void		exec_echo(t_cmd	*cmd);
+void	check_cmd(t_cmd *cmd, char	**path, pid_t *pid);
 
 #endif

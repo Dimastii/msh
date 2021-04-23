@@ -5,15 +5,16 @@
 
 char	*brute_force(char **str, char *cmd)
 {
-	char *path;
-	char *fre_str;
-	struct stat buff;
-	char *fre;
+	char		*path;
+	char		*fre_str;
+	struct stat	buff;
+	char		*fre;
 
 	path = NULL;
 	fre_str = *str;
 	path = *str;
-	while ((*str = ft_strchr(*str, ':')))
+	*str = ft_strchr(*str, ':');
+	while (*str)
 	{
 		**str = '\0';
 		(*str)++;
@@ -24,9 +25,8 @@ char	*brute_force(char **str, char *cmd)
 			free(fre_str);
 			return (path);
 		}
-		fre = path;
-		path = *str;
-		free(fre);
+		path = ft_freeline(path, *str);
+		*str = ft_strchr(*str, ':');
 	}
 	free(fre_str);
 	return (NULL);
@@ -34,9 +34,9 @@ char	*brute_force(char **str, char *cmd)
 
 char	*findbin(char *cmd, char **envp)
 {
-	char *str;
-	char *ret;
-	struct stat buff;
+	char		*str;
+	char		*ret;
+	struct stat	buff;
 
 	if (stat(cmd, &buff) == 0)
 	{
@@ -53,5 +53,5 @@ char	*findbin(char *cmd, char **envp)
 	{
 		printf(" А где PATH то?\n");
 	}
-	return NULL;
+	return (NULL);
 }
