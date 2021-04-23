@@ -45,7 +45,7 @@ void	end_str(t_cmd *cmd, int *fd_out, int *fd_arr)
 	}
 }
 
-void	detect_spec(char **str, t_cmd *cmd, char ***envp)
+void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 {
 	static int	fd_out;
 	static int	fd_arr[1000];
@@ -54,7 +54,7 @@ void	detect_spec(char **str, t_cmd *cmd, char ***envp)
 	if (**str == '|')
 	{
 		(*str)++;
-		fd_arr[i++] = exec_pepe(str, *cmd, fd_out, envp);
+		fd_arr[i++] = exec_pepe(*cmd, fd_out, envp);
 		fd_out = fd_arr[i - 1];
 		ft_freecol(cmd->tokens);
 		cmd->tokens = NULL;

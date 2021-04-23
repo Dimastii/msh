@@ -6,6 +6,11 @@
 
 char *ft_freeline(char *fre, char *str)
 {
+	if (!fre)
+	{
+		printf("Иди пива попей\n");
+		exit(0);
+	}
 	free(fre);
 	fre = NULL;
 	return(str);

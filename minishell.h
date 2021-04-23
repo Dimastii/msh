@@ -43,22 +43,17 @@ void 	this_quote(char **str, char **tocken, char **tmp);
 void		exec_pwd();
 int 	isspec(int c);
 int		ft_isspace(int c);
-char		*pwd();
 char		*findbin(char *cmd, char **envp);
 void		stdexec(t_cmd *cmd, int fd_out);
 char		*ft_strchrifnepred(const char *string, int symbol, int flag);
-void		lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode);
 void		lets_pars(char **str, char ***envp);
-void		pepe(char **argv, char **envp);
-void		exec_ls(char *file, char **argv, char ***envp);
 char		*ft_strjoins(char const *s1, char s2);
 void		init_cnd(t_cmd *cmd);
-void		init_cmds(t_cmd **cmds);
 t_dlist		*sort_history(int fd, t_dlist *lst);
 t_dlist		*init_list(t_dlist *lst, char *str);
 char		*termcap_processing(int fd, t_dlist *lst);
 char		*check_glob(char *glob, char **envp);
-int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp);
+int			exec_pepe(t_cmd cmd, int fd_out, char ***envp);
 void		exec_echo(t_cmd	*cmd);
 
-#endif //MINISHELL_H
+#endif

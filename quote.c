@@ -3,24 +3,26 @@
 //
 #include "minishell.h"
 
-void 	find_close(char **str, char **tocken, char **tmp, int flag)
+void	find_close(char **str, char **tocken, char **tmp, int flag)
 {
-	while (*str != *tmp)//если есть то пока мы до неё не дойжем то будем джоинить
+	while (*str != *tmp)
 	{
-		if (**str == '\\' && flag)//если экран то мы просто джоиним скипая экран
+		if (**str == '\\' && flag)
 		{
-			if (!(*(*str + 1))) {
+			if (!(*(*str + 1)))
+			{
 				(*str)++;
-				continue;
+				continue ;
 			}
 			*tocken = ft_freeline(*tocken, ft_strjoins(*tocken, *(*str + 1)));
 			(*str) = (*str) + 2;
 		}
-		else if (**str != '$' || !flag) {// обычный случай
+		else if (**str != '$' || !flag)
+		{
 			*tocken = ft_freeline(*tocken, ft_strjoins(*tocken, **str));
 			(*str)++;
 		}
-		else// необычный случай (если переменная)
+		else
 		{
 			search_glob(str, tocken, *tmp, g_envp);
 		}
@@ -28,17 +30,18 @@ void 	find_close(char **str, char **tocken, char **tmp, int flag)
 	(*str)++;
 }
 
-void 	this_quote(char **str, char **tocken, char **tmp)
+void	this_quote(char **str, char **tocken, char **tmp)
 {
-	int flag;
-	char *fre;
+	int		flag;
+	char	*fre;
 
 	if (**str == '"')
 		flag = 1;
 	else
 		flag = 0;
-	(*str)++;//находим есть ли вообще такая же закрывающаа скобка
-	if ((*tmp = ft_strchrifnepred(*str, *(*str - 1), flag)))
+	(*str)++;
+	*tmp = ft_strchrifnepred(*str, *(*str - 1), flag);
+	if (*tmp)
 	{
 		find_close(str, tocken, tmp, flag);
 	}

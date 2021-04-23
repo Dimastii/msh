@@ -40,37 +40,44 @@ int	double_redir(char **str, char **tocken, int *redir)
 	return (0);
 }
 
-void 	this_not_quote(char **s, char **tocken, int *redir, char **tmp)
+int 	baffle(char **s, char **tokn)
+{
+	if (!(*(*s + 1)))
+	{
+		(*s)++;
+		return (1);
+	}
+	*tokn = ft_freeline(*tokn, ft_strjoins(*tokn, *(*s + 1)));
+	(*s) = (*s) + 2;
+	return (0);
+}
+
+void 	this_not_quote(char **s, char **tokn, int *redir, char **tmp)
 {
 	while (**s && **s != '"' && **s != '\'' && **s != ' ' && !isspec(**s))
 	{
-		if (**s == '\\')
+		if (**s == '\\' && baffle(s, tokn))
 		{
-			if (!(*(*s + 1)))
-			{
-				(*s)++;
-				continue ;
-			}
-			*tocken = ft_freeline(*tocken, ft_strjoins(*tocken, *(*s + 1)));
-			(*s) = (*s) + 2;
+//			if (!(*(*s + 1)))
+//			{
+//				(*s)++;
+//				continue ;
+//			}
+//			*tokn = ft_freeline(*tokn, ft_strjoins(*tokn, *(*s + 1)));
+//			(*s) = (*s) + 2;
+			continue ;
 		}
-		else if (**s == '>' && *(*s + 1) == '>')
-		{
-			if (double_redir(s, tocken, redir))
-				break ;
-		}
-		else if (**s == '>')
-		{
-			if (redir_(s, tocken, redir, 1))
-				break ;
-		}
-		else if (**s == '<' && redir_(s, tocken, redir, 2))
+		else if (**s == '>' && *(*s + 1) == '>' && double_redir(s, tokn, redir))
+			break ;
+		else if (**s == '>' && redir_(s, tokn, redir, 1))
+			break ;
+		else if (**s == '<' && redir_(s, tokn, redir, 2))
 			break ;
 		else if (**s == '$')
-			search_glob(s, tocken, *tmp, g_envp);
+			search_glob(s, tokn, *tmp, g_envp);
 		else
 		{
-			*tocken = ft_freeline(*tocken, ft_strjoins(*tocken, **s));
+			*tokn = ft_freeline(*tokn, ft_strjoins(*tokn, **s));
 			(*s)++;
 		}
 	}
