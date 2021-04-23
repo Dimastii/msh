@@ -88,6 +88,7 @@ char		*termcap_processing_2(int fd, t_dlist **lst)
 	char			str[2000];
 	char			*fre;
 	t_dlist			*tmp;
+	t_dlist			*temp;
 
 	tcgetattr(0, &term);
 	term.c_lflag &= ~(ECHO);
@@ -100,6 +101,18 @@ char		*termcap_processing_2(int fd, t_dlist **lst)
 	tputs(save_cursor, 1, ft_putchar);
 	tmp = *lst;
 	init_list(&tmp, ft_strdup(""));
+//	write(1, "::::", 4);
+//	write(1, tmp->str, ft_strlen(tmp->str));
+//	write(1, "::::", 4);
+//	write(1, "\n", 1);
+//	temp = tmp;
+//	while (temp->prev)
+//	{
+//		write(1, "before termcap: ", 16);
+//		write(1, temp->str, ft_strlen(temp->str));
+//		write(1, "\n", 1);
+//		temp = temp->prev;
+//	}
 	write(1, BASH_NAME, 10);
 	while (1)
 	{
@@ -169,12 +182,12 @@ char		*termcap_processing_2(int fd, t_dlist **lst)
 			term.c_lflag |= (ICANON);
 			term.c_lflag |= (ISIG);
 			tcsetattr(0, TCSANOW, &term);
-			write(1, "tut\n", 4);
 			if (*tmp->str != '\0')
 			{
 				write(fd, tmp->str, ft_strlen(tmp->str));
 				write(fd, "\n", 1);
 			}
+			*lst = tmp;
 			return (tmp->str);
 		}
 	}

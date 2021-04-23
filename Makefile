@@ -50,25 +50,22 @@ NAME		= minishell
 SRC			= main.c \
 			libft/get_next_line.c \
 			termcaps.c \
-			perser.c \
+			parser.c \
 			ft_init.c \
-			execve.c \
 			utils.c \
-			libft/ft_itoa.c	\
 			libft/ft_free.c \
 			libft/ft_lastcoldel.c \
 			libft/ft_isolating.c \
 			echo.c \
 			pwd.c \
-			detct_token.c \
+			detect_token.c \
 			detect_spec.c \
 			quote.c \
 			not_quote.c \
 			search_glob.c \
-
-
-
-
+			pipe_exec.c \
+			findbin.c \
+			stdexec.c
 
 HEADER		= minishell.h
 
