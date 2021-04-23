@@ -24,7 +24,7 @@ void	lets_pars(char **str, char ***envp)
 	while (**str)
 	{
 		while (ft_isspace(**str))
-			str++;
+			(*str)++;
 		detect_cmd(str, &cmd, *envp);
 		detect_spec(str, &cmd, envp);
 	}

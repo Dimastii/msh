@@ -47,7 +47,7 @@ void	sighandler(int signum)
 	write(1, "\n", 1);
 //	printf("Caught signal %d, coming out...\n", signum);
 }
-void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
+void		stdexec(t_cmd *cmd, int fd_out)
 {
 	pid_t		pid;
 	char		*path;
@@ -58,7 +58,7 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 	{
 		exit(0);
 	}
-	if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0 || (path = findbin(cmd->tokens[0], *envp)))
+	if (ft_strncmp(cmd->tokens[0], "echo", ft_strlen(cmd->tokens[0])) == 0 || (path = findbin(cmd->tokens[0], g_envp)))
 	{
 		pid = fork();
 	}
@@ -80,7 +80,7 @@ void		stdexec(t_cmd *cmd, char ***envp, int fd_out)
 		}
 		else
 		{
-			execve(path, cmd->tokens, *envp);
+			execve(path, cmd->tokens, g_envp);
 		}
 	}
 	else if (pid < 0)
