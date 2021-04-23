@@ -16,7 +16,12 @@ void	check_cmd(t_cmd *cmd, char	**path, pid_t *pid)
 		exit(0);
 	}
 	*path = findbin(cmd->tkn[0], g_envp);
-	if (ft_strncmp(cmd->tkn[0], "echo", ft_strlen(cmd->tkn[0])) == 0 || *path)
+	if (ft_strncmp(cmd->tkn[0], "echo", ft_strlen(cmd->tkn[0])) == 0 ||
+		ft_strncmp(cmd->tkn[0], "pwd", ft_strlen(cmd->tkn[0])) == 0 ||
+		ft_strncmp(cmd->tkn[0], "export", ft_strlen(cmd->tkn[0])) == 0 ||
+		ft_strncmp(cmd->tkn[0], "unset", ft_strlen(cmd->tkn[0])) == 0 ||
+		ft_strncmp(cmd->tkn[0], "cd", ft_strlen(cmd->tkn[0])) == 0 ||
+		 *path)
 	{
 		*pid = fork();
 	}
@@ -32,13 +37,9 @@ void	child_proc(t_cmd *cmd, char	*path, int fd_out)
 	if (cmd->fd_write != 1)
 		dup2(cmd->fd_write, 1);
 	if (ft_strncmp(cmd->tkn[0], "echo", ft_strlen(cmd->tkn[0])) == 0)
-	{
 		exec_echo(cmd);
-	}
 	else if (ft_strncmp(cmd->tkn[0], "pwd", ft_strlen(cmd->tkn[0])) == 0)
-	{
 		exec_pwd();
-	}
 	else
 	{
 		stat = execve(path, cmd->tkn, g_envp);

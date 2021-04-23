@@ -12,7 +12,7 @@ int	detect_cmd(char **str, t_cmd *cmd)
 	return (1);
 }
 
-void	lets_pars(char **str, char ***envp)
+void	lets_pars(char **str)
 {
 	t_cmd	cmd;
 
@@ -22,6 +22,6 @@ void	lets_pars(char **str, char ***envp)
 		while (ft_isspace(**str))
 			(*str)++;
 		detect_cmd(str, &cmd);
-		detect_spec(str, &cmd, envp);
+		detect_spec(str, &cmd);
 	}
 }
