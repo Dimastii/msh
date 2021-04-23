@@ -39,18 +39,11 @@ int	main(int ac, char **argv, char **envp)
 		sort_history(fd, &lst);
 		pars_str = termcap_processing_2(fd, &lst);
 		fre = pars_str;
-//		listik = lst;
-//		write(1, "\n", 1);
+		listik = lst;
+		write(1, "\n", 1);
 //		write(1, "|||", 3);
 //		write(1, listik->str, ft_strlen(listik->str));
 //		write(1, "|||", 3);
-//		while (listik->prev)
-//		{
-//			write(1, "after termcap: ", 15);
-//			write(1, listik->str, ft_strlen(listik->str));
-//			write(1, "\n", 1);
-//			listik = listik->prev;
-//		}
 		if (*pars_str)
 		{
 			lets_pars(&pars_str);

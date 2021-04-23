@@ -105,14 +105,14 @@ char		*termcap_processing_2(int fd, t_dlist **lst)
 //	write(1, tmp->str, ft_strlen(tmp->str));
 //	write(1, "::::", 4);
 //	write(1, "\n", 1);
-//	temp = tmp;
-//	while (temp->prev)
-//	{
-//		write(1, "before termcap: ", 16);
-//		write(1, temp->str, ft_strlen(temp->str));
-//		write(1, "\n", 1);
-//		temp = temp->prev;
-//	}
+	temp = tmp;
+	while (temp->prev)
+	{
+		write(1, "before termcap: ", 16);
+		write(1, temp->str, ft_strlen(temp->str));
+		write(1, "\n", 1);
+		temp = temp->prev;
+	}
 	write(1, BASH_NAME, 10);
 	while (1)
 	{
@@ -187,6 +187,7 @@ char		*termcap_processing_2(int fd, t_dlist **lst)
 				write(fd, tmp->str, ft_strlen(tmp->str));
 				write(fd, "\n", 1);
 			}
+//			init_list(&tmp, tmp->str);
 			*lst = tmp;
 			return (tmp->str);
 		}
