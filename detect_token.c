@@ -26,7 +26,7 @@ void	check_token(char *token, int redir, t_cmd *cmd)
 		}
 		else
 		{
-			cmd->tokens = ft_coljoins(cmd->tokens, token);
+			cmd->tkn = ft_coljoins(cmd->tkn, token);
 		}
 	}
 }

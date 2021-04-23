@@ -9,12 +9,12 @@ void	end_cmd(char **str, t_cmd *cmd, int *fd_out, int *fd_arr)
 
 	(*str)++;
 	i = 0;
-	if (cmd->tokens[0])
+	if (cmd->tkn[0])
 		stdexec(cmd, *fd_out);
 	if (*fd_out != 0)
 		*fd_out = 0;
-	ft_freecol(cmd->tokens);
-	cmd->tokens = NULL;
+	ft_freecol(cmd->tkn);
+	cmd->tkn = NULL;
 	init_cnd(cmd);
 	while (ft_isspace(**str))
 		(*str)++;
@@ -29,12 +29,12 @@ void	end_str(t_cmd *cmd, int *fd_out, int *fd_arr)
 {
 	int		i;
 
-	if (cmd->tokens[0])
+	if (cmd->tkn[0])
 		stdexec(cmd, *fd_out);
 	if (*fd_out != 0)
 		*fd_out = 0;
-	ft_freecol(cmd->tokens);
-	cmd->tokens = NULL;
+	ft_freecol(cmd->tkn);
+	cmd->tkn = NULL;
 	init_cnd(cmd);
 	i = 0;
 	while (fd_arr[i] != 0)
@@ -45,7 +45,7 @@ void	end_str(t_cmd *cmd, int *fd_out, int *fd_arr)
 	}
 }
 
-void		detect_spec(char **str, t_cmd *cmd, char ***envp)
+void	detect_spec(char **str, t_cmd *cmd, char ***envp)
 {
 	static int	fd_out;
 	static int	fd_arr[1000];
@@ -56,8 +56,8 @@ void		detect_spec(char **str, t_cmd *cmd, char ***envp)
 		(*str)++;
 		fd_arr[i++] = exec_pepe(*cmd, fd_out, envp);
 		fd_out = fd_arr[i - 1];
-		ft_freecol(cmd->tokens);
-		cmd->tokens = NULL;
+		ft_freecol(cmd->tkn);
+		cmd->tkn = NULL;
 		init_cnd(cmd);
 		while (ft_isspace(**str))
 			(*str)++;

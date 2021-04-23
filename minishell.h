@@ -29,7 +29,7 @@ typedef struct	s_cmd
 {
 	int		fd_read;
 	int		fd_write;
-	char	**tokens;
+	char	**tkn;
 }				t_cmd;
 
 char **g_envp;

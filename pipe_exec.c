@@ -12,7 +12,7 @@ int			exec_pepe(t_cmd cmd, int fd_out, char ***envp)
 	pid = 1;
 	path = NULL;
 	pipe(pipefd);
-	if (ft_strncmp(cmd.tokens[0], "echo", ft_strlen(cmd.tokens[0])) == 0 || (path = findbin(cmd.tokens[0], *envp)))
+	if (ft_strncmp(cmd.tkn[0], "echo", ft_strlen(cmd.tkn[0])) == 0 || (path = findbin(cmd.tkn[0], *envp)))
 	{
 		pid = fork();
 	}
@@ -26,17 +26,15 @@ int			exec_pepe(t_cmd cmd, int fd_out, char ***envp)
 		else
 			dup2(cmd.fd_write, 1);
 		close(pipefd[0]);
-		if (ft_strncmp(cmd.tokens[0], "echo", ft_strlen(cmd.tokens[0])) == 0)
+		if (ft_strncmp(cmd.tkn[0], "echo", ft_strlen(cmd.tkn[0])) == 0)
 		{
 			exec_echo(&cmd);
 		}
 		else
-			execve(path, cmd.tokens, *envp);
+			execve(path, cmd.tkn, *envp);
 	}
 	else
-	{
 		close(pipefd[1]);
-	}
 	if (path)
 		free(path);
 	return(pipefd[0]);
