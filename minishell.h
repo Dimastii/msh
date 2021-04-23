@@ -16,8 +16,7 @@
 # include <curses.h>
 # include <term.h>
 # include <signal.h>
-# define HISTORY_FILE "./minishell_history"
-# define BASH_NAME "POLUPOKER:"
+
 
 typedef	struct		s_dlist
 {
@@ -33,23 +32,28 @@ typedef struct	s_cmd
 	char	**tokens;
 }				t_cmd;
 
-void		sort_history(int fd, t_dlist **lst);
-void		init_list(t_dlist **list, char *str);
-void		error(char *str);
-char		*termcap_processing_2(int fd, t_dlist **lst);
+char **g_envp;
+
+char *ft_freeline(char *fre, char *str);
+void	detect_token(char **str, t_cmd *cmd);
+void		detect_spec(char **str, t_cmd *cmd, char ***envp);
+void	search_glob(char **str, char **tocken, char const *tmp, char **envp);
+void 	this_not_quote(char **str, char **tocken, int *redir, char **tmp);
+void 	this_quote(char **str, char **tocken, char **tmp);
 void		exec_pwd();
+int 	isspec(int c);
+int		ft_isspace(int c);
 char		*findbin(char *cmd, char **envp);
-void		cd(char *path);
-void		stdexec(t_cmd *cmd, char ***envp, int fd_out);
+void		stdexec(t_cmd *cmd, int fd_out);
 char		*ft_strchrifnepred(const char *string, int symbol, int flag);
-void		lets_exec(int pepeout[2], int pepein[2], char *file, char **argv, char **envp, int mode);
 void		lets_pars(char **str, char ***envp);
-void		pepe(char **argv, char **envp);
-void		exec_ls(char *file, char **argv, char ***envp);
 char		*ft_strjoins(char const *s1, char s2);
 void		init_cnd(t_cmd *cmd);
-void		init_cmds(t_cmd **cmds);
+t_dlist		*sort_history(int fd, t_dlist *lst);
+t_dlist		*init_list(t_dlist *lst, char *str);
+char		*termcap_processing(int fd, t_dlist *lst);
 char		*check_glob(char *glob, char **envp);
-int			exec_pepe(char **str, t_cmd cmd, int fd_out, char ***envp);
+int			exec_pepe(t_cmd cmd, int fd_out, char ***envp);
 void		exec_echo(t_cmd	*cmd);
-#endif //MINISHELL_H
+
+#endif
