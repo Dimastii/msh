@@ -8,7 +8,7 @@ char *ft_freeline(char *fre, char *str)
 {
 	if (!fre)
 	{
-		printf("Иди пива попей\n");
+		printf("freeline error\n");
 		exit(0);
 	}
 	free(fre);
@@ -55,4 +55,18 @@ char	*ft_strchrifnepred(const char *string, int symbol, int flag)
 		str++;
 	}
 	return ((*str == sb) ? str : NULL);
+}
+
+char	**ret_glob(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (g_envp[i])
+	{
+		if (ft_strnstr(g_envp[i], arg, ft_strlen(g_envp[i])))
+			return (&g_envp[i]);
+		++i;
+	}
+	return (NULL);
 }

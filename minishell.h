@@ -45,7 +45,7 @@ void 		this_quote(char **str, char **tocken, char **tmp);
 void		exec_pwd();
 int 		isspec(int c);
 int			ft_isspace(int c);
-char		*findbin(char *cmd, char **envp);
+char	*findbin(char *cmd);
 void		stdexec(t_cmd *cmd, int fd_out);
 char		*ft_strchrifnepred(const char *string, int symbol, int flag);
 void		lets_pars(char **str);
@@ -59,6 +59,8 @@ int			exec_pepe(t_cmd cmd, int fd_out);
 void		exec_echo(t_cmd	*cmd);
 void		check_cmd(t_cmd *cmd, char	**path, pid_t *pid);
 void		error(char *str);
+char	**ret_glob(char *arg);
 void		exec_export(t_cmd *cmd);
+void 	exec_cd(t_cmd cmd);
 
 #endif

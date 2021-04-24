@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	*find_arg(char	*pos_eq)
+char	*find_arg(char *pos_eq)
 {
 	char	*arg;
 
@@ -14,32 +14,47 @@ char	*find_arg(char	*pos_eq)
 	return (arg);
 }
 
-void 	add_env(char *str, t_cmd cmd)
+void 	add_env2(char *str, char **arg, char **var, char ***f_glob)
 {
-	char	*pos_eq;
-	char	*arg;
-	char 	*finded_glob;
-
-	pos_eq = 0;
-	if (ft_isalpha(*str))
+	while (*str != '=' && *str)
+		*arg = ft_freeline(*arg, ft_strjoins(*arg, *str++));
+	*f_glob = ret_glob(*arg);
+	if (*f_glob)
 	{
-		pos_eq = ft_strchr(str, '=');
-		finded_glob = check_glob(str);
-		if (check_glob(str))
+		**f_glob = ft_freeline(**f_glob, ft_strdup(*arg));
+		if (*str == '=')
 		{
-
+			**f_glob = ft_freeline(**f_glob, ft_strjoins(**f_glob, *str++));
+			*var = find_arg(str);
+			**f_glob = ft_freeline(**f_glob, ft_strjoin(**f_glob, *var));
+			free(*var);
 		}
-		if (pos_eq)
-		{
-			arg = ft_substr(str, 0, pos_eq - str + 1);
-			arg = ft_freeline(arg , ft_strjoin(arg ,find_arg(pos_eq + 1)));
-		}
-		else
-			arg = str;
-		g_envp = ft_coljoins(g_envp, arg);
 	}
 	else
+	{
+		if (*str == '=')
+		{
+			*arg = ft_freeline(*arg, ft_strjoins(*arg, *str++));
+			*var = find_arg(str);
+			*arg = ft_freeline(*arg, ft_strjoin(*arg, *var));
+			free(*var);
+		}
+		g_envp = ft_coljoins(g_envp, *arg);
+	}
+}
+
+void 	add_env(char *str, t_cmd cmd)
+{
+	char	*arg;
+	char	**found_glob;
+	char	*var;
+
+	arg = ft_strdup("");
+	if (ft_isalpha(*str))
+		add_env2(str, &arg, &var, &found_glob);
+	else
 		write(cmd.fd_write, "invalid var", 12);
+	free(arg);
 }
 
 void 	show_env(t_cmd cmd)
@@ -60,7 +75,7 @@ void 	show_env(t_cmd cmd)
 
 void	exec_export(t_cmd *cmd)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (!cmd->tkn[i])

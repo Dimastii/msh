@@ -49,10 +49,9 @@ int	main(int ac, char **argv, char **envp)
 	if (fd < 0)
 		error("couldn't open history file");
 
-	char *line = strdup("ls");
-	char *lin = line;
+	char *line = strdup("cd .. ; export");
 
-//	line = strdup("export r=qwe    qwe=");
+//	line = strdup("export r=qwe    qwe=w");
 //	ft_printcol(g_envp);
 //	while (1)
 //	{
@@ -66,7 +65,6 @@ int	main(int ac, char **argv, char **envp)
 			lets_pars(&line);
 //			ft_printcol(g_envp);
 
-			free(lin);
 //		}
 //	}
 	char *r;

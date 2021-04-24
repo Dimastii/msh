@@ -20,7 +20,7 @@ char	*brute_force(char **str, char *cmd)
 		(*str)++;
 		path = ft_strjoins(path, '/');
 		path = ft_freeline(path, ft_strjoin(path, cmd));
-		if (stat(path, &buff) == 0)
+		if (stat(path, &buff) == 0 && buff.st_mode == S_IXUSR)
 		{
 			free(fre_str);
 			return (path);
@@ -32,13 +32,13 @@ char	*brute_force(char **str, char *cmd)
 	return (NULL);
 }
 
-char	*findbin(char *cmd, char **envp)
+char	*findbin(char *cmd)
 {
 	char		*str;
 	char		*ret;
 	struct stat	buff;
 
-	if (stat(cmd, &buff) == 0)
+	if (stat(cmd, &buff) == 0 && buff.st_mode == S_IXUSR)
 	{
 		return (cmd);
 	}
