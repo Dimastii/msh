@@ -59,4 +59,6 @@ int			exec_pepe(t_cmd cmd, int fd_out);
 void		exec_echo(t_cmd	*cmd);
 void		check_cmd(t_cmd *cmd, char	**path, pid_t *pid);
 void		error(char *str);
+void		exec_export(t_cmd *cmd);
+
 #endif

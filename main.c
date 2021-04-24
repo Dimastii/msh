@@ -21,6 +21,19 @@ void		del_str(char *str)
 	free(str);
 }
 
+/* @hviva
+ * @hnewman
+ * @fngoc
+ * @lphoenix
+ * @mdenys
+ * @Melisha
+ * @trachell
+ * @jkamala рыжик
+ * @Smyriell Maria
+ * @mhumfrey
+ * @keuclide
+ */
+
 int	main(int ac, char **argv, char **envp)
 {
 	char			*pars_str;
@@ -29,25 +42,29 @@ int	main(int ac, char **argv, char **envp)
 	t_dlist			*lst;
 	t_dlist			*listik;
 
-	g_envp = envp;
+
+	g_envp = ft_coldup(envp);
+	ft_printcol(g_envp);
 	lst = NULL;
 	fd = open(HISTORY_FILE, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd < 0)
 		error("couldn't open history file");
-	while (1)
-	{
-		sort_history(fd, &lst);
-		pars_str = termcap_processing_2(fd, &lst);
-		fre = pars_str;
-		listik = lst;
-		write(1, "\n", 1);
-//		write(1, "|||", 3);
-//		write(1, listik->str, ft_strlen(listik->str));
-//		write(1, "|||", 3);
-		if (*pars_str)
-		{
-			lets_pars(&pars_str);
-			free(fre);
-		}
-	}
+
+	char *line = strdup("export w");
+
+//	ft_printcol(g_envp);
+//	while (1)
+//	{
+//		sort_history(fd, &lst);
+//		pars_str = termcap_processing_2(fd, &lst);
+//		fre = pars_str;
+//		listik = lst;
+//		write(1, "\n", 1);
+//		if (*pars_str)
+//		{
+			lets_pars(&line);
+
+//			free(fre);
+//		}
+//	}
 }
