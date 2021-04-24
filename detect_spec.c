@@ -15,7 +15,7 @@ void	end_cmd(char **str, t_cmd *cmd, int *fd_out, int *fd_arr)
 		*fd_out = 0;
 	ft_freecol(cmd->tkn);
 	cmd->tkn = NULL;
-	init_cnd(cmd);
+//	init_cnd(cmd);
 	while (ft_isspace(**str))
 		(*str)++;
 	while (fd_arr[i] != 0)
@@ -35,7 +35,7 @@ void	end_str(t_cmd *cmd, int *fd_out, int *fd_arr)
 		*fd_out = 0;
 	ft_freecol(cmd->tkn);
 	cmd->tkn = NULL;
-	init_cnd(cmd);
+//	init_cnd(cmd);
 	i = 0;
 	while (fd_arr[i] != 0)
 	{

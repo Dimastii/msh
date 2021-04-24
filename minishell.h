@@ -54,7 +54,7 @@ void		init_cnd(t_cmd *cmd);
 void		sort_history(int fd, t_dlist **lst);
 void		init_list(t_dlist **list, char *str);
 char		*termcap_processing_2(int fd, t_dlist **lst);
-char		*check_glob(char *glob, char **envp);
+char		*check_glob(char *glob);
 int			exec_pepe(t_cmd cmd, int fd_out);
 void		exec_echo(t_cmd	*cmd);
 void		check_cmd(t_cmd *cmd, char	**path, pid_t *pid);

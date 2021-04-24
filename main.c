@@ -44,14 +44,15 @@ int	main(int ac, char **argv, char **envp)
 
 
 	g_envp = ft_coldup(envp);
-	ft_printcol(g_envp);
 	lst = NULL;
 	fd = open(HISTORY_FILE, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd < 0)
 		error("couldn't open history file");
 
-	char *line = strdup("export w");
+	char *line = strdup("ls");
+	char *lin = line;
 
+//	line = strdup("export r=qwe    qwe=");
 //	ft_printcol(g_envp);
 //	while (1)
 //	{
@@ -63,8 +64,14 @@ int	main(int ac, char **argv, char **envp)
 //		if (*pars_str)
 //		{
 			lets_pars(&line);
+//			ft_printcol(g_envp);
 
-//			free(fre);
+			free(lin);
 //		}
 //	}
+	char *r;
+	while (read(0, &r, 1))
+	{
+
+	}
 }

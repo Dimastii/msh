@@ -42,7 +42,7 @@ char	*findbin(char *cmd, char **envp)
 	{
 		return (cmd);
 	}
-	str = ft_strdup(check_glob("PATH", envp));
+	str = ft_strdup(check_glob("PATH"));
 	if (str)
 	{
 		ret = brute_force(&str, cmd);

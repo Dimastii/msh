@@ -22,7 +22,7 @@ void	check_cmd(t_cmd *cmd, char	**path, pid_t *pid)
 	{
 		*pid = fork();
 	}
-	else
+	else if (ft_strncmp(cmd->tkn[0], "export", ft_strlen(cmd->tkn[0])) != 0)
 		printf(" А где бинарник то?:%s \n", *path);
 }
 

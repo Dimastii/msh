@@ -16,9 +16,9 @@ void	lets_pars(char **str)
 {
 	t_cmd	cmd;
 
-	init_cnd(&cmd);
 	while (**str)
 	{
+		init_cnd(&cmd);
 		while (ft_isspace(**str))
 			(*str)++;
 		detect_cmd(str, &cmd);

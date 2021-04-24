@@ -14,7 +14,6 @@ void ft_freecol(char **col)
 	size_t	len;
 
 	len = ft_collen(col);
-
 	while (len) {
 		len--;
 		ft_freestr(col[len]);

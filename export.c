@@ -1,7 +1,3 @@
-//
-// Created by Cloyster Veeta on 4/23/21.
-//
-
 #include "minishell.h"
 
 char	*find_arg(char	*pos_eq)
@@ -22,21 +18,28 @@ void 	add_env(char *str, t_cmd cmd)
 {
 	char	*pos_eq;
 	char	*arg;
+	char 	*finded_glob;
+
+	pos_eq = 0;
 	if (ft_isalpha(*str))
 	{
 		pos_eq = ft_strchr(str, '=');
+		finded_glob = check_glob(str);
+		if (check_glob(str))
+		{
+
+		}
 		if (pos_eq)
 		{
-			arg = find_arg(pos_eq + 1);
+			arg = ft_substr(str, 0, pos_eq - str + 1);
+			arg = ft_freeline(arg , ft_strjoin(arg ,find_arg(pos_eq + 1)));
 		}
 		else
 			arg = str;
 		g_envp = ft_coljoins(g_envp, arg);
-//		ft_printcol(g_envp);
 	}
 	else
 		write(cmd.fd_write, "invalid var", 12);
-//		printf("invalid var \"%s\"\n", str);
 }
 
 void 	show_env(t_cmd cmd)
@@ -58,13 +61,10 @@ void 	show_env(t_cmd cmd)
 void	exec_export(t_cmd *cmd)
 {
 	int i;
-//	char *var;
 
 	i = 1;
 	if (!cmd->tkn[i])
-	{
 		show_env(*cmd);
-	}
 	while (cmd->tkn[i])
 	{
 		add_env(cmd->tkn[i], *cmd);
