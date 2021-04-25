@@ -13,10 +13,10 @@ char	*ft_freeline(char *fre, char *str)
 	}
 	free(fre);
 	fre = NULL;
-	return(str);
+	return (str);
 }
 
-int		ft_isspace(int c)
+int	ft_isspace(int c)
 {
 	c = (unsigned char)c;
 	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
@@ -25,7 +25,7 @@ int		ft_isspace(int c)
 	return (0);
 }
 
-int 	isspec(int c)
+int	isspec(int c)
 {
 	c = (unsigned char)c;
 	if (c == ';' || c == '|' || c == '\0')
@@ -35,11 +35,11 @@ int 	isspec(int c)
 
 char	*ft_strchrifnepred(const char *string, int symbol, int flag)
 {
-	char *str;
-	char sb;
+	char	*str;
+	char	sb;
 
 	sb = (char)symbol;
-	str = (char*)string;
+	str = (char *)string;
 	while (*str)
 	{
 		if (flag)
@@ -54,7 +54,10 @@ char	*ft_strchrifnepred(const char *string, int symbol, int flag)
 		}
 		str++;
 	}
-	return ((*str == sb) ? str : NULL);
+	if (*str == sb)
+		return (str);
+	else
+		return (NULL);
 }
 
 char	**ret_glob(char *arg)

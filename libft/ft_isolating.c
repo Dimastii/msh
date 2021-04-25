@@ -4,10 +4,10 @@
 
 #include "libft.h"
 
-size_t ft_count_c(char *token, char c)
+size_t	ft_count_c(char *token, char c)
 {
-	int i;
-	size_t count;
+	int		i;
+	size_t	count;
 
 	i = 0;
 	count = 0;
@@ -22,11 +22,11 @@ size_t ft_count_c(char *token, char c)
 	return (count);
 }
 
-char *ft_isolating(char *token, char c)
+char	*ft_isolating(char *token, char c)
 {
-	int i;
-	char *strr;
-	char *str;
+	int		i;
+	char	*strr;
+	char	*str;
 
 	i = 0;
 	strr = malloc(sizeof(char *) * (ft_strlen(token) - ft_count_c(token, c)));

@@ -34,7 +34,6 @@ void	end_str(t_cmd *cmd, int *fd_out, int *fd_arr)
 		*fd_out = 0;
 	ft_freecol(cmd->tkn);
 	cmd->tkn = NULL;
-//	init_cnd(cmd);
 	i = 0;
 	while (fd_arr[i] != 0)
 	{

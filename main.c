@@ -14,6 +14,8 @@ int	main(int ac, char **argv, char **envp)
 	int				fd;
 	t_dlist			*lst;
 
+//	char *line
+
 	if (ac == 1)
 	{
 		g_envp = ft_coldup(envp);

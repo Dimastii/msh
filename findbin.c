@@ -38,7 +38,7 @@ char	*findbin(char *cmd)
 	char		*ret;
 	struct stat	buff;
 
-	if (lstat(cmd, &buff) == 0 &&  buff.st_mode & S_IFREG)
+	if (lstat(cmd, &buff) == 0 && buff.st_mode & S_IFREG)
 	{
 		return (cmd);
 	}

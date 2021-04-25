@@ -20,7 +20,7 @@ char	*ft_strrchr(const char *string, int symbol)
 
 	len = ft_strlen(string);
 	sb = (char)symbol;
-	str = (char*)(string + len);
+	str = (char *)(string + len);
 	while (len != (-1))
 	{
 		if (*str == sb)

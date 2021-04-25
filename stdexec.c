@@ -16,9 +16,8 @@ void	check_cmd(t_cmd *cmd, char	**path, pid_t *pid)
 		exit(0);
 	}
 	*path = findbin(cmd->tkn[0]);
-	if (ft_strncmp(cmd->tkn[0], "echo", ft_strlen(cmd->tkn[0])) == 0 ||
-		ft_strncmp(cmd->tkn[0], "pwd", ft_strlen(cmd->tkn[0])) == 0 ||
-		 *path)
+	if (ft_strncmp(cmd->tkn[0], "echo", ft_strlen(cmd->tkn[0])) == 0
+		|| ft_strncmp(cmd->tkn[0], "pwd", ft_strlen(cmd->tkn[0])) == 0 || *path)
 	{
 		*pid = fork();
 	}

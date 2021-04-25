@@ -4,7 +4,7 @@
 
 #include "minishell.h"
 
-void		init_cnd(t_cmd *cmd)
+void	init_cnd(t_cmd *cmd)
 {
 	cmd->tkn = malloc(sizeof(char *));
 	cmd->tkn[0] = NULL;

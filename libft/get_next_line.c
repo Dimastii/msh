@@ -1,22 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bdaedric <bdaedric@student.21-school.ru>   +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 12:36:10 by bdaedric          #+#    #+#             */
-/*   Updated: 2021/03/03 17:40:47 by bdaedric         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../minishell.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
-# endif
-
-# include "../minishell.h"
-
-size_t		ft_strcpy(char *dest, const char *src)
+size_t	ft_strcpy(char *dest, const char *src)
 {
 	size_t	i;
 	int		j;
@@ -62,7 +46,8 @@ char	*check_remainder(char *remainder, char **line)
 	tmp = NULL;
 	if (remainder)
 	{
-		if ((tmp = ft_strchr(remainder, '\n')))
+		tmp = ft_strchr(remainder, '\n');
+		if (tmp)
 		{
 			*tmp = '\0';
 			*line = ft_strdup(remainder);
@@ -76,25 +61,26 @@ char	*check_remainder(char *remainder, char **line)
 	return (tmp);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*remainder;
 	char		*temp;
 	size_t		r_bytes;
 	char		*buff;
 
-	if (fd < 0 || !line || (read(fd, 0, 0) == -1))
-		return (-1);
-	if (!(buff = (char *)malloc(BUFFER_SIZE + 1)))
+	buff = (char *)malloc(20 + 1);
+	if (fd < 0 || !line || (read(fd, 0, 0) == -1) || !buff)
 		return (-1);
 	*line = NULL;
 	temp = check_remainder(remainder, line);
-	while (!temp && (r_bytes = read(fd, buff, BUFFER_SIZE)))
+	r_bytes = read(fd, buff, 20);
+	while (!temp && r_bytes)
 	{
 		buff[r_bytes] = '\0';
-		if ((temp = ft_strchr(buff, '\n')))
+		temp = ft_strchr(buff, '\n');
+		if (temp)
 			set_remainder(&remainder, temp, 1);
-		*line = ft_freeline(*line ,ft_strjoin(*line, buff));
+		*line = ft_freeline(*line, ft_strjoin(*line, buff));
 	}
 	free(buff);
 	if (temp)

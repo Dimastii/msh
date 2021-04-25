@@ -1,22 +1,19 @@
-//
-// Created by Cloyster Veeta on 4/4/21.
-//
-
 #include "libft.h"
 
-void ft_freestr(char *str)
+void	ft_freestr(char *str)
 {
 	free(str);
 }
 
-void ft_freecol(char **col)
+void	ft_freecol(char **col)
 {
 	size_t	len;
 
-	len = ft_collen(col);
-	while (len) {
-		len--;
+	len = 0;
+	while (col[len])
+	{
 		ft_freestr(col[len]);
+		len++;
 	}
 	free(col);
 }

@@ -9,7 +9,8 @@ char	**ft_coljoins(char **s1, char const *s2)
 	if (!s2)
 		return (NULL);
 	len = ft_collen(s1) + 1;
-	if (!(strr = malloc(sizeof(char *) * (len + 1))))
+	strr = malloc(sizeof(char *) * (len + 1));
+	if (!(strr))
 		return (NULL);
 	len = 0;
 	while (s1[len])

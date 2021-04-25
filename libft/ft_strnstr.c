@@ -22,7 +22,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	biig = (char *)big;
 	litle = (const char *)little;
 	if (!ft_strlen(litle))
-		return (char *)big;
+		return ((char *)big);
 	while (*biig && len--)
 	{
 		if (ft_strlen(litle) <= len + 1)

@@ -16,7 +16,7 @@ void	ft_bzero(void *memptr, size_t num)
 {
 	unsigned char	*ptr;
 
-	ptr = (unsigned char*)memptr;
+	ptr = (unsigned char *)memptr;
 	while (num)
 	{
 		*ptr = '\0';

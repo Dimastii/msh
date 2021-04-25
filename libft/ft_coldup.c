@@ -5,12 +5,12 @@
 char	**ft_coldup(char **c)
 {
 	char	**col;
-	int 	i;
+	int		i;
 
 	i = 0;
-	if (!(col = malloc(sizeof(char *) * ft_collen(c) + 1)))
+	col = malloc(sizeof(char *) * ft_collen(c) + 1);
+	if (!col)
 		return (NULL);
-
 	while (c[i])
 	{
 		col[i] = ft_strdup(c[i]);

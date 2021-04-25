@@ -22,14 +22,14 @@ void	*ft_memcpy(void *dst, const void *src, size_t num)
 	if (!src && !dst)
 		return (NULL);
 	dst1 = dst;
-	src1 = (unsigned long*)src;
+	src1 = (unsigned long *)src;
 	while (num / sizeof(long) >= 1)
 	{
 		*(dst1++) = *(src1++);
 		num = num - sizeof(long);
 	}
-	d = (unsigned char*)dst1;
-	s = (unsigned char*)src1;
+	d = (unsigned char *)dst1;
+	s = (unsigned char *)src1;
 	while (num)
 	{
 		*d = *s;
