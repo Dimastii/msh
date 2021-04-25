@@ -4,7 +4,7 @@
 
 #include "minishell.h"
 
-char *ft_freeline(char *fre, char *str)
+char	*ft_freeline(char *fre, char *str)
 {
 	if (!fre)
 	{

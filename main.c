@@ -1,38 +1,11 @@
 #include "minishell.h"
 
-void	lst_clear(t_dlist **lst, void (*del)(char *))
+static void	argv_error(char **argv)
 {
-	t_dlist *temp;
-
-	if (lst && *lst)
-	{
-		while (*lst)
-		{
-			temp = *lst;
-			(*lst) = (*lst)->prev;
-			del(temp->str);
-			free(temp);
-		}
-	}
+	write(1, BASH_NAME, 10);
+	write(1, &argv[1][0], ft_strlen(&argv[1][0]));
+	write(1, ": No such file or directory", 27);
 }
-
-void		del_str(char *str)
-{
-	free(str);
-}
-
-/* @hviva
- * @hnewman
- * @fngoc
- * @lphoenix
- * @mdenys
- * @Melisha
- * @trachell
- * @jkamala рыжик
- * @Smyriell Maria
- * @mhumfrey
- * @keuclide
- */
 
 int	main(int ac, char **argv, char **envp)
 {
@@ -40,36 +13,24 @@ int	main(int ac, char **argv, char **envp)
 	char			*fre;
 	int				fd;
 	t_dlist			*lst;
-	t_dlist			*listik;
 
-
-	g_envp = ft_coldup(envp);
-	lst = NULL;
-	fd = open(HISTORY_FILE, O_CREAT | O_RDWR | O_APPEND, 0644);
-	if (fd < 0)
-		error("couldn't open history file");
-
-	char *line = strdup("cd .. ; export");
-
-//	line = strdup("export r=qwe    qwe=w");
-//	ft_printcol(g_envp);
-//	while (1)
-//	{
-//		sort_history(fd, &lst);
-//		pars_str = termcap_processing_2(fd, &lst);
-//		fre = pars_str;
-//		listik = lst;
-//		write(1, "\n", 1);
-//		if (*pars_str)
-//		{
-			lets_pars(&line);
-//			ft_printcol(g_envp);
-
-//		}
-//	}
-	char *r;
-	while (read(0, &r, 1))
+	if (ac == 1)
 	{
-
+		g_envp = ft_coldup(envp);
+		lst = NULL;
+		fd = open(HISTORY_FILE, O_CREAT | O_RDWR | O_APPEND, 0644);
+		while (1)
+		{
+			sort_history(fd, &lst);
+			pars_str = termcap_processing_2(fd, &lst);
+			fre = pars_str;
+			if (*pars_str)
+			{
+				lets_pars(&pars_str);
+				free(fre);
+			}
+		}
 	}
+	argv_error(argv);
+	return (0);
 }

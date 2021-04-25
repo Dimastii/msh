@@ -19,7 +19,6 @@
 # define HISTORY_FILE "./minishell_history"
 # define BASH_NAME "POLUPOKER:"
 
-
 typedef	struct		s_dlist
 {
 	char			*str;
@@ -36,7 +35,20 @@ typedef struct	s_cmd
 
 char		**g_envp;
 
+void		ctrl_l();
+char		*return_line(struct termios	*term, int fd, char *line);
 char		*ft_freeline(char *fre, char *str);
+int			exclude_ascii(char *str);
+void		search_keys(char *fd_str, struct termios *term, char **line, t_dlist **tmp);
+int			ft_strcmp(const char *s1, const char *s2);
+char		*save_history(char *line, int fd);
+void		ctrl_c(char **line);
+int			back_space(char **line);
+void		ctrl_d(char symbol, struct termios *term);
+void		termcap_switcher(struct termios *term ,int switcher);
+void		arrow_down(t_dlist **tmp);
+void		arrow_up(t_dlist **tmp);
+int			ft_putchar(int c);
 void		detect_token(char **str, t_cmd *cmd);
 void		detect_spec(char **str, t_cmd *cmd);
 void		search_glob(char **str, char **tocken, char const *tmp, char **envp);

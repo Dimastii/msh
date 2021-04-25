@@ -11,14 +11,10 @@
 /* ************************************************************************** */
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 20
 # endif
 
-#include "libft.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <unistd.h>
+# include "../minishell.h"
 
 size_t		ft_strcpy(char *dest, const char *src)
 {
@@ -87,7 +83,7 @@ int		get_next_line(int fd, char **line)
 	size_t		r_bytes;
 	char		*buff;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !line || (read(fd, 0, 0) == -1))
+	if (fd < 0 || !line || (read(fd, 0, 0) == -1))
 		return (-1);
 	if (!(buff = (char *)malloc(BUFFER_SIZE + 1)))
 		return (-1);
@@ -98,7 +94,7 @@ int		get_next_line(int fd, char **line)
 		buff[r_bytes] = '\0';
 		if ((temp = ft_strchr(buff, '\n')))
 			set_remainder(&remainder, temp, 1);
-		*line = ft_strjoin(*line, buff);
+		*line = ft_freeline(*line ,ft_strjoin(*line, buff));
 	}
 	free(buff);
 	if (temp)

@@ -12,11 +12,11 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-#include <unistd.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct		s_list
 {
@@ -77,5 +77,5 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 int					get_next_line(int fd, char **line);
-char	**ft_coldup(char **c);
+char				**ft_coldup(char **c);
 #endif
