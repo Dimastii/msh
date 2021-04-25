@@ -5,7 +5,6 @@
 char	**ft_coldup(char **c)
 {
 	char	**col;
-	char	**colret;
 	int 	i;
 
 	i = 0;

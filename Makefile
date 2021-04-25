@@ -66,7 +66,8 @@ SRC			= main.c \
 			pipe_exec.c \
 			findbin.c \
 			stdexec.c \
-			export.c
+			export.c \
+			cd.c
 
 HEADER		= minishell.h
 
