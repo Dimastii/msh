@@ -3,6 +3,7 @@
 //
 #include "minishell.h"
 
+//ft_freecol(cmd->tkn);
 void	end_cmd(char **str, t_cmd *cmd, int *fd_out, int *fd_arr)
 {
 	int		i;
@@ -13,7 +14,6 @@ void	end_cmd(char **str, t_cmd *cmd, int *fd_out, int *fd_arr)
 		stdexec(cmd, *fd_out);
 	if (*fd_out != 0)
 		*fd_out = 0;
-	ft_freecol(cmd->tkn);
 	cmd->tkn = NULL;
 	while (ft_isspace(**str))
 		(*str)++;
@@ -24,6 +24,7 @@ void	end_cmd(char **str, t_cmd *cmd, int *fd_out, int *fd_arr)
 	}
 }
 
+//ft_freecol(cmd->tkn);
 void	end_str(t_cmd *cmd, int *fd_out, int *fd_arr)
 {
 	int		i;
@@ -32,7 +33,6 @@ void	end_str(t_cmd *cmd, int *fd_out, int *fd_arr)
 		stdexec(cmd, *fd_out);
 	if (*fd_out != 0)
 		*fd_out = 0;
-	ft_freecol(cmd->tkn);
 	cmd->tkn = NULL;
 	i = 0;
 	while (fd_arr[i] != 0)

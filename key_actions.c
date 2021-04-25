@@ -37,18 +37,12 @@ void	ctrl_c(char **line)
 	ft_bzero(*line, ft_strlen(*line));
 }
 
-void	ctrl_l()
-{
-	tputs(tgetstr("cl", 0), 1, ft_putchar);
-	write(1, BASH_NAME, 10);
-}
-
 int	exclude_ascii(char *str)
 {
 	if (!ft_strcmp(str, "\t")
 		|| !ft_strcmp(str, "\e[C") || !ft_strcmp(str, "\e[D")
 		|| ((int)str[0] > 4 && (int)str[0] < 10)
-		|| ((int)str[0] > 12 && (int)str[0] < 32)
+		|| ((int)str[0] > 11 && (int)str[0] < 32)
 		|| ((int)str[0] >= 0 && (int)str[0] < 3))
 		return (1);
 	return (0);

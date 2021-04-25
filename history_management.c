@@ -45,7 +45,7 @@ void	init_list(t_dlist **list, char *str)
 	}
 }
 
-char	*return_line(struct termios	*term, int fd, char *line)
+void	new_line_press(struct termios	*term, int fd, char *line)
 {
 	termcap_switcher(term, 1);
 	if (*line != '\0')
@@ -54,15 +54,15 @@ char	*return_line(struct termios	*term, int fd, char *line)
 		write(fd, "\n", 1);
 	}
 	write(1, "\n", 1);
-	return (line);
 }
 
-void	search_keys(char *fd_str, struct termios *term, char **line, t_dlist **tmp)
+void	search_keys(char *fd_str, struct termios *term,
+		char **line, t_dlist **tmp)
 {
 	if (!ft_strcmp(fd_str, "\4"))
 		ctrl_d(**line, term);
-//	else if (!ft_strcmp(fd_str, "\e[A"))
-//		arrow_up(tmp);
+	else if (!ft_strcmp(fd_str, "\e[A"))
+		arrow_up(tmp);
 	else if (!ft_strcmp(fd_str, "\e[B"))
 		arrow_down(tmp);
 }

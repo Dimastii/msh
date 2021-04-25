@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	termcap_switcher(struct termios	*term ,int	switcher)
+void	termcap_switcher(struct	termios *term, int switcher)
 {
 	if (!switcher)
 	{
@@ -32,54 +32,37 @@ static void	pre_term_preps(struct termios *term)
 	write(1, BASH_NAME, 10);
 }
 
-//char	*termcap_processing_2(int fd, t_dlist **lst)
-//{
-//	struct termios	term;
-//	size_t			i;
-//	char			str[2000];
-//	t_dlist			*tmp;
-//
-//	pre_term_preps(&term);
-//	tmp = *lst;
-//	init_list(&tmp, "");
-//	while (1)
-//	{
-//		str[0] = '\0';
-//		i = read(0, &str, 100);
-//		str[i] = '\0';
-//		search_keys(str, &term, &tmp->str, &tmp);
-//		if (!ft_strcmp(str, "\177"))
-//		{
-//			if (ft_strlen(tmp->str) > 0)
-//			{
-//				tputs(cursor_left, 1, ft_putchar);
-//				tputs(tgetstr("dc", 0), 1, ft_putchar);
-//				tmp->str[ft_strlen(tmp->str - 1)] = '\0';
-//			}
-//			else
-//				continue ;
-//		}
-//		else if (!ft_strcmp(str, "\3"))
-//		{
-//			ctrl_c(&tmp->str);
-//			continue ;
-//		}
-//		else if (exclude_ascii(str))
-//			continue ;
-//		else if (ft_strcmp(str, "\n"))
-//		{
-//			tmp->str = ft_freeline(tmp->str, ft_strjoin(tmp->str, str));
-//			write(1, str, i);
-//		}
-//		if (!ft_strcmp(str, "\n"))
-//		{
-//			*lst = tmp;
-//			return (return_line(&term, fd, tmp->str));
-//		}
-//	}
-//}
+static int	ctrl_c_and_ascii(char *fd_str, char **line, size_t i)
+{
+	if (!ft_strcmp(fd_str, "\3"))
+	{
+		ctrl_c(line);
+		return (1);
+	}
+	else if (exclude_ascii(fd_str))
+		return (1);
+	else if (ft_strcmp(fd_str, "\n"))
+	{
+		*line = ft_freeline(*line, ft_strjoin(*line, fd_str));
+		write(1, fd_str, i);
+	}
+	return (0);
+}
 
-char		*termcap_processing_2(int fd, t_dlist **lst)
+static int	backspace(t_dlist **tmp)
+{
+	if (ft_strlen((*tmp)->str) > 0)
+	{
+		tputs(cursor_left, 1, ft_putchar);
+		tputs(tgetstr("dc", 0), 1, ft_putchar);
+		(*tmp)->str[ft_strlen((*tmp)->str) - 1] = '\0';
+		return (1);
+	}
+	else
+		return (0);
+}
+
+char	*termcap_processing_2(int fd, t_dlist **lst)
 {
 	struct termios	term;
 	size_t			i;
@@ -91,47 +74,17 @@ char		*termcap_processing_2(int fd, t_dlist **lst)
 	init_list(&tmp, "");
 	while (1)
 	{
-		str[0] = '\0';
 		i = read(0, &str, 100);
 		str[i] = '\0';
 		search_keys(str, &term, &tmp->str, &tmp);
-		if (!ft_strcmp(str, "\177"))//delete
-		{
-			if (ft_strlen(tmp->str) > 0)
-			{
-				tputs(cursor_left, 1, ft_putchar);
-				tputs(tgetstr("dc", 0), 1, ft_putchar);
-				tmp->str[ft_strlen(tmp->str) - 1] = '\0';
-			}
-			else
-				continue ;
-		}
-		else if (((int)str[0] == 12))
-			ctrl_l();
-		else if (!ft_strcmp(str, "\e[A"))//arrow up
-			arrow_up(&tmp);
-		else if (!ft_strcmp(str, "\3"))//ctrl + C
-		{
-			ctrl_c(&tmp->str);
+		if (!ft_strcmp(str, "\177"))
+			backspace(&tmp);
+		else if (ctrl_c_and_ascii(str, &tmp->str, i))
 			continue ;
-		}
-		else if (exclude_ascii(str))
-			continue ;
-		else if (ft_strcmp(str, "\n"))
-		{
-			tmp->str = ft_freeline(tmp->str, ft_strjoin(tmp->str, str));
-			write(1, &str, i);
-		}
 		if (!ft_strcmp(str, "\n"))
 		{
-			termcap_switcher(&term, 1);
-			if (*tmp->str != '\0')
-			{
-				write(fd, tmp->str, ft_strlen(tmp->str));
-				write(fd, "\n", 1);
-			}
+			new_line_press(&term, fd, tmp->str);
 			*lst = tmp;
-			write(0, "\n", 1);
 			return (tmp->str);
 		}
 	}
